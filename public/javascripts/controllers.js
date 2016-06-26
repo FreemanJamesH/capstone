@@ -1,3 +1,5 @@
 app.controller('MainController', function($scope, $http){
- $scope.message = "Test Message";
+  $http.get('/test').then(function(response){
+      $scope.message = response.data;
+  })
 })
