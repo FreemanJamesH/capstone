@@ -1,4 +1,28 @@
-body{
+body, html{
   background-color: dodgerblue;
-  color: white;
+  color: black;
+  height: 100%;
+}
+
+ng-view {
+  height: 100%;
+}
+
+.landingrow {
+  height: 100%;
+  margin-top: 15%;
+}
+
+.landingbox {
+  height: 50%;
+  background-color: red;
+}
+
+.landingbox:hover {
+  background-color: #000d58
+}
+
+.pictext{
+  position: absolute;
+  z-index: 100;
 }

@@ -4,8 +4,8 @@ app.config(function($routeProvider, $locationProvider){
     templateUrl: '/partials/landing.html',
     controller: 'MainController'
   })
-  .when('/chat', {
-    templateUrl: '/partials/chat.html',
+  .when('/scan', {
+    templateUrl: '/partials/scan.html',
     controller: 'MainController'
   })
   .otherwise({redirectTo:'/'});

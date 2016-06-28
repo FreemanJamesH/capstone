@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="myApp">
+
 <head>
   <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css"/>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css"/> -->
   <script src="https://code.angularjs.org/1.5.7/angular.js"></script>
   <script src="https://code.angularjs.org/1.5.7/angular-route.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></link>
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script src="./javascripts/module.js"></script>
   <script src="./javascripts/controllers.js"></script>
@@ -12,10 +14,22 @@
   <title>Chatroom</title>
   <base href="/">
 </head>
-<body ng-cloak>
-  <ng-view>
-    {{message}}
-  </ng-view>
+
+<body ng-cloak class="container-fluid">
+    <div class="row bg-warning">
+      <div class="col-sm-3 bg-primary">
+        filler
+      </div>
+      <div class="col-sm-6 bg-info text-center">
+        hello
+      </div>
+      <div class="col-sm-3 bg-primary">
+        filler
+      </div>
+    </div>
+
+    <ng-view></ng-view>
 
 </body>
+
 </html>
