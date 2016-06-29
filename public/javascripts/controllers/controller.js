@@ -1,4 +1,4 @@
-app.controller('MainController', function($scope, $http){
+app.controller('MainController', function($scope, $http, searchService){
   $scope.hello = 'hello'
   $scope.submit = function(){
     let searchParams = {};
@@ -9,6 +9,8 @@ app.controller('MainController', function($scope, $http){
     searchParams.category = $scope.scancategory
     console.log(searchParams);
   }
+
+  $scope.callService = searchService.search()
 
 
   $scope.testArr = [
