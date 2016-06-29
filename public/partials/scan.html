@@ -1,48 +1,30 @@
 <div class="form-style-5">
-  <form>
-    <fieldset>
+  <form ng-submit="submit()" action="/results">
       <legend><span class="number">1</span>What's your scan's name?</legend>
-      <input type="text" name="field1" placeholder="Name your scan here">
-      <label for="job">How far back should your scan search?</label>
+      <input type="text" ng-model="scantitle" placeholder="Name your scan here">
+      <label>How far back should your scan search?</label>
       <md-content>
-        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+        <md-datepicker ng-model="scandate" md-placeholder="Enter date"></md-datepicker>
       </md-content>
-      <legend><span class="number">2</span>Where do you want to scan?</legend>
-      <md-radio-group ng-model="data.group1">
-        <md-radio-button value="Apple" class="md-primary">Nationwide</md-radio-button>
-        <md-radio-button value="Banana"> By State </md-radio-button>
+
+      <legend><span class="number">2</span>What are you trying to find?</legend>
+      <input type="text" ng-model="query" placeholder="Type query here">
+
+      <legend><span class="number">3</span>Where do you want to scan?</legend>
+      <md-radio-group ng-model="scanlocation">
+        <md-radio-button value="nationwide" class="md-primary">Nationwide</md-radio-button>
+        <md-radio-button value="statewide"> By State </md-radio-button>
       </md-radio-group>
-      <legend><span class="number">3</span>What are you trying to find?</legend>
-      <input type="text" name="field1" placeholder="Type query here">
+
+
       <legend><span class="number">4</span>Want to narrow it down?</legend>
+      <md-radio-group ng-model="scancategory">
+        <md-radio-button value="all" class="md-primary">Search all categories</md-radio-button>
+        <md-radio-button value="housing" class="md-primary">Housing</md-radio-button>
+        <md-radio-button value="forsale"> For Sale </md-radio-button>
+      </md-radio-group>
+
       <legend><span class="number">5</span>All done?</legend>
-      <input type="email" name="field2" placeholder="Your Email *">
-      <textarea name="field3" placeholder="About yourself"></textarea>
-      <label for="job">Interests:</label>
-      <select id="job" name="field4">
-        <optgroup label="Indoors">
-          <option value="fishkeeping">Fishkeeping</option>
-          <option value="reading">Reading</option>
-          <option value="boxing">Boxing</option>
-          <option value="debate">Debate</option>
-          <option value="gaming">Gaming</option>
-          <option value="snooker">Snooker</option>
-          <option value="other_indoor">Other</option>
-        </optgroup>
-        <optgroup label="Outdoors">
-          <option value="football">Football</option>
-          <option value="swimming">Swimming</option>
-          <option value="fishing">Fishing</option>
-          <option value="climbing">Climbing</option>
-          <option value="cycling">Cycling</option>
-          <option value="other_outdoor">Other</option>
-        </optgroup>
-      </select>
-    </fieldset>
-    <fieldset>
-      <legend><span class="number">2</span> Additional Info</legend>
-      <textarea name="field3" placeholder="About Your School"></textarea>
-    </fieldset>
-    <input type="submit" value="Apply" />
+      <input type="submit" value="Submit search" />
   </form>
 </div>

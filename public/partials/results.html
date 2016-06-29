@@ -1,0 +1,23 @@
+<h1>hello</h1>
+<div ng-repeat="post in testArr">
+  <md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{post.title}}</span>
+            <span class="md-subhead">{{post.date}}</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-md card-media">
+              <img src="http://images.craigslist.org/00c0c_izT4IZl7Q3n_300x300.jpg" alt="">
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-content>
+          {{post.price}}
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Save</md-button>
+          <md-button>Delete</md-button>
+        </md-card-actions>
+      </md-card>
+</div>
