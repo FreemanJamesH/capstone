@@ -4,9 +4,9 @@ app.service('searchService', ['$resource', function($resource){
   },
   this.search = function(){
     console.log('searching')
-    $resource('http://boulder.craigslist.org/search/sss?').get({
-      sort: 'rel',
-      query: 'guitar'
+    $resource('/api').save({
+      sort: 'sort=rel',
+      query: 'query=guitar'
     }).$promise.then(function(results) {
       console.log('results', results);
     })

@@ -3,16 +3,16 @@ var router = express.Router();
 var request = require('request');
 var cheerio = require('cheerio')
 
-var url = 'http://www.indeed.com/jobs?q=programmer&l=Boulder%2C+CO'
+var url = 'http://boulder.craigslist.org/search/sss?'
 
 
-router.get('/api', function(req, res, next){
-  request(url, function(err, resp, body){
+router.post('/api', function(req, res, next){
+  console.log('req', req.body)
+  request(url+req.body.sort + '&' + req.body.query, function(err, resp, body){
     var $ = cheerio.load(body)
     // var company = $('.company').text();
-    console.log(body);
+    res.send({comp: body})
   })
-  res.json({hello: 'hello'})
 })
 
 router.get('*', function(req, res, next) {
