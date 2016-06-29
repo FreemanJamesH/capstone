@@ -4,12 +4,12 @@ app.service('searchService', ['$resource', function($resource){
   },
   this.search = function(){
     console.log('searching')
-    // $resource('/api').save({
-    //   sort: 'sort=rel',
-    //   query: 'query=guitar'
-    // }).$promise.then(function(results) {
-    //   console.log('results', results);
-    // })
+    $resource('/api').save({
+      sort: 'sort=rel',
+      query: 'query=guitar'
+    }).$promise.then(function(results) {
+      console.log('results', results);
+    })
 
   }
 }])
