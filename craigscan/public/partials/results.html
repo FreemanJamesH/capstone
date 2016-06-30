@@ -1,4 +1,4 @@
-<h1>hello</h1>
+<h1>{{hello}}</h1>
 <div ng-repeat="post in arr">
   <md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
         <md-card-title>
@@ -10,7 +10,7 @@
           </md-card-title-text>
           <md-card-title-media>
             <div class="md-media-lg card-media">
-              <img src="http://images.craigslist.org/00c0c_izT4IZl7Q3n_300x300.jpg" alt="">
+              <img src="{{post.img}}" alt="">
             </div>
           </md-card-title-media>
         </md-card-title>
