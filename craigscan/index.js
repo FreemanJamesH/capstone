@@ -7,11 +7,22 @@ var url = 'http://boulder.craigslist.org/search/sss?'
 
 
 router.post('/api', function(req, res, next){
-  console.log('req', req.body)
-  request(url+req.body.sort + '&' + req.body.query, function(err, resp, body){
+  let customURL = url +req.body.sort + '&' + req.body.query
+  console.log(customURL);
+  request(customURL, function(err, resp, body){
     var $ = cheerio.load(body)
-    // var company = $('.company').text();
-    res.send({comp: body})
+    let data = [];
+    $('.row').each(function(){
+      let dataObj = {};
+      dataObj.href = $(this).children('a').attr('href')
+      dataObj.img = $(this).children('a').attr('data-ids')
+      dataObj.price = $(this).children('a').children('.price').text()
+      dataObj.time = $(this).find('time').attr('datetime')
+      dataObj.title = $(this).find('#titletextonly').text()
+      dataObj.location = $(this).find('.pnr').children('small').text()
+      data.push(dataObj)
+    })
+    res.json({dataArr: data})
   })
 })
 
