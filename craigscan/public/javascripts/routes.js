@@ -1,19 +1,19 @@
 app.config(function($routeProvider, $locationProvider){
   $routeProvider
   .when('/', {
-    templateUrl: '/partials/scan.html',
+    templateUrl: './partials/scan.html',
     controller: 'MainController'
   })
   .when('/dashboard', {
-    templateUrl: '/partials/dashboard.html',
+    templateUrl: './partials/dashboard.html',
     controller: 'MainController'
   })
   .when('/results', {
-    templateUrl: '/partials/results.html',
+    templateUrl: './partials/results.html',
     controller: 'MainController'
   })
   .when('/saved', {
-    templateUrl: '/partials/saved.html',
+    templateUrl: './partials/saved.html',
     controller: 'MainController'
   })
   .otherwise({redirectTo:'/'});
