@@ -32,5 +32,9 @@ router.post('/api', function(req, res, next){
   })
 })
 
+router.get('/sls', function(req, res, nex){
+  res.json({a: 'a'})
+})
+
 
 module.exports = router;

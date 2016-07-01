@@ -1,7 +1,7 @@
 app.controller('MainController', function($scope, $http, searchService, stateListService, $location) {
-  $scope.hello = 'hello'
+  stateListService.search()
   $scope.arr = searchService.resultsArrGetter();
-  stateListService.log()
+  $scope.stateListProto = stateListService.resultsArrGetter();
   $scope.stateList = [
     ['Alabama', 'AL'],
     ['Alaska', 'AK'],
@@ -55,7 +55,6 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
     ['Wyoming', 'WY']
   ]
 
-  console.log($scope.stateList.length)
 
 
   $scope.submit = function() {
