@@ -5,6 +5,9 @@
   "scripts": {
     "start": "node ./craigscan/bin/www"
   },
+  "engines": {
+    "node": "6.2.1"
+  },
   "dependencies": {
     "body-parser": "~1.13.2",
     "cheerio": "^0.20.0",
