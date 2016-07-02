@@ -1,65 +1,19 @@
 app.controller('MainController', function($scope, $http, searchService, stateListService, $location) {
-  stateListService.search()
+  stateListService.retrieve().then(function(results){
+    $scope.stateListProto = stateListService.resultsArrGetter();
+    console.log('scope slsproto:', $scope.stateListProto)
+  })
+
   $scope.arr = searchService.resultsArrGetter();
-  $scope.stateListProto = stateListService.resultsArrGetter();
-  $scope.stateList = [
-    ['Alabama', 'AL'],
-    ['Alaska', 'AK'],
-    ['Arizona', 'AZ'],
-    ['Arkansas', 'AR'],
-    ['California', 'CA'],
-    ['Colorado', 'CO'],
-    ['Connecticut', 'CT'],
-    ['Delaware', 'DE'],
-    ['Florida', 'FL'],
-    ['Georgia', 'GA'],
-    ['Hawaii', 'HI'],
-    ['Idaho', 'ID'],
-    ['Illinois', 'IL'],
-    ['Indiana', 'IN'],
-    ['Iowa', 'IA'],
-    ['Kansas', 'KS'],
-    ['Kentucky', 'KY'],
-    ['Louisiana', 'LA'],
-    ['Maine', 'ME'],
-    ['Maryland', 'MD'],
-    ['Massachusetts', 'MA'],
-    ['Michigan', 'MI'],
-    ['Minnessota', 'MN'],
-    ['Mississippi', 'MS'],
-    ['Missouri', 'MO'],
-    ['Montana', 'MT'],
-    ['Nebraska', 'NE'],
-    ['Nevada', 'NV'],
-    ['New Hampshire', 'NH'],
-    ['New Jersey', 'NJ'],
-    ['New Mexico', 'NM'],
-    ['New York', 'NY'],
-    ['North Carolina', 'NC'],
-    ['North Dakota', 'ND'],
-    ['Ohio', 'OH'],
-    ['Oklahoma', 'OK'],
-    ['Oregon', 'OR'],
-    ['Pennsylvania', 'PA'],
-    ['Rhode Island', 'RI'],
-    ['South Carolina', 'SC'],
-    ['South Dakota', 'SD'],
-    ['Tennessee', 'TN'],
-    ['Texas', 'TX'],
-    ['Utah', 'UT'],
-    ['Vermont', 'VT'],
-    ['Virginia', 'VA'],
-    ['Washington', 'WA'],
-    ['West Virginia', 'WV'],
-    ['Wisconsin', 'WI'],
-    ['Wyoming', 'WY']
-  ]
+
+
+
 
 
 
   $scope.submit = function() {
     var searchParams = {};
-    $scope.hello = 'goodbye'
+    searchParams.url = $scope.regionChoice
     searchParams.title = $scope.scantitle
     searchParams.date = $scope.scandate
     searchParams.query = $scope.query

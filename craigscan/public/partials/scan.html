@@ -1,5 +1,5 @@
 <div class="form-style-5">
-  <h1>State choice: {{stateChoice}}</h1>
+  <h1>region choice: {{regionChoice}}</h1>
   <form ng-submit="submit()">
     <legend><span class="number">1</span>What's your scan's name?</legend>
     <input type="text" ng-model="scantitle" placeholder="Name your scan here">
@@ -12,8 +12,14 @@
     <input type="text" ng-model="query" placeholder="Type query here">
     <legend><span class="number">3</span>Where?</legend>
     <md-select ng-model="stateChoice" placeholder="Select a state">
-      <md-option ng-value="state[1]" ng-repeat="state in stateList">{{state[0]}}</md-option>
+      <md-option ng-value="stateListProto.indexOf(stateObj)" ng-repeat="stateObj in stateListProto">{{stateObj.state}}</md-option>
     </md-select>
+
+    <md-radio-group ng-model="regionChoice">
+      <md-radio-button ng-repeat="region in stateListProto[stateChoice].regionList" ng-value="region.link" aria-label="{{ d.label }}">
+        {{region.name}}
+      </md-radio-button>
+    </md-radio-group>
 
 
     <!-- <legend><span class="number">3</span>Where do you want to scan?</legend>

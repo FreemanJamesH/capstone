@@ -3,12 +3,12 @@ var router = express.Router();
 var request = require('request');
 var cheerio = require('cheerio')
 
-var url = 'http://boulder.craigslist.org/search/sss?'
 
 
 router.post('/api', function(req, res, next){
-  let customURL = url +req.body.sort + '&' + req.body.query
-  console.log(customURL);
+  let url = req.body.url + 'search/sss?'
+  let customURL = 'http://' + url +req.body.sort + '&' + req.body.query
+  console.log(customURL)
   request(customURL, function(err, resp, body){
     var $ = cheerio.load(body)
     let data = [];
@@ -32,8 +32,26 @@ router.post('/api', function(req, res, next){
   })
 })
 
-router.get('/sls', function(req, res, nex){
-  res.json({a: 'a'})
+router.get('/sls', function(req, res, next){
+  let siteURL = 'http://www.craigslist.org/about/sites'
+  request(siteURL, function(err, resp, body){
+    var $ = cheerio.load(body)
+    let data = []
+    $("a[name|='US']").parent().next().find('h4').each(function(i, elem){
+      let stateObj = {};
+      stateObj.state = ($(this).html())
+      stateObj.regionList = []
+      $(this).next().find('a').each(function(i, elem){
+        let regionObj = {};
+        regionObj.link  = ($(this).attr('href')).slice(2)
+        regionObj.name  = ($(this).html())
+        stateObj.regionList.push(regionObj)
+      })
+      data.push(stateObj)
+    })
+    res.json({finish: data})
+  })
+
 })
 
 
