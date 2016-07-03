@@ -1,19 +1,19 @@
 app.service('searchService', ['$resource', function($resource) {
-  var resultsArr = [];
+  var resultsObj = {};
   return {
     search: function(obj) {
       // return $resource('https://jhfcapstone.herokuapp.com/api').save({
       return $resource('//localhost:3000/api').save({
         url: obj.url,
         sort: 'sort=rel',
-        query: 'query=' + obj.query
+        query: 'query=' + obj.query,
       }).$promise.then(function(results) {
-        resultsArr = results.dataArr;
-        console.log(resultsArr)
+        resultsObj = results;
       })
     },
-    resultsArrGetter: function() {
-      return resultsArr;
+    resultsObjGetter: function() {
+      console.log('objgetter results', resultsObj)
+      return resultsObj;
     }
   }
 }])

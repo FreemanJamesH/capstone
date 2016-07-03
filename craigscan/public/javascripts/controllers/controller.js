@@ -4,7 +4,8 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
     console.log('scope slsproto:', $scope.stateListProto)
   })
 
-  $scope.arr = searchService.resultsArrGetter();
+  $scope.obj = searchService.resultsObjGetter();
+  $scope.arr = $scope.obj.dataArr
 
 
 
@@ -21,6 +22,7 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
     searchParams.category = $scope.scancategory
     console.log('searchParams', searchParams)
     searchService.search(searchParams).then(function(results) {
+      console.log('results', results)
       $location.path('/results')
     })
   }
