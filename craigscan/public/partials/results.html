@@ -1,14 +1,18 @@
-<h1>819</h1>
+<h1>844</h1>
 <md-content>
   <md-list flex='70'>
     <md-list-item class="md-3-line" ng-repeat="post in arr" ng-click="null">
       <div class="imgholder">
         <img class="imgresult" src="{{post.img}}" alt="">
       </div>
-      <div class="md-list-item-text" layout="column">
-        <h3>{{ post.title }}</h3>
+      <div class="md-list-item-text" layout="column" layout-align="start center">
+        <h2>{{ post.title }}</h2>
         <h4>{{ post.time }}</h4>
         <p>{{ post.price }}</p>
+        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+          <md-button class="md-raised">Save</md-button>
+          <md-button class="md-raised md-warn">Delete</md-button>
+        </section>
       </div>
     </md-list-item>
 </md-content>

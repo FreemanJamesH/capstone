@@ -16,9 +16,9 @@ router.post('/api', function(req, res, next) {
     $('.row').each(function() {
       let dataObj = {};
       dataObj.href = $(this).children('a').attr('href')
+      dataObj.title = $(this).find('#titletextonly').text()
       if ($(this).children('a').attr('data-ids')) {
         dataObj.img = 'http://images.craigslist.org/' + $(this).children('a').attr('data-ids').slice(2, 19) + '_300x300.jpg'
-        dataObj.title = $(this).find('#titletextonly').text()
           data.forEach(function(element, index) {
             if (dataObj.img === element.img || dataObj.title === element.title) {
               dataObj.dupe = true
