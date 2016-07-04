@@ -1,25 +1,41 @@
-<h1>{{hello}}</h1>
+<h1>819</h1>
+<md-content>
+  <md-list flex='70'>
+    <md-list-item class="md-3-line" ng-repeat="post in arr" ng-click="null">
+      <div class="imgholder">
+        <img class="imgresult" src="{{post.img}}" alt="">
+      </div>
+      <div class="md-list-item-text" layout="column">
+        <h3>{{ post.title }}</h3>
+        <h4>{{ post.time }}</h4>
+        <p>{{ post.price }}</p>
+      </div>
+    </md-list-item>
+</md-content>
+
+
+<!--
 <div ng-repeat="post in arr">
   <md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
-        <md-card-title>
-          <md-card-title-text>
-            <a href="//www.craigslist.org/bdp/5658293290.html">
-            <span class="md-headline">{{post.title}}</span>
-          </a>
-            <span class="md-subhead">{{post.date}}</span>
-          </md-card-title-text>
-          <md-card-title-media>
-            <div class="md-media-lg card-media">
-              <img src="{{post.img}}" alt="">
-            </div>
-          </md-card-title-media>
-        </md-card-title>
-        <md-card-content>
-          {{post.price}}
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button>Save</md-button>
-          <md-button>Delete</md-button>
-        </md-card-actions>
-      </md-card>
-</div>
+    <md-card-title>
+      <md-card-title-text>
+        <a href="//www.craigslist.org/bdp/5658293290.html">
+          <span class="md-headline">{{post.title}}</span>
+        </a>
+        <span class="md-subhead">{{post.date}}</span>
+      </md-card-title-text>
+      <md-card-title-media>
+        <div class="md-media-lg card-media">
+          <img src="{{post.img}}" alt="">
+        </div>
+      </md-card-title-media>
+    </md-card-title>
+    <md-card-content>
+      {{post.price}}
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button>Save</md-button>
+      <md-button>Delete</md-button>
+    </md-card-actions>
+  </md-card>
+</div> -->
