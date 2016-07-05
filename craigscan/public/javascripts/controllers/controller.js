@@ -1,16 +1,15 @@
 app.controller('MainController', function($scope, $http, searchService, stateListService, $location) {
   stateListService.retrieve().then(function(results){
     $scope.stateListProto = stateListService.resultsArrGetter();
-    console.log('scope slsproto:', $scope.stateListProto)
   })
 
   $scope.obj = searchService.resultsObjGetter();
   $scope.arr = $scope.obj.dataArr
-
-
-
-
-
+  $scope.dupeShow = false
+  $scope.imageHide = false
+  $scope.loggit = function(){
+    $scope.dupeShow
+  }
 
   $scope.submit = function() {
     var searchParams = {};

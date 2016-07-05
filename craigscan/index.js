@@ -27,6 +27,8 @@ router.post('/api', function(req, res, next) {
             if (dataObj.img === element.img || dataObj.title === element.title) {
               dataObj.dupe = true
               foundDupe = true
+            } else {
+              dataObj.dupe = false
             }
           })
           if (foundDupe){

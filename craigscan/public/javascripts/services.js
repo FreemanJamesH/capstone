@@ -10,7 +10,7 @@ app.service('searchService', ['$resource', function($resource) {
       })
     },
     resultsObjGetter: function() {
-      console.log('objgetter results', resultsObj)
+      console.log('resultsObj: ', resultsObj)
       return resultsObj;
     }
   }
@@ -24,7 +24,6 @@ app.service('stateListService', ['$resource', function($resource) {
       return $resource('https://jhfcapstone.herokuapp.com/sls').get()
       // return $resource('//localhost:3000/sls').get()
       .$promise.then(function(results) {
-        // console.log('results HERE', results)
         resultsArr = results.finish;
       })
     },

@@ -1,8 +1,29 @@
 <div class="result_big_container" layout="row">
-  <div style="background-color:grey" flex></div>
+  <div class="form-style-5 resultsform" flex>
+    <legend>Found {{obj.resultCount}} unique results</legend>
+    <label for="duplicates">{{obj.dupeCount}} duplicates detected</label>
+
+    <legend>Options</legend>
+    <div class="options_container">
+    <md-checkbox ng-model="dupeShow" ng-change="loggit()">
+      Show duplicates
+    </md-checkbox>
+    <md-checkbox ng-model="imageHide">
+      Show only results with images
+    </md-checkbox>
+    <label for="sort">Sort by:</label>
+    <md-select id="sort" ng-model="stateChoice" placeholder="Sort by">
+      <md-option ng-value="1">Date</md-option>
+      <md-option ng-value="1">Price</md-option>
+    </md-select>
+
+    </div>
+
+  </div>
+  <!-- </div> -->
   <div class="result_container" flex="80">
     <md-list>
-      <md-list-item class="md-3-line" ng-repeat="post in arr" ng-click="null">
+      <md-list-item class="md-3-line" ng-repeat="post in arr" ng-hide="!dupeShow && post.dupe">
         <div class="imgholder">
           <img class="imgresult" src="{{post.img}}" alt="">
         </div>
@@ -16,5 +37,5 @@
           </section>
         </div>
       </md-list-item>
-    </div>
+  </div>
 </div>
