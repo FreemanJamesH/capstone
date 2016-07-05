@@ -2,8 +2,8 @@ app.service('searchService', ['$resource', function($resource) {
   var resultsObj = {};
   return {
     search: function(obj) {
-      return $resource('https://jhfcapstone.herokuapp.com/api').save({
-      // return $resource('//localhost:3000/api').save({
+      // return $resource('https://jhfcapstone.herokuapp.com/api').save({
+      return $resource('//localhost:3000/api').save({
         url: obj.url
       }).$promise.then(function(results) {
         resultsObj = results;

@@ -7,6 +7,24 @@ ng-view {
   height: 100%;
 }
 
+.result_big_container {
+  height: 100%;
+}
+
+.result_container {
+  max-height: 100%;
+  overflow: scroll;
+  border: 3px solid red;
+}
+
+.thirty {
+  background-color: red;
+}
+
+.seventy {
+  background-color: blue;
+}
+
 md-datepicker {
 }
 

@@ -1,45 +1,20 @@
-<!-- <h1>1150</h1> -->
-<md-content>
-  <md-list flex='70'>
-    <md-list-item class="md-3-line" ng-repeat="post in arr" ng-click="null">
-      <div class="imgholder">
-        <img class="imgresult" src="{{post.img}}" alt="">
-      </div>
-      <div class="md-list-item-text" layout="column" layout-align="start center">
-        <h2>{{ post.title }}</h2>
-        <h4>{{ post.time }}</h4>
-        <p>{{ post.price }}</p>
-        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-          <md-button class="md-raised">Save</md-button>
-          <md-button class="md-raised md-warn">Delete</md-button>
-        </section>
-      </div>
-    </md-list-item>
-</md-content>
-
-
-<!--
-<div ng-repeat="post in arr">
-  <md-card md-theme="{{ showDarkTheme ? 'dark-blue' : 'default' }}" md-theme-watch>
-    <md-card-title>
-      <md-card-title-text>
-        <a href="//www.craigslist.org/bdp/5658293290.html">
-          <span class="md-headline">{{post.title}}</span>
-        </a>
-        <span class="md-subhead">{{post.date}}</span>
-      </md-card-title-text>
-      <md-card-title-media>
-        <div class="md-media-lg card-media">
-          <img src="{{post.img}}" alt="">
+<div class="result_big_container" layout="row">
+  <div style="background-color:grey" flex></div>
+  <div class="result_container" flex="80">
+    <md-list>
+      <md-list-item class="md-3-line" ng-repeat="post in arr" ng-click="null">
+        <div class="imgholder">
+          <img class="imgresult" src="{{post.img}}" alt="">
         </div>
-      </md-card-title-media>
-    </md-card-title>
-    <md-card-content>
-      {{post.price}}
-    </md-card-content>
-    <md-card-actions layout="row" layout-align="end center">
-      <md-button>Save</md-button>
-      <md-button>Delete</md-button>
-    </md-card-actions>
-  </md-card>
-</div> -->
+        <div class="md-list-item-text" layout="column" layout-align="start center">
+          <h2>{{ post.title }}</h2>
+          <h4>{{ post.time }}</h4>
+          <p>{{ post.price }}</p>
+          <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+            <md-button class="md-raised">Save</md-button>
+            <md-button class="md-raised md-warn">Delete</md-button>
+          </section>
+        </div>
+      </md-list-item>
+    </div>
+</div>
