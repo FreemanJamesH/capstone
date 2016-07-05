@@ -6,39 +6,52 @@ var cheerio = require('cheerio')
 
 
 router.post('/api', function(req, res, next) {
-  let url = req.body.url + 'search/apa?'
-  let customURL = 'http://' + url + req.body.sort + '&' + req.body.query
-  console.log(customURL)
-  request(customURL, function(err, resp, body) {
-    var $ = cheerio.load(body)
-    let data = [];
-    let duplicate = 0;
-    $('.row').each(function() {
-      let dataObj = {};
-      dataObj.href = $(this).children('a').attr('href')
-      dataObj.title = $(this).find('#titletextonly').text()
-      if ($(this).children('a').attr('data-ids')) {
-        dataObj.img = 'http://images.craigslist.org/' + $(this).children('a').attr('data-ids').slice(2, 19) + '_300x300.jpg'
+  let count = 0
+  let data = [];
+  let duplicate = 0;
+  console.log(req.body.url)
+  requestFunction(req.body.url)
+
+  function requestFunction(urlArg) {
+    let url = urlArg + '&s=' + count
+    request(url, function(err, resp, body) {
+      var $ = cheerio.load(body)
+      $('.row').each(function() {
+        let dataObj = {};
+        dataObj.href = $(this).children('a').attr('href')
+        dataObj.title = $(this).find('#titletextonly').text()
+        if ($(this).children('a').attr('data-ids')) {
+          dataObj.img = 'http://images.craigslist.org/' + $(this).children('a').attr('data-ids').slice(2, 19) + '_300x300.jpg'
+          let foundDupe = false
           data.forEach(function(element, index) {
             if (dataObj.img === element.img || dataObj.title === element.title) {
               dataObj.dupe = true
-              duplicate++
+              foundDupe = true
             }
           })
-      } else {
-        dataObj.img = 'https://www.shearwater.com/wp-content/plugins/lightbox/images/No-image-found.jpg';
+          if (foundDupe){
+            duplicate++
+          }
+        } else {
+          dataObj.img = 'https://www.shearwater.com/wp-content/plugins/lightbox/images/No-image-found.jpg';
+        }
+        dataObj.price = $(this).find('.price').text()
+        dataObj.time = $(this).find('time').attr('datetime')
+        dataObj.location = $(this).find('.pnr').children('small').text()
+        data.push(dataObj)
+      })
+      if (data.length === 100 + count && count != 2400) {
+        count += 100
+        return requestFunction(urlArg)
       }
-      dataObj.price = $(this).children('a').children('.price').text()
-      dataObj.time = $(this).find('time').attr('datetime')
-      dataObj.location = $(this).find('.pnr').children('small').text()
-      data.push(dataObj)
+      // console.log('resultcount: ', data.length)
+      res.json({
+        dataArr: data,
+        dupeCount: duplicate,
+        resultCount: data.length
+      })
     })
-    console.log('res.json: ', data);
-    res.json({
-      dataArr: data,
-      dupeCount: duplicate
-    })
-  })
+  }
 })
 
 router.get('/sls', function(req, res, next) {

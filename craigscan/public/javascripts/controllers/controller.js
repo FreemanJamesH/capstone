@@ -14,15 +14,24 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
 
   $scope.submit = function() {
     var searchParams = {};
-    searchParams.url = $scope.regionChoice
+    searchParams.url = 'http://' + $scope.regionChoice + 'search/apa?'
+    if ($scope.query){
+      searchParams.url += ('&query=' + $scope.query)
+    }
+    if ($scope.distance){
+      searchParams.url += ('&search_distance=' + $scope.distance)
+    }
+    if ($scope.postal){
+      searchParams.url += ('&postal=' + $scope.postal)
+    }
+    if ($scope.min_price){
+      searchParams.url += ('&min_price=' + $scope.min_price)
+    }
+    if ($scope.max_price){
+      searchParams.url += ('&max_price=' + $scope.max_price)
+    }
     searchParams.title = $scope.scantitle
-    searchParams.date = $scope.scandate
-    searchParams.query = $scope.query
-    searchParams.location = $scope.scanlocation
-    searchParams.category = $scope.scancategory
-    console.log('searchParams', searchParams)
     searchService.search(searchParams).then(function(results) {
-      console.log('results', results)
       $location.path('/results')
     })
   }

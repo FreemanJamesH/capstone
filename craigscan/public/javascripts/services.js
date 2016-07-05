@@ -4,9 +4,7 @@ app.service('searchService', ['$resource', function($resource) {
     search: function(obj) {
       // return $resource('https://jhfcapstone.herokuapp.com/api').save({
       return $resource('//localhost:3000/api').save({
-        url: obj.url,
-        sort: 'sort=rel',
-        query: 'query=' + obj.query,
+        url: obj.url
       }).$promise.then(function(results) {
         resultsObj = results;
       })

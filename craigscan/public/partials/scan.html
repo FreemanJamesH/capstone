@@ -2,6 +2,7 @@
   <form ng-submit="submit()">
     <legend><span class="number">1</span>What's your scan's name?</legend>
     <input type="text" ng-model="scantitle" placeholder="Name your scan here">
+
     <!-- <label>How far back should your scan search?</label> -->
     <!-- <md-content>
         <md-datepicker ng-model="scandate" md-placeholder="Enter date"></md-datepicker>
@@ -10,6 +11,7 @@
     <legend><span class="number">2</span>What are you trying to find?</legend>
     <input type="text" ng-model="query" placeholder="Type query here">
     <legend><span class="number">3</span>Where?</legend>
+
     <md-select ng-model="stateChoice" placeholder="Select a state">
       <md-option ng-value="stateListProto.indexOf(stateObj)" ng-repeat="stateObj in stateListProto">{{stateObj.state}}</md-option>
     </md-select>
@@ -20,22 +22,19 @@
       </md-radio-button>
     </md-radio-group>
 
+    <legend><span class="number">4</span>Distance within zipcode?</legend>
+    <label for="postal">Zip code</label>
+    <input id="postal" type="text" ng-model="postal" placeholder="Zip code">
+    <label for="distance">Miles</label>
+    <input id="distance" type="number" ng-model="distance">
 
-    <!-- <legend><span class="number">3</span>Where do you want to scan?</legend>
-      <md-radio-group ng-model="scanlocation">
-        <md-radio-button value="nationwide" class="md-primary">Nationwide</md-radio-button>
-        <md-radio-button value="statewide"> By State </md-radio-button>
-      </md-radio-group>
+    <legend><span class="number">5</span>Price</legend>
+    <label for="min_price">Min Price</label>
+    <input id="min_price" type="text" ng-model="min_price" placeholder="Min Price">
+    <label for="max_price">Max Price</label>
+    <input id="max_price" type="text" ng-model="max_price" placeholder="Max Price">
 
-
-      <legend><span class="number">4</span>Want to narrow it down?</legend>
-      <md-radio-group ng-model="scancategory">
-        <md-radio-button value="all" class="md-primary">Search all categories</md-radio-button>
-        <md-radio-button value="housing" class="md-primary">Housing</md-radio-button>
-        <md-radio-button value="forsale"> For Sale </md-radio-button>
-      </md-radio-group> -->
-
-    <legend><span class="number">4</span>All done?</legend>
+    <legend><span class="number">6</span>All done?</legend>
     <input type="submit" value="Submit search" />
   </form>
 </div>
