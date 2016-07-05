@@ -21,6 +21,7 @@ router.post('/api', function(req, res, next) {
         dataObj.href = $(this).children('a').attr('href')
         dataObj.title = $(this).find('#titletextonly').text()
         if ($(this).children('a').attr('data-ids')) {
+          dataObj.hasimg = true
           dataObj.img = 'http://images.craigslist.org/' + $(this).children('a').attr('data-ids').slice(2, 19) + '_300x300.jpg'
           let foundDupe = false
           data.forEach(function(element, index) {
@@ -35,6 +36,7 @@ router.post('/api', function(req, res, next) {
             duplicate++
           }
         } else {
+          dataObj.hasimg = false
           dataObj.img = 'https://www.shearwater.com/wp-content/plugins/lightbox/images/No-image-found.jpg';
         }
         dataObj.price = $(this).find('.price').text()
