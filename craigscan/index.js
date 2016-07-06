@@ -9,7 +9,6 @@ router.post('/api', function(req, res, next) {
   let count = 0
   let data = [];
   let duplicate = 0;
-  console.log(req.body.url)
   requestFunction(req.body.url)
 
   function requestFunction(urlArg) {
@@ -18,18 +17,17 @@ router.post('/api', function(req, res, next) {
       var $ = cheerio.load(body)
       $('.row').each(function() {
         let dataObj = {};
-        dataObj.href = $(this).children('a').attr('href')
+        dataObj.href = '//' + req.body.regionChoice + $(this).children('a').attr('href').slice(1)
         dataObj.title = $(this).find('#titletextonly').text()
         if ($(this).children('a').attr('data-ids')) {
           dataObj.hasimg = true
-          dataObj.img = 'http://images.craigslist.org/' + $(this).children('a').attr('data-ids').slice(2, 19) + '_300x300.jpg'
+          dataObj.img = 'http://images.craigslist.org/' + $(this).children('a').attr('data-ids').slice(2, 19) + '_300x300.jpg';
+          // 'https://www.shearwater.com/wp-content/plugins/lightbox/images/No-image-found.jpg'
           let foundDupe = false
           data.forEach(function(element, index) {
             if (dataObj.img === element.img || dataObj.title === element.title) {
               dataObj.dupe = true
               foundDupe = true
-            } else {
-              dataObj.dupe = false
             }
           })
           if (foundDupe){
@@ -39,7 +37,16 @@ router.post('/api', function(req, res, next) {
           dataObj.hasimg = false
           dataObj.img = 'https://www.shearwater.com/wp-content/plugins/lightbox/images/No-image-found.jpg';
         }
-        dataObj.price = $(this).find('.price').text()
+        let time = $(this).find('time').attr('datetime')
+        let timeConverted =
+        (parseInt(time.slice(0,4)) - 1970) * 365 * 24 * 60 * 60
+        + parseInt(time.slice(5,7)) * 30 * 24 * 60 * 60
+        + parseInt(time.slice(8,10)) * 24 * 60 * 60
+        + parseInt(time.slice(11,13)) * 60
+        + parseInt(time.slice(14, 16))
+        dataObj.timeConverted = timeConverted
+        dataObj.price = $(this).find('.price').text().slice(1)
+        dataObj.price = parseInt(dataObj.price, 10)
         dataObj.time = $(this).find('time').attr('datetime')
         dataObj.location = $(this).find('.pnr').children('small').text()
         data.push(dataObj)
@@ -48,7 +55,6 @@ router.post('/api', function(req, res, next) {
         count += 100
         return requestFunction(urlArg)
       }
-      // console.log('resultcount: ', data.length)
       res.json({
         dataArr: data,
         dupeCount: duplicate,

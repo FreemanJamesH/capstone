@@ -3,6 +3,9 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
     $scope.stateListProto = stateListService.resultsArrGetter();
   })
 
+  $scope.sortLog = function(){
+    console.log($scope.sortBy)
+  }
   $scope.obj = searchService.resultsObjGetter();
   $scope.arr = $scope.obj.dataArr
   $scope.dupeShow = false
@@ -13,6 +16,7 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
 
   $scope.submit = function() {
     var searchParams = {};
+    searchParams.regionChoice = $scope.regionChoice
     searchParams.url = 'http://' + $scope.regionChoice + 'search/apa?'
     if ($scope.query){
       searchParams.url += ('&query=' + $scope.query)

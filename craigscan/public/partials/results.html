@@ -1,6 +1,6 @@
 <div class="result_big_container" layout="row">
   <div class="form-style-5 resultsform" flex>
-    <legend>Found {{obj.resultCount}} unique results</legend>
+    <legend>Found {{obj.resultCount - obj.dupeCount}} unique results</legend>
     <label for="duplicates">{{obj.dupeCount}} duplicates detected</label>
 
     <legend>Options</legend>
@@ -12,9 +12,9 @@
       Show only results with images
     </md-checkbox>
     <label for="sort">Sort by:</label>
-    <md-select id="sort" ng-model="stateChoice" placeholder="Sort by">
-      <md-option ng-value="1">Date</md-option>
-      <md-option ng-value="1">Price</md-option>
+    <md-select id="sort" ng-model="sortBy" ng-change=(sortLog()) placeholder="Sort by">
+      <md-option ng-value="'-timeConverted'">Post Date</md-option>
+      <md-option ng-value="'price'">Price</md-option>
     </md-select>
 
     </div>
@@ -23,14 +23,14 @@
   <!-- </div> -->
   <div class="result_container" flex="80">
     <md-list>
-      <md-list-item class="md-3-line" ng-repeat="post in arr" ng-hide="(!dupeShow && post.dupe) || (!post.hasimg && imageHide)">
+      <md-list-item class="md-3-line" ng-repeat="post in arr | orderBy:sortBy" ng-hide="(!dupeShow && post.dupe) || (!post.hasimg && imageHide)">
         <div class="imgholder">
           <img class="imgresult" src="{{post.img}}" alt="">
         </div>
         <div class="md-list-item-text" layout="column" layout-align="start center">
-          <h2>{{ post.title }}</h2>
+          <a href="{{post.href}}"><h2>{{ post.title }}</h2></a>
           <h4>{{ post.time }}</h4>
-          <p>{{ post.price }}</p>
+          <p>${{ post.price }}</p>
           <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
             <md-button class="md-raised">Save</md-button>
             <md-button class="md-raised md-warn">Delete</md-button>
