@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Tangerine">
 
   <link rel="stylesheet" href="/stylesheets/style.css">
   <script src="https://code.angularjs.org/1.5.7/angular.js"></script>
@@ -21,26 +22,26 @@
   <title>CraigScan</title>
   <base href="/">
 </head>
+
 <body ng-cloak>
-  <md-toolbar>
-        <div class="md-toolbar-tools">
-          <!-- <md-button aria-label="Go Back">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <!-- <md-button aria-label="Go Back">
             Go Back
           </md-button> -->
-          <h2>
-            <span>CraigScan</span>
-          </h2>
-          <!-- <span flex></span>
+        <h1>
+            <span class="craigs">Craigs<span class="bliss">Bliss</span> <span>Apartment Search</span></span>
+          </h1>
+        <!-- <span flex></span>
           <md-button class="md-raised" aria-label="Learn More">
             Learn More
           </md-button>
           <md-button class="md-fab md-mini" aria-label="Favorite">
             <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
           </md-button> -->
-        </div>
-      </md-toolbar>
-  <ng-view></ng-view>
-
+      </div>
+    </md-toolbar>
+    <ng-view></ng-view>
 </body>
 
 </html>
