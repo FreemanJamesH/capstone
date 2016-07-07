@@ -1,4 +1,4 @@
-
+<div class="scanPage">
   <div class="form-style-5">
     <form ng-submit="submit()">
       <!-- <legend><span class="number">1</span>What's your scan's name?</legend>
@@ -9,7 +9,7 @@
         <md-datepicker ng-model="scandate" md-placeholder="Enter date"></md-datepicker>
       </md-content> -->
 
-      <legend><span class="number">1</span>What are you trying to find?</legend>
+      <legend><span class="number">1</span>What Are You Trying to Find?</legend>
       <input type="text" ng-model="query" placeholder="Type query here">
       <legend><span class="number">2</span>Where?</legend>
       <md-select required ng-model="stateChoice" placeholder="Select a state">
@@ -22,8 +22,8 @@
         </md-radio-button>
       </md-radio-group>
 
-      <legend><span class="number">3</span>Distance within zipcode?</legend>
-      <label for="postal">Zip code</label>
+      <legend><span class="number">3</span>Distance Within Zipcode?</legend>
+      <label for="postal">Zip Code</label>
       <input id="postal" type="text" ng-model="postal" placeholder="Zip code">
       <label for="distance">Miles</label>
       <input id="distance" type="number" ng-model="distance">
@@ -34,7 +34,8 @@
       <label for="max_price">Max Price</label>
       <input id="max_price" type="text" ng-model="max_price" placeholder="Max Price">
 
-      <legend><span class="number">5</span>All done?</legend>
+      <legend><span class="number">5</span>All Done?</legend>
       <input type="submit" value="Submit search" />
     </form>
   </div>
+</div>

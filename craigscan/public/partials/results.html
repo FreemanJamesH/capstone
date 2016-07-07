@@ -1,41 +1,46 @@
-<div class="result_big_container" layout="row">
-  <div class="form-style-5 resultsform" flex>
-    <legend>Found {{obj.resultCount - obj.dupeCount}} unique results</legend>
-    <label for="duplicates">{{obj.dupeCount}} duplicates detected</label>
+<div class="solidbg">
+  <div class="result_big_container" layout="row">
+    <div class="form-style-5 resultsform" flex>
+      <legend>Found {{obj.resultCount - obj.dupeCount}} Unique Results</legend>
+      <label for="duplicates">{{obj.dupeCount}} Duplicates Detected</label>
 
-    <legend>Options</legend>
-    <div class="options_container">
-    <md-checkbox ng-model="dupeShow" ng-change="loggit()">
-      Show duplicates
-    </md-checkbox>
-    <md-checkbox ng-model="imageHide">
-      Show only results with images
-    </md-checkbox>
-    <label for="sort">Sort by:</label>
-    <md-select id="sort" ng-model="sortBy" ng-change=(sortLog()) placeholder="Sort by">
-      <md-option ng-value="'-timeConverted'">Post Date</md-option>
-      <md-option ng-value="'price'">Price</md-option>
-    </md-select>
+      <div class="optionsTitle">
+      <legend>Options:</legend>
+      <div class="options_container">
+        <md-checkbox ng-model="dupeShow" ng-change="loggit()">
+          Show Duplicates
+        </md-checkbox>
+        <md-checkbox ng-model="imageHide">
+          Show Only Results with Images
+        </md-checkbox>
+        <md-select id="sort" ng-model="sortBy" ng-change=(sortLog()) placeholder="Sort by">
+          <md-option ng-value="'-timeConverted'">Post Date</md-option>
+          <md-option ng-value="'price'">Price</md-option>
+        </md-select>
+
+      </div>
+      </div>
 
     </div>
-
-  </div>
-  <!-- </div> -->
-  <div class="result_container" flex="80">
-    <md-list>
-      <md-list-item class="md-3-line" ng-repeat="post in arr | orderBy:sortBy" ng-hide="(!dupeShow && post.dupe) || (!post.hasimg && imageHide)">
-        <div class="imgholder">
-          <img class="imgresult" src="{{post.img}}" alt="">
-        </div>
-        <div class="md-list-item-text" layout="column" layout-align="start center">
-          <a href="{{post.href}}"><h2>{{ post.title }}</h2></a>
-          <h4>{{ post.time }}</h4>
-          <p>${{ post.price }}</p>
-          <!-- <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+    <!-- </div> -->
+    <div class="result_container" flex="80">
+      <md-list>
+        <md-list-item class="md-3-line" ng-repeat="post in arr | orderBy:sortBy" ng-hide="(!dupeShow && post.dupe) || (!post.hasimg && imageHide)">
+          <a href="{{post.href}}">
+          <div class="imgholder">
+            <img class="imgresult" src="{{post.img}}" alt="">
+          </div>
+          <div class="md-list-item-text" layout="column" layout-align="start">
+          <h2>{{ post.title }}</h2><br>
+            <h3>Posted on: {{ post.time | date: 'medium' }}</h3><br>
+            <h3>Rent: ${{ post.price }}</h3>
+            <!-- <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
             <md-button class="md-raised">Save</md-button>
             <md-button class="md-raised md-warn">Delete</md-button>
           </section> -->
-        </div>
-      </md-list-item>
+          </div>
+        </md-list-item>
+        </a>
+    </div>
   </div>
 </div>
