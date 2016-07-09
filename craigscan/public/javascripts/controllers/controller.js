@@ -14,7 +14,7 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
     $scope.dupeShow
   }
 
-  
+
 
   $scope.submit = function() {
     var searchParams = {};

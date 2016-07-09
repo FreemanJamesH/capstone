@@ -33,8 +33,10 @@ a {
   display: flex;
 }
 
-.scanPage{
-  background-image: url('http://rdcnewscdn.realtor.com/wp-content/uploads/2015/06/tilt-shift-neighborhood.jpg');
+.neighborhood{
+  height: 100%;
+  background-image: url('./tilt-shift-neighborhood-dark.jpg');
+  background-size: cover;
   z-index: -1;
   padding: 10px;
 
