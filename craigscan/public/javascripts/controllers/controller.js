@@ -1,5 +1,16 @@
+app.controller('AuthController', function($scope, $http, $location, signupService) {
+  $scope.submit = function(){
+    var signupObj = {};
+    signupObj.username = $scope.username
+    signupObj.email = $scope.email
+    signupObj.password = $scope.password
+    signupService.signup(signupObj)
+  }
+})
+
+
 app.controller('MainController', function($scope, $http, searchService, stateListService, $location) {
-  stateListService.retrieve().then(function(results){
+  stateListService.retrieve().then(function(){
     $scope.stateListProto = stateListService.resultsArrGetter();
   })
 

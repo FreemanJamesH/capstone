@@ -1,8 +1,21 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-var cheerio = require('cheerio')
+var cheerio = require('cheerio');
+var User = require('./User.model')
 
+router.post('/signup', function(req, res, next){
+  let newUser = new User({
+    username: 'James',
+    email: 'freeman.james.h@gmail.com',
+    password: 'password'
+  })
+  newUser.save(function(err){
+    if (err) throw err;
+    console.log('User added!: ', newUser)
+  })
+  res.json({test: newUser})
+})
 
 
 router.post('/api', function(req, res, next) {

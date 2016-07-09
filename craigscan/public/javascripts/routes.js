@@ -18,7 +18,7 @@ app.config(function($routeProvider, $locationProvider){
   })
   .when('/auth', {
     templateUrl: './partials/auth.html',
-    controller: 'MainController'
+    controller: 'AuthController'
   })
   .otherwise({redirectTo:'/'});
   $locationProvider.html5Mode(true);

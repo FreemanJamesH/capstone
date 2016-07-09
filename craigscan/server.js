@@ -1,15 +1,19 @@
 var express = require('express');
 var path = require('path');
-// var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var request = require('request')
 var cheerio = require('cheerio')
+var mongoose = require('mongoose')
+var passport = require('passport')
 
-var routes = require('./index');
+
+var routes = require('./routes');
 var cors = require('cors')
 var app = express();
+
+mongoose.connect('mongodb://localhost/craigscan')
 
 
 // uncomment after placing your favicon in /public
