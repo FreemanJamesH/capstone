@@ -1,4 +1,6 @@
 var express = require('express');
+var app = express();
+var session = require('express-session')
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -7,23 +9,27 @@ var request = require('request')
 var cheerio = require('cheerio')
 var mongoose = require('mongoose')
 var passport = require('passport')
+// var MongoStore = require('connect-mongo')(session)
+require('./passportConfig.js')(passport);
 
 
-var routes = require('./routes');
 var cors = require('cors')
-var app = express();
+var routes = require('./routes');
 
 mongoose.connect('mongodb://localhost/craigscan')
+
 
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(session({resave: false, saveUninitialized: true, secret: 'jhf13'}));
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(cors());
 app.use('/', routes);
 

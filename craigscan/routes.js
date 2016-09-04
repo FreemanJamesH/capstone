@@ -2,20 +2,11 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 var cheerio = require('cheerio');
-var User = require('./User.model')
+var User = require('./User.model');
+var passport = require('passport')
 
-router.post('/signup', function(req, res, next){
-  let newUser = new User({
-    username: 'James',
-    email: 'freeman.james.h@gmail.com',
-    password: 'password'
-  })
-  newUser.save(function(err){
-    if (err) throw err;
-    console.log('User added!: ', newUser)
-  })
-  res.json({test: newUser})
-})
+
+router.post('/signup', passport.authenticate('local-signup', {}))
 
 
 router.post('/api', function(req, res, next) {
@@ -32,7 +23,7 @@ router.post('/api', function(req, res, next) {
       $('.row').each(function() {
         let dataObj = {};
         dataObj.href = '//' + req.body.regionChoice + $(this).children('a').attr('href').slice(1)
-        dataObj.title = $(this).find('#titletextonly').text()
+        dataObj.title = $(this).find('.hdrlnk').text()
         if ($(this).children('a').attr('data-ids')) {
           dataObj.hasimg = true
           dataObj.img = 'http://images.craigslist.org/' + $(this).children('a').attr('data-ids').slice(2, 19) + '_300x300.jpg';
@@ -44,7 +35,7 @@ router.post('/api', function(req, res, next) {
               foundDupe = true
             }
           })
-          if (foundDupe){
+          if (foundDupe) {
             duplicate++
           }
         } else {
@@ -53,11 +44,11 @@ router.post('/api', function(req, res, next) {
         }
         let time = $(this).find('time').attr('datetime')
         let timeConverted =
-        (parseInt(time.slice(0,4)) - 1970) * 365 * 24 * 60 * 60
-        + parseInt(time.slice(5,7)) * 30 * 24 * 60 * 60
-        + parseInt(time.slice(8,10)) * 24 * 60 * 60
-        + parseInt(time.slice(11,13)) * 60
-        + parseInt(time.slice(14, 16))
+          (parseInt(time.slice(0, 4)) - 1970) * 365 * 24 * 60 * 60 +
+          parseInt(time.slice(5, 7)) * 30 * 24 * 60 * 60 +
+          parseInt(time.slice(8, 10)) * 24 * 60 * 60 +
+          parseInt(time.slice(11, 13)) * 60 +
+          parseInt(time.slice(14, 16))
         dataObj.timeConverted = timeConverted
         dataObj.price = $(this).find('.price').text().slice(1)
         dataObj.price = parseInt(dataObj.price, 10)
