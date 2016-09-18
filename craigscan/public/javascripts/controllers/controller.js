@@ -4,7 +4,9 @@ app.controller('AuthController', function($scope, $http, $location, signupServic
     signupObj.username = $scope.username
     signupObj.email = $scope.email
     signupObj.password = $scope.password
-    signupService.signup(signupObj)
+    signupService.signup(signupObj).then(function(results){
+      $location.path('/')
+    })
   }
 })
 
@@ -24,8 +26,6 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
   $scope.loggit = function(){
     $scope.dupeShow
   }
-
-
 
   $scope.submit = function() {
     var searchParams = {};

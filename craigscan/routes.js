@@ -1,9 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var request = require('request');
-var cheerio = require('cheerio');
-var User = require('./User.model');
-var bcrypt = require('bcrypt-nodejs');
+const express = require('express');
+const app = express();
+const router = express.Router();
+const request = require('request');
+const cheerio = require('cheerio');
+const User = require('./User.model');
+const bcrypt = require('bcrypt-nodejs');
+
 
 router.post('/signup', function(req, res, next){
   let hashed_pw = bcrypt.hashSync(req.body.password)
@@ -12,11 +14,13 @@ router.post('/signup', function(req, res, next){
     email: req.body.email,
     password: hashed_pw
   });
-  user.save(function(err){
+  user.save(function(err, returnedUser){
     if (err){
-      console.log('An error occurred.');
+      console.log('An error occurred.')
+      res.send({message: err})
     } else {
-      console.log('No errors');
+      req.session.user = user;
+      console.log('req.session.user: ', req.session.user)
     }
   })
 })

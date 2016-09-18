@@ -1,20 +1,28 @@
-var express = require('express');
-var app = express();
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var request = require('request')
-var cheerio = require('cheerio')
-var mongoose = require('mongoose')
-// var MongoStore = require('connect-mongo')(session)
+const express = require('express');
+const app = express();
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const request = require('request')
+const cheerio = require('cheerio')
+const mongoose = require('mongoose')
+const sessions = require('client-sessions')
+// const MongoStore = require('connect-mongo')(session)
 
 
-var cors = require('cors')
-var routes = require('./routes');
+const cors = require('cors')
+const routes = require('./routes');
 
 mongoose.connect('mongodb://localhost/craigscan')
 
+
+app.use(sessions({
+    cookieName: 'session',
+    secret: 'sdjf803kjlfs90j09fsdfs90jk3ljlfjs9009j4kl',
+    duration: 30 * 60 * 1000,
+    activeDuration: 5 * 60 * 1000
+}))
 
 
 // uncomment after placing your favicon in /public

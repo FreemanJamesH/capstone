@@ -2,7 +2,7 @@ app.service('signupService', ['$resource', function($resource){
   return {
     signup: function(obj){
       return $resource('//localhost:3000/signup').save(obj).$promise.then(function(results){
-        console.log('signup results', results.data)
+        console.log('signup results', results)
       })
     }
   }
