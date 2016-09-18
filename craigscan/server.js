@@ -8,9 +8,7 @@ var bodyParser = require('body-parser');
 var request = require('request')
 var cheerio = require('cheerio')
 var mongoose = require('mongoose')
-var passport = require('passport')
 // var MongoStore = require('connect-mongo')(session)
-require('./passportConfig.js')(passport);
 
 
 var cors = require('cors')
@@ -27,9 +25,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({resave: false, saveUninitialized: true, secret: 'jhf13'}));
-app.use(passport.initialize())
-app.use(passport.session())
 app.use(cors());
 app.use('/', routes);
 

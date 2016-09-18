@@ -3,11 +3,23 @@ var router = express.Router();
 var request = require('request');
 var cheerio = require('cheerio');
 var User = require('./User.model');
-var passport = require('passport')
+var bcrypt = require('bcrypt-nodejs');
 
-
-router.post('/signup', passport.authenticate('local-signup', {}))
-
+router.post('/signup', function(req, res, next){
+  let hashed_pw = bcrypt.hashSync(req.body.password)
+  let user = new User({
+    username: req.body.username,
+    email: req.body.email,
+    password: hashed_pw
+  });
+  user.save(function(err){
+    if (err){
+      console.log('An error occurred.');
+    } else {
+      console.log('No errors');
+    }
+  })
+})
 
 router.post('/api', function(req, res, next) {
   let count = 0
