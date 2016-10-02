@@ -7,12 +7,14 @@ const bodyParser = require('body-parser');
 const request = require('request')
 const cheerio = require('cheerio')
 const mongoose = require('mongoose')
+const passport = require('passport')
 
+mongoose.connect('mongodb://localhost/craigscan')
+require('./models/Users')
 
 const cors = require('cors')
 const routes = require('./routes');
 
-mongoose.connect('mongodb://localhost/craigscan')
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -21,6 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize())
 app.use(cors());
 app.use('/', routes);
 

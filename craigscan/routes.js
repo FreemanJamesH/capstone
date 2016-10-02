@@ -1,10 +1,13 @@
 const express = require('express');
-const app = express();
 const router = express.Router();
+const mongoose = require('mongoose')
 const request = require('request');
 const cheerio = require('cheerio');
-const User = require('./User.model');
+const User = mongoose.model('User')
 const bcrypt = require('bcrypt-nodejs');
+const passport = require('passport');
+const jwt = require('express-jwt');
+const auth = jwt({secret : 'SECRET', userProperty: 'payload'})
 
 
 router.post('/signup', function(req, res, next){
