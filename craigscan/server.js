@@ -7,23 +7,12 @@ const bodyParser = require('body-parser');
 const request = require('request')
 const cheerio = require('cheerio')
 const mongoose = require('mongoose')
-const sessions = require('client-sessions')
-// const MongoStore = require('connect-mongo')(session)
 
 
 const cors = require('cors')
 const routes = require('./routes');
 
 mongoose.connect('mongodb://localhost/craigscan')
-
-
-app.use(sessions({
-    cookieName: 'session',
-    secret: 'sdjf803kjlfs90j09fsdfs90jk3ljlfjs9009j4kl',
-    duration: 30 * 60 * 1000,
-    activeDuration: 5 * 60 * 1000
-}))
-
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
