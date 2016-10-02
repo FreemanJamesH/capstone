@@ -4,14 +4,17 @@ const mongoose = require('mongoose')
 const request = require('request');
 const cheerio = require('cheerio');
 const User = mongoose.model('User')
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 const passport = require('passport');
 const jwt = require('express-jwt');
 const auth = jwt({secret : 'SECRET', userProperty: 'payload'})
 
 
 router.post('/signup', function(req, res, next){
+  console.log('signup request received on backend')
+  console.log('req.body: ', req.body);
   let hashed_pw = bcrypt.hashSync(req.body.password, 12)
+  console.log('and the hashed_pw: ', hashed_pw);
   let user = new User({
     username: req.body.username,
     email: req.body.email,
@@ -22,8 +25,7 @@ router.post('/signup', function(req, res, next){
       console.log('An error occurred.')
       res.send({message: err})
     } else {
-      req.session.user = user;
-      console.log('req.session.user: ', req.session.user)
+      return res.json({token: user.generateJWT()})
     }
   })
 })

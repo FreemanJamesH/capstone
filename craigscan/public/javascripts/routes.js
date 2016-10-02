@@ -16,8 +16,12 @@ app.config(function($routeProvider, $locationProvider){
     templateUrl: './partials/saved.html',
     controller: 'MainController'
   })
-  .when('/auth', {
-    templateUrl: './partials/auth.html',
+  .when('/signup', {
+    templateUrl: './partials/signup.html',
+    controller: 'AuthController'
+  })
+  .when('/login', {
+    templateUrl: './partials/login.html',
     controller: 'AuthController'
   })
   .otherwise({redirectTo:'/'});

@@ -1,6 +1,7 @@
 app.service('authService', ['$resource', function($resource){
   return {
     signup: function(obj){
+      console.log('Signing up...');
       return $resource('//localhost:3000/signup').save(obj).$promise.then(function(results){
         console.log('signup results', results)
       })
