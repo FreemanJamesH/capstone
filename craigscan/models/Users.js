@@ -1,0 +1,34 @@
+var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
+
+var userSchema = mongoose.Schema({
+  username: String,
+  email: {
+    type: String,
+    unique: true
+  },
+  password: String
+})
+
+userSchema.methods.generateHash = function(password){
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(12), null)
+}
+
+userSchema.methods.validPassword = function(password){
+  return bcrypt.compareSync(password, this.local.password)
+}
+
+userSchema.methods.generateJWT = function(){
+  let today = new Date();
+  let exp = new Date(today);
+  exp.setDate(today.getDate() + 30)
+
+  return jwt.sign({
+    _id: this._id,
+    username: this.username,
+    exp: parseInt(exp.getTime() / 1000)
+  }, 'SECRET')
+}
+
+
+mongoose.model('User', userSchema)
