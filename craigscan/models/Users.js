@@ -10,10 +10,6 @@ var userSchema = mongoose.Schema({
   password: String
 })
 
-userSchema.methods.generateHash = function(password){
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(12), null)
-}
-
 userSchema.methods.validPassword = function(password){
   return bcrypt.compareSync(password, this.local.password)
 }

@@ -11,7 +11,7 @@ const auth = jwt({secret : 'SECRET', userProperty: 'payload'})
 
 
 router.post('/signup', function(req, res, next){
-  let hashed_pw = bcrypt.hashSync(req.body.password)
+  let hashed_pw = bcrypt.hashSync(req.body.password, 12)
   let user = new User({
     username: req.body.username,
     email: req.body.email,
@@ -26,6 +26,21 @@ router.post('/signup', function(req, res, next){
       console.log('req.session.user: ', req.session.user)
     }
   })
+})
+
+router.post('/login', function(req, res, next){
+  if (!req.body.username || !req.body.password){
+    return res.status(400)({message: 'Please fill out all fields'})
+  }
+
+  passport.authenticate('local', function(err, user, info){
+    if (err) {return next(err)}
+    if (user){
+      return res.json({token: user.generateJWT})
+    } else {
+      return res.status(401).json(info)
+    }
+  })(req, res, next)
 })
 
 router.post('/api', function(req, res, next) {

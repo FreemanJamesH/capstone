@@ -1,10 +1,10 @@
-app.controller('AuthController', function($scope, $http, $location, signupService) {
+app.controller('AuthController', function($scope, $http, $location, authService) {
   $scope.submit = function(){
     var signupObj = {};
     signupObj.username = $scope.username
     signupObj.email = $scope.email
     signupObj.password = $scope.password
-    signupService.signup(signupObj).then(function(results){
+    authService.signup(signupObj).then(function(results){
       $location.path('/')
     })
   }

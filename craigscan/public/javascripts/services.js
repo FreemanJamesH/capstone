@@ -1,9 +1,17 @@
-app.service('signupService', ['$resource', function($resource){
+app.service('authService', ['$resource', function($resource){
   return {
     signup: function(obj){
       return $resource('//localhost:3000/signup').save(obj).$promise.then(function(results){
         console.log('signup results', results)
       })
+    },
+    login: function(obj){
+      return $resource('//localhost:3000/login').save(obj).$promise.then(function(results){
+        console.log('login results', results);
+      })
+    },
+    logout: function(){
+      $window.localStorage.removeItem('craigsbliss-token')
     }
   }
 }])
