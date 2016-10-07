@@ -25,7 +25,7 @@ router.post('/signup', function(req, res, next){
       console.log('An error occurred.')
       res.send({message: err})
     } else {
-      return res.json({token: user.generateJWT()})
+      return res.json({jwt: user.generateJWT()})
     }
   })
 })
@@ -38,7 +38,7 @@ router.post('/login', function(req, res, next){
   passport.authenticate('local', function(err, user, info){
     if (err) {return next(err)}
     if (user){
-      return res.json({token: user.generateJWT})
+      return res.json({jwt: user.generateJWT()})
     } else {
       return res.status(401).json(info)
     }

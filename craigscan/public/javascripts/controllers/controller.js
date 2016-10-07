@@ -4,10 +4,7 @@ app.controller('AuthController', function($scope, $http, $location, authService)
   $scope.user = {};
 
   $scope.signup = function() {
-    authService.signup($scope.user).then(function(results) {
-      console.log('Signup results in controller: ', results);
-      $location.path('/')
-    })
+    authService.signup($scope.user)
   }
 
   $scope.login = function() {

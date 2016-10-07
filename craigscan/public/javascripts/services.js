@@ -1,19 +1,26 @@
-app.service('authService', ['$resource', function($resource){
+app.service('authService', ['$resource', '$window', function($resource, $window){
   return {
     signup: function(obj){
       console.log('Signing up...');
-      return $resource('//localhost:3000/signup').save(obj).$promise.then(function(results){
-        return results
-      })
+      $resource('//localhost:3000/signup').save(obj).$promise.then(function(results){
+        $window.localStorage['craigsbliss-token'] = results.jwt
+      });
     },
     login: function(obj){
       return $resource('//localhost:3000/login').save(obj).$promise.then(function(results){
         console.log('login results', results);
       })
     },
+    giveToken: function(token){
+      console.log("Here's the token: ", token);
+      $window.localStorage['craigsbliss-token'] = token.jwt;
+    },
+    getToken: function(){
+
+    },
     logout: function(){
       $window.localStorage.removeItem('craigsbliss-token')
-    }
+    },
   }
 }])
 
