@@ -1,14 +1,13 @@
-app.controller('AuthController', function($scope, $http, $location, authService) {
-
+app.controller('AuthController', function($scope, $http, $location, authService, userService) {
 
   $scope.user = {};
 
   $scope.signup = function() {
-    authService.signup($scope.user)
+    userService.signup($scope.user)
   }
 
   $scope.login = function() {
-    authService.login($scope.user)
+    userService.login($scope.user)
   }
 
 })

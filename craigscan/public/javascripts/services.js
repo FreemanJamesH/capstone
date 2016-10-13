@@ -1,26 +1,49 @@
-app.service('authService', ['$resource', '$window', function($resource, $window){
+app.factory('authInterceptor', ['authService', function(auth) {
+
   return {
-    signup: function(obj){
-      console.log('Signing up...');
-      $resource('//localhost:3000/signup').save(obj).$promise.then(function(results){
-        $window.localStorage['craigsbliss-token'] = results.jwt
-      });
+    request: function(config) {
+      console.log('Intercepting request...');
+      var token = auth.getToken();
+      if (config.url.indexOf('http://localhost:3000/') === 0) {
+        config.headers.Authorization = `Bearer ${token}`
+      }
+      return config
     },
-    login: function(obj){
-      return $resource('//localhost:3000/login').save(obj).$promise.then(function(results){
-        console.log('login results', results);
-      })
-    },
-    giveToken: function(token){
-      console.log("Here's the token: ", token);
+    response: function(res) {
+      console.log('Intercepting response...');
+      if (res.config.url.indexOf('http://localhost:3000/') === 0 && res.data.token) {
+        auth.giveToken(res.data.token)
+      }
+      return res
+    }
+  }
+}])
+
+
+app.service('authService', ['$window', function($window) {
+  return {
+    giveToken: function(token) {
       $window.localStorage['craigsbliss-token'] = token.jwt;
     },
-    getToken: function(){
-
+    getToken: function() {
+      return $window.localStorage['craigsbliss-token']
     },
-    logout: function(){
+    logout: function() {
       $window.localStorage.removeItem('craigsbliss-token')
     },
+  }
+}])
+
+app.service('userService', ['$resource', function($resource) {
+  return {
+    signup: function(obj) {
+      console.log('Signing up...');
+      $resource('//localhost:3000/signup').save(obj)
+    },
+    login: function(obj) {
+      console.log('Signing in...');
+      return $resource('//localhost:3000/login').save(obj)
+    }
   }
 }])
 
@@ -29,7 +52,7 @@ app.service('searchService', ['$resource', function($resource) {
   return {
     search: function(obj) {
       console.log('service obj: ', obj)
-      // return $resource('https://jhfcapstone.herokuapp.com/api').save(obj).$promise.then(function(results) {
+        // return $resource('https://jhfcapstone.herokuapp.com/api').save(obj).$promise.then(function(results) {
       return $resource('//localhost:3000/api').save(obj).$promise.then(function(results) {
         resultsObj = results;
       })
@@ -41,19 +64,22 @@ app.service('searchService', ['$resource', function($resource) {
   }
 }])
 
-
 app.service('stateListService', ['$resource', function($resource) {
   var resultsArr = [];
   return {
     retrieve: function(obj) {
       // return $resource('https://jhfcapstone.herokuapp.com/sls').get()
       return $resource('//localhost:3000/sls').get()
-      .$promise.then(function(results) {
-        resultsArr = results.finish;
-      })
+        .$promise.then(function(results) {
+          resultsArr = results.finish;
+        })
     },
     resultsArrGetter: function() {
       return resultsArr;
     }
   }
 }])
+
+app.config(function($httpProvider){
+  $httpProvider.interceptors.push('authInterceptor')
+})
