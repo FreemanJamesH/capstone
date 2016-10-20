@@ -10,6 +10,7 @@ const jwt = require('express-jwt');
 const auth = jwt({secret : 'SECRET', userProperty: 'payload'})
 
 
+
 router.post('/signup', function(req, res, next){
   console.log('signup request received on backend')
   console.log('req.body: ', req.body);

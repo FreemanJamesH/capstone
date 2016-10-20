@@ -2,18 +2,19 @@ app.factory('authInterceptor', ['authService', function(auth) {
 
   return {
     request: function(config) {
-      console.log('Intercepting request...');
       var token = auth.getToken();
-      if (config.url.indexOf('http://localhost:3000/') === 0) {
+      if (config.url.indexOf('//localhost:3000/') === 0) {
+        console.log('setting Authorization header');
         config.headers.Authorization = `Bearer ${token}`
       }
+      console.log('Returning config: ', config);
       return config
     },
     response: function(res) {
-      console.log('Intercepting response...');
       if (res.config.url.indexOf('http://localhost:3000/') === 0 && res.data.token) {
         auth.giveToken(res.data.token)
       }
+      console.log('Returning res: ', res);
       return res
     }
   }
