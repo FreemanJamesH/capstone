@@ -3,7 +3,6 @@ body, html {
   height: 100%;
   margin: 0px;
   padding: 5px;
-
 }
 
 md-option, md-select {
@@ -14,8 +13,13 @@ md-option, md-select {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-.md-toolbar-tools{
+#toolbar {
+  background-color: white;
+}
+
+.md-toolbar-tools {
   background-color: #44b3c2;
+  /*position: fixed;*/
 }
 
 h2 , h4{
@@ -33,12 +37,17 @@ a {
   display: flex;
 }
 
-.neighborhood{
+.neighborhood {
+  /*border: 1px solid red;*/
+  /*padding-bottom: 300px;*/
+  width: 100%;
   height: 100%;
   background-image: url('./tilt-shift-neighborhood-dark.jpg');
-  background-size: cover;
-  z-index: -1;
-  padding: 10px;
+  /*background-size: contain;*/
+  /*background-attachment: fixed;*/
+  /*z-index: -1;*/
+  background-repeat: no-repeat;
+  overflow: scroll;
 
 }
 
@@ -72,6 +81,7 @@ h1 {
 
 .craigs{
   font-size: 36px;
+  
 }
 
 .bliss {
