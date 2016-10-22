@@ -1,0 +1,36 @@
+ng-view {
+  width: 100%;
+}
+
+.md-toolbar-tools{
+  height: auto;
+  min-height: 60px;
+  max-height: 500px;
+}
+
+.form-style-5 {
+  width: 90%;
+  margin-left: 5%;
+  /*margin-top: 150px;*/
+  position: absolute;
+}
+
+.neighborhood {
+  width: 100%;
+  height: auto;
+  /*background-image : url();*/
+  /*background-color: red;*/
+  padding: 0px;
+  /*border: 8px solid yellow;*/
+  /*text-align: center;*/
+
+
+}
+
+.craigs {
+  font-size: 24px;
+}
+
+.bliss {
+  font-size: 32px;
+}
