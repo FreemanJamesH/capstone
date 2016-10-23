@@ -16,15 +16,21 @@ userSchema.methods.validPassword = function(password){
 }
 
 userSchema.methods.generateJWT = function(){
+  console.log('Generating JWT...');
+  console.log('this: ', this);
   let today = new Date();
   let exp = new Date(today);
   exp.setDate(today.getDate() + 30)
 
-  return jwt.sign({
+  let returnMe =  jwt.sign({
     _id: this._id,
     username: this.username,
     exp: parseInt(exp.getTime() / 1000)
   }, 'SECRET')
+
+  console.log('return me: ', returnMe);
+
+  return returnMe
 }
 
 

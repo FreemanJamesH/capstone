@@ -12,10 +12,7 @@ const auth = jwt({secret : 'SECRET', userProperty: 'payload'})
 
 
 router.post('/signup', function(req, res, next){
-  console.log('signup request received on backend')
-  console.log('req.body: ', req.body);
   let hashed_pw = bcrypt.hashSync(req.body.password, 12)
-  console.log('and the hashed_pw: ', hashed_pw);
   let user = new User({
     username: req.body.username,
     email: req.body.email,

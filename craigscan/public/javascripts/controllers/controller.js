@@ -12,10 +12,14 @@ app.controller('AuthController', function($scope, $http, $location, authService,
 
 })
 
-app.controller('MainController', function($scope, $http, searchService, stateListService, $location) {
+app.controller('MainController', function($scope, $http, searchService, stateListService, $location, authService) {
+  console.log('authed? :', authService.isAuthed())
   stateListService.retrieve().then(function() {
     $scope.stateListProto = stateListService.resultsArrGetter();
   })
+
+
+  console.log('decoded token: ', authService.parseJwt(authService.getToken()));
 
   $scope.sortLog = function() {
     console.log($scope.sortBy)
