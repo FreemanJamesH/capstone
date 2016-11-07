@@ -10,7 +10,7 @@ app.factory('authInterceptor', ['authService', function(auth) {
       return config
     },
     response: function(res) {
-      console.log('response interceptor firing');
+      console.log('response interceptor firing'); 
       console.log('res: ', res);
       if (res.config.url.indexOf('//localhost:3000/signup') === 0 && res.data.jwt) {
         console.log('giving token: ', res.data);
