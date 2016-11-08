@@ -12,10 +12,24 @@ app.controller('AuthController', function($scope, $http, $location, authService,
 
 })
 
-app.controller('MainController', function($scope, $http, searchService, stateListService, $location, authService, userService) {
+app.controller('MainController', function($scope, $http, searchService, stateListService, $location, authService, userService, $window) {
   stateListService.retrieve().then(function() {
     $scope.stateListProto = stateListService.resultsArrGetter();
   })
+
+  $scope.$watch(function(){
+    return $window.localStorage.getItem('craigsbliss-token')
+  },
+  function(newValue){
+    if (newValue){
+      console.log('new value:', newValue);
+      let decodedPayload = JSON.parse(atob(newValue.split('.')[1]))
+      $scope.username = decodedPayload.username
+    }
+  }
+)
+
+  console.log('storage: ', $window.localStorage.getItem('craigsbliss-token'))
 
   $scope.dashboard = function(){
     userService.getUser()

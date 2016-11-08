@@ -33,14 +33,17 @@
                     </span>
                 </h1>
                 <span flex></span>
-                <md-button class="md-raised">
+                <md-button ng-hide="username" class="md-raised">
                     <a href="login"> | Log in</a>
                 </md-button>
-                <md-button class="md-raised">
+                <md-button ng-hide="username" class="md-raised">
                     <a href="signup"> | Sign up</a>
                 </md-button>
-                <md-button class="md-raised">
+                <md-button ng-show="username"class="md-raised">
                     <a href="/dashboard"> | Dashboard</a>
+                </md-button>
+                <md-button ng-show="username" class="md-raised">
+                    <a href="/dashboard"> | {{username}}</a>
                 </md-button>
                 <!-- <md-button class="md-fab md-mini" aria-label="Favorite">
             <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
