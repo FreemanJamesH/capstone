@@ -12,18 +12,15 @@ app.controller('AuthController', function($scope, $http, $location, authService,
 
 })
 
-app.controller('MainController', function($scope, $http, searchService, stateListService, $location, authService) {
-  console.log('authed? :', authService.isAuthed())
+app.controller('MainController', function($scope, $http, searchService, stateListService, $location, authService, userService) {
   stateListService.retrieve().then(function() {
     $scope.stateListProto = stateListService.resultsArrGetter();
   })
 
-
-  // console.log('decoded token: ', authService.parseJwt(authService.getToken()));
-
-  $scope.sortLog = function() {
-    console.log($scope.sortBy)
+  $scope.dashboard = function(){
+    userService.getUser()
   }
+
   $scope.obj = searchService.resultsObjGetter();
   $scope.arr = $scope.obj.dataArr
   $scope.dupeShow = false
@@ -56,4 +53,11 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
       $location.path('/results')
     })
   }
+})
+
+app.controller('dashController', function($scope, userService){
+  userService.getUser().then(function(results){
+    console.log('results in dash: ', results);
+    $scope.userObj = results
+  })
 })

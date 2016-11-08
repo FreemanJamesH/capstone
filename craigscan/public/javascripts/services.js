@@ -1,19 +1,14 @@
 app.factory('authInterceptor', ['authService', function(auth) {
-
   return {
     request: function(config) {
       var token = auth.getToken();
-      if (config.url.indexOf('//localhost:3000/signup') === 0) {
-        config.headers.Authorization = `Bearer ${token}`
-      }
-      console.log('req config: ', config);
+      // if (config.url.indexOf('//localhost:3000/dashboard') === 0) {
+      config.headers.token = token
+        // }
       return config
     },
     response: function(res) {
-      console.log('response interceptor firing'); 
-      console.log('res: ', res);
       if (res.config.url.indexOf('//localhost:3000/signup') === 0 && res.data.jwt) {
-        console.log('giving token: ', res.data);
         auth.giveToken(res.data)
       }
       return res
@@ -21,11 +16,9 @@ app.factory('authInterceptor', ['authService', function(auth) {
   }
 }])
 
-
 app.service('authService', ['$window', function($window) {
   return {
     giveToken: function(token) {
-      console.log('');
       $window.localStorage['craigsbliss-token'] = token.jwt;
     },
     getToken: function() {
@@ -34,16 +27,16 @@ app.service('authService', ['$window', function($window) {
     logout: function() {
       $window.localStorage.removeItem('craigsbliss-token')
     },
-    parseJwt: function(token){
-      var base64Url = token.split('.')[1];
-      var base64 = base64Url.replace('-', '+').replace('_', '/')
-      return JSON.parse($window.atob(base64))
+    parseJwt: function(token) {
+      if (token) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace('-', '+').replace('_', '/')
+        return JSON.parse($window.atob(base64))
+      }
     },
-    isAuthed: function(){
+    isAuthed: function() {
       var returnedToken = this.getToken();
-      console.log('returned token:', returnedToken);
       if (returnedToken) {
-        // var params = this.parseJwt(token);
         return true
       } else {
         return false
@@ -52,22 +45,31 @@ app.service('authService', ['$window', function($window) {
   }
 }])
 
-app.service('userService', ['$resource', function($resource) {
+app.service('userService', ['$resource', '$location', function($resource, $location) {
   return {
     signup: function(obj) {
-      $resource('//localhost:3000/signup').save(obj)
+      return $resource('//localhost:3000/signup').save(obj)
     },
     login: function(obj) {
-      return $resource('//localhost:3000/login').save(obj)
+       return $resource('//localhost:3000/login').save(obj)
+    },
+    getUser: function() {
+       return $resource('//localhost:3000/dashboard').get().$promise.then(function(response) {
+        $location.path('/dashboard')
+        return response
+      },
+        function(err) {
+          $location.path('/error')
+        })
     }
   }
 }])
 
-app.service('searchService', ['$resource', function($resource) {
+app.service('searchService', ['$resource', function($resource, $location) {
   var resultsObj = {};
   return {
     search: function(obj) {
-        // return $resource('https://jhfcapstone.herokuapp.com/api').save(obj).$promise.then(function(results) {
+      // return $resource('https://jhfcapstone.herokuapp.com/api').save(obj).$promise.then(function(results) {
       return $resource('//localhost:3000/api').save(obj).$promise.then(function(results) {
         resultsObj = results;
       })
@@ -82,8 +84,7 @@ app.service('stateListService', ['$resource', function($resource) {
   var resultsArr = [];
   return {
     retrieve: function(obj) {
-      // return $resource('https://jhfcapstone.herokuapp.com/sls').get()
-      return $resource('//localhost:3000/sls').get()
+      return $resource('https://jhfcapstone.herokuapp.com/sls').get()
         .$promise.then(function(results) {
           resultsArr = results.finish;
         })
@@ -94,6 +95,6 @@ app.service('stateListService', ['$resource', function($resource) {
   }
 }])
 
-app.config(function($httpProvider){
+app.config(function($httpProvider) {
   $httpProvider.interceptors.push('authInterceptor')
 })

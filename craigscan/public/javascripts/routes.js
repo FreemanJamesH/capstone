@@ -6,7 +6,7 @@ app.config(function($routeProvider, $locationProvider){
   })
   .when('/dashboard', {
     templateUrl: './partials/dashboard.html',
-    controller: 'MainController'
+    controller: 'dashController'
   })
   .when('/results', {
     templateUrl: './partials/results.html',
@@ -23,6 +23,10 @@ app.config(function($routeProvider, $locationProvider){
   .when('/login', {
     templateUrl: './partials/login.html',
     controller: 'AuthController'
+  })
+  .when('/error', {
+    templateUrl: './partials/error.html',
+    controller: 'dashController'
   })
   .otherwise({redirectTo:'/'});
   $locationProvider.html5Mode(true);

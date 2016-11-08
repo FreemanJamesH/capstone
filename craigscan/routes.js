@@ -6,37 +6,74 @@ const cheerio = require('cheerio');
 const User = mongoose.model('User')
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-const jwt = require('express-jwt');
-const auth = jwt({secret : 'SECRET', userProperty: 'payload'})
+const jwt = require('jsonwebtoken');
+const authorize = function() {
+
+}
+
+router.get('/dashboard', function(req, res, next) {
+  if (!req.headers.token) {
+    console.log(1);
+    let err = new Error()
+    err.message = 'You are not logged in.'
+    err.status = 403
+    return next(err)
+  } else {
+    console.log(2);
+    let token = req.headers.token
+    jwt.verify(token, 'SECRET', function(err, decoded) {
+      if (err) {
+        console.log(3);
+        return next(err)
+      } else {
+        console.log(4);
+        User.findById(decoded._id, function(err, user) {
+          console.log(5);
+          res.send(user)
+        })
+      }
+    })
+  }
+})
 
 
 
-router.post('/signup', function(req, res, next){
+router.post('/signup', function(req, res, next) {
   let hashed_pw = bcrypt.hashSync(req.body.password, 12)
   let user = new User({
     username: req.body.username,
     email: req.body.email,
     password: hashed_pw
   });
-  user.save(function(err, returnedUser){
-    if (err){
+  user.save(function(err, returnedUser) {
+    if (err) {
       console.log('An error occurred.')
-      res.send({message: err})
+      res.send({
+        message: err
+      })
     } else {
-      return res.json({jwt: user.generateJWT()})
+      return res.json({
+        jwt: user.generateJWT()
+      })
     }
   })
 })
 
-router.post('/login', function(req, res, next){
-  if (!req.body.username || !req.body.password){
-    return res.status(400)({message: 'Please fill out all fields'})
+router.post('/login', function(req, res, next) {
+  if (!req.body.username || !req.body.password) {
+    return res.status(400)({
+      message: 'Please fill out all fields'
+    })
   }
 
-  passport.authenticate('local', function(err, user, info){
-    if (err) {return next(err)}
-    if (user){
-      return res.json({jwt: user.generateJWT()})
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {
+      return next(err)
+    }
+    if (user) {
+      return res.json({
+        jwt: user.generateJWT()
+      })
     } else {
       return res.status(401).json(info)
     }
@@ -47,7 +84,6 @@ router.post('/api', function(req, res, next) {
   let count = 0
   let data = [];
   let duplicate = 0;
-  console.log(req.body)
   requestFunction(req.body.url)
 
   function requestFunction(urlArg) {
