@@ -12,26 +12,38 @@ app.controller('AuthController', function($scope, $http, $location, authService,
 
 })
 
-app.controller('MainController', function($scope, $http, searchService, stateListService, $location, authService, userService, $window) {
+app.controller('MainController', function($scope, $http, searchService, stateListService, $location, authService, userService, $window, $q) {
   stateListService.retrieve().then(function() {
     $scope.stateListProto = stateListService.resultsArrGetter();
   })
 
-  $scope.$watch(function(){
-    return $window.localStorage.getItem('craigsbliss-token')
-  },
-  function(newValue){
-    if (newValue){
-      console.log('new value:', newValue);
-      let decodedPayload = JSON.parse(atob(newValue.split('.')[1]))
-      $scope.username = decodedPayload.username
-    }
+  $scope.logout = function() {
+    console.log('logout in controller called');
+    $q(function(resolve, reject) {
+      authService.logout()
+      resolve('done!')
+    }).then(function(results) {
+      // $scope.$apply()
+    })
   }
-)
 
-  console.log('storage: ', $window.localStorage.getItem('craigsbliss-token'))
+  $scope.home = function() {
+    $location.path('/')
+  }
 
-  $scope.dashboard = function(){
+  $scope.$watch(function() {
+      return $window.localStorage.getItem('craigsbliss-token')
+    },
+    function(newValue) {
+      if (newValue) {
+        console.log('new value:', newValue);
+        let decodedPayload = JSON.parse(atob(newValue.split('.')[1]))
+        $scope.username = decodedPayload.username
+      }
+    }
+  )
+
+  $scope.dashboard = function() {
     userService.getUser()
   }
 
@@ -69,8 +81,8 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
   }
 })
 
-app.controller('dashController', function($scope, userService){
-  userService.getUser().then(function(results){
+app.controller('dashController', function($scope, userService) {
+  userService.getUser().then(function(results) {
     console.log('results in dash: ', results);
     $scope.userObj = results
   })

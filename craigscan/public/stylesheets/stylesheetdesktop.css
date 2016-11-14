@@ -6,7 +6,9 @@ body, html {
     background-color: #e45641;
 }
 
-
+.craigs {
+  cursor: pointer;
+}
 
 md-option, md-select {
     color: black;
