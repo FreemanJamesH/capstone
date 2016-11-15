@@ -46,6 +46,11 @@ a {
     display: flex;
 }
 
+.resultCard {
+  border: 10px solid red;
+  display: flex;
+}
+
 .neighborhood {
     width: 100%;
     height: 100%;
