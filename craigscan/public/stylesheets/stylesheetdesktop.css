@@ -7,7 +7,7 @@ body, html {
 }
 
 .craigs {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 md-option, md-select {
@@ -27,10 +27,8 @@ md-select-value {
     background-color: white;
 }
 
-
 .md-toolbar-tools {
     background-color: #44b3c2;
-    /*position: fixed;*/
 }
 
 h2, h4 {
@@ -46,11 +44,6 @@ a {
     display: flex;
 }
 
-.resultCard {
-  border: 10px solid red;
-  display: flex;
-}
-
 .neighborhood {
     width: 100%;
     height: 100%;
@@ -59,20 +52,22 @@ a {
     overflow: scroll;
 }
 
-
 .solidbg {
     background-color: white;
     height: 100%;
 }
 
-.md-list-item-text {
-    height: 225px;
-    width: 80%;
-    background-color: inherit;
+.resultCard {
     color: #7b8d8e;
-    padding: 5px;
-    margin: 10px;
-    margin-bottom: 15px;
+    width: 95%;
+    margin-bottom: 4px;
+    margin-right: 5px;
+    border-radius: 4px;
+    padding: 30px;
+    background-color: #f2edd8;
+    text-align: left;
+    transition: all 0.3s;
+    display: flex;
 }
 
 md-list-item:hover {
@@ -117,17 +112,9 @@ h1 {
     margin-left: 7px;
 }
 
-md-list-item {
-    width: 95%;
-    margin-bottom: 4px;
-    margin-right: 5px;
-    border-radius: 4px;
-    padding: 30px;
-    background-color: #f2edd8;
-    text-decoration-color: white;
-    text-align: left;
-    display: inline-block;
-    transition: all 0.3s;
+md-list-item-text {
+    display: flex;
+    height: 10px;
 }
 
 .optionsTitle {
@@ -154,7 +141,6 @@ md-content {
 }
 
 .form-style-5 {
-    /*max-height: 90%;*/
     max-width: 500px;
     background: #f4f7f8;
     margin: 10px auto;
@@ -164,12 +150,12 @@ md-content {
     font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-form > *:not(.hr) {
+form>*:not(.hr) {
     margin: 0px;
 }
 
 .small {
-  margin-top: 12%;
+    margin-top: 12%;
 }
 
 .form-style-5 fieldset {
@@ -243,7 +229,6 @@ form > *:not(.hr) {
     width: 100%;
     border: 1px solid #16a085;
     border-width: 1px 1px 3px;
-    /*margin-bottom: 10px;*/
 }
 
 .form-style-5 input[type="submit"]:hover, .form-style-5 input[type="button"]:hover {
@@ -258,10 +243,11 @@ form > *:not(.hr) {
     height: 100%;
 }
 
-
 .hr {
     margin-top: 30px;
     color: green;
     width: 16%;
     display: none;
 }
+
+*/
