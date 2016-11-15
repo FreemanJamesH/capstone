@@ -8,7 +8,8 @@ const userSchema = mongoose.Schema({
     type: String,
     unique: true
   },
-  password: String
+  password: String,
+  searches: Array
 })
 
 userSchema.methods.validPassword = function(password){

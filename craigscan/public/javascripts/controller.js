@@ -77,6 +77,7 @@ app.controller('resultsController', function($scope, searchService){
   $scope.arr = $scope.obj.dataArr
   $scope.dupeShow = false
   $scope.imageHide = false
+  
 })
 
 app.controller('dashController', function($scope, userService) {
