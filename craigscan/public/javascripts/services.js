@@ -8,6 +8,7 @@ app.factory('authInterceptor', ['authService', function(auth) {
       return config
     },
     response: function(res) {
+      console.log('response interceptor res.data: ', res.data);
       // if (res.config.url.indexOf('//localhost:3000/signup') === 0 && res.data.jwt) {
       if (res.data.jwt) {
         auth.giveToken(res.data)
@@ -49,20 +50,20 @@ app.service('authService', ['$window', function($window) {
 app.service('userService', ['$resource', '$location', function($resource, $location, $window) {
   return {
     signup: function(obj) {
-      return $resource('//localhost:3000/signup').save(obj)
+      return $resource('//localhost:3000/api/signup').save(obj)
     },
     login: function(obj) {
-       return $resource('//localhost:3000/login').save(obj)
+      return $resource('//localhost:3000/api/login').save(obj)
     },
-    logout: function(){
+    logout: function() {
       $window.localStorage.removeItem('craigsbliss-token')
       return 3
     },
     getUser: function() {
-       return $resource('//localhost:3000/dashboard').get().$promise.then(function(response) {
-        $location.path('/dashboard')
-        return response
-      },
+      return $resource('//localhost:3000/api/dashboard').get().$promise.then(function(response) {
+          $location.path('/dashboard')
+          return response
+        },
         function(err) {
           $location.path('/error')
         })
@@ -75,12 +76,17 @@ app.service('searchService', ['$resource', function($resource, $location) {
   return {
     search: function(obj) {
       // return $resource('https://jhfcapstone.herokuapp.com/api').save(obj).$promise.then(function(results) {
-      return $resource('//localhost:3000/api').save(obj).$promise.then(function(results) {
+      return $resource('//localhost:3000/api/scrape').save(obj).$promise.then(function(results) {
         resultsObj = results;
       })
     },
     resultsObjGetter: function() {
       return resultsObj;
+    },
+    saveSearch: function(obj) {
+      return $resource('//localhost:3000/api/savesearch').save(obj).$promise.then(function(results) {
+        console.log(results);
+      })
     }
   }
 }])

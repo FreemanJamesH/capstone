@@ -79,11 +79,17 @@ app.controller('resultsController', function($scope, $mdDialog, searchService){
   $scope.imageHide = false
   $scope.saveDialog = function(){
     $mdDialog.show(
-      $mdDialog.alert()
+      $mdDialog.prompt()
         .clickOutsideToClose(true)
-        .title('Save your search!')
+        .title('Please choose a name for your search.')
         .openFrom('.resultsform')
-    )
+        .ok('Save')
+    ).then(function(results){
+      let search = {}
+      search.title = results
+      search.results = $scope.arr
+      searchService.saveSearch(search)
+    })
   }
 
 })
