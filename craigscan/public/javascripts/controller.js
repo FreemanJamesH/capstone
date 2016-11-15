@@ -72,12 +72,20 @@ app.controller('AuthController', function($scope, $http, $location, authService,
 
 })
 
-app.controller('resultsController', function($scope, searchService){
+app.controller('resultsController', function($scope, $mdDialog, searchService){
   $scope.obj = searchService.resultsObjGetter();
   $scope.arr = $scope.obj.dataArr
   $scope.dupeShow = false
   $scope.imageHide = false
-  
+  $scope.saveDialog = function(){
+    $mdDialog.show(
+      $mdDialog.alert()
+        .clickOutsideToClose(true)
+        .title('Save your search!')
+        .openFrom('.resultsform')
+    )
+  }
+
 })
 
 app.controller('dashController', function($scope, userService) {
