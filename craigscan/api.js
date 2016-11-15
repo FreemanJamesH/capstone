@@ -66,22 +66,26 @@ router.post('/login', function(req, res, next) {
       message: 'Please fill out all fields'
     })
   } else {
-    User.findOne({'username': req.body.username}, function(err, results){
-      if (!results){
+    User.findOne({
+      'username': req.body.username
+    }, function(err, results) {
+      if (!results) {
         console.log('user not found');
       }
       let passwordMatch = bcrypt.compareSync(req.body.password, results.password)
-      if (!passwordMatch){
+      if (!passwordMatch) {
         console.log('wrong password');
       } else {
         console.log('sendign jwt...');
-        return res.json({jwt: results.generateJWT()})
+        return res.json({
+          jwt: results.generateJWT()
+        })
       }
     })
   }
 })
 
-router.post('/savesearch', function(req, res, next){
+router.post('/savesearch', function(req, res, next) {
   console.log('savesearch route hit. req: ', req);
   if (!req.headers.token) {
     console.log(1);
@@ -99,14 +103,31 @@ router.post('/savesearch', function(req, res, next){
       } else {
         console.log(4);
         User.findById(decoded._id, function(err, user) {
-            user.searches.push(req.body)
-            user.save(function(err, updatedUser){
-              console.log(updatedUser);
-            })
+          user.searches.push(req.body)
+          user.save(function(err, updatedUser) {
+            console.log(updatedUser);
+          })
         })
       }
     })
   }
+})
+
+router.post('/deletesearch', function(req, res, next) {
+  let indexToDelete = req.body.index
+  let token = req.headers.token
+  jwt.verify(token, 'SECRET', function(err, decoded) {
+    if (err) {
+      return next(err)
+    } else {
+      User.findById(decoded._id, function(err, user) {
+        user.searches.splice(indexToDelete, 1)
+        user.save(function(err, updatedUser) {
+          res.json(updatedUser)
+        })
+      })
+    }
+  })
 })
 
 router.post('/scrape', function(req, res, next) {

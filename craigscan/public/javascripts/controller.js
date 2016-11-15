@@ -94,9 +94,16 @@ app.controller('resultsController', function($scope, $mdDialog, searchService){
 
 })
 
-app.controller('dashController', function($scope, userService) {
+app.controller('dashController', function($scope, userService, searchService) {
   userService.getUser().then(function(results) {
     console.log('results in dash: ', results);
     $scope.userObj = results
   })
+
+  $scope.deleteSearch = function(index){
+    searchService.deleteSearch(index).then(function(results){
+      console.log('results in controller:', results);
+      $scope.userObj = results
+    })
+  }
 })

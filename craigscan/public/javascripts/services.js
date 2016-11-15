@@ -87,6 +87,15 @@ app.service('searchService', ['$resource', function($resource, $location) {
       return $resource('//localhost:3000/api/savesearch').save(obj).$promise.then(function(results) {
         console.log(results);
       })
+    },
+    deleteSearch: function(index){
+      return $resource('//localhost:3000/api/deletesearch')
+      .save({index:index})
+      .$promise
+      .then(function(results){
+        console.log('deleteSearch results:', results);
+        return results
+      })
     }
   }
 }])
