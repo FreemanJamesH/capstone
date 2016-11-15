@@ -10,7 +10,7 @@ app.config(function($routeProvider, $locationProvider){
   })
   .when('/results', {
     templateUrl: './partials/results.html',
-    controller: 'MainController'
+    controller: 'resultsController'
   })
   .when('/saved', {
     templateUrl: './partials/saved.html',

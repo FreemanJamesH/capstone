@@ -1,16 +1,3 @@
-app.controller('AuthController', function($scope, $http, $location, authService, userService) {
-  $scope.user = {};
-
-  $scope.signup = function() {
-    userService.signup($scope.user)
-  }
-
-  $scope.login = function() {
-    userService.login($scope.user)
-  }
-
-})
-
 app.controller('MainController', function($scope, $http, searchService, stateListService, $location, authService, userService, $window, $q) {
   stateListService.retrieve().then(function() {
     $scope.stateListProto = stateListService.resultsArrGetter();
@@ -46,14 +33,6 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
     userService.getUser()
   }
 
-  $scope.obj = searchService.resultsObjGetter();
-  $scope.arr = $scope.obj.dataArr
-  $scope.dupeShow = false
-  $scope.imageHide = false
-  $scope.loggit = function() {
-    $scope.dupeShow
-  }
-
   $scope.submit = function() {
     var searchParams = {};
     searchParams.regionChoice = $scope.regionChoice
@@ -78,6 +57,26 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
       $location.path('/results')
     })
   }
+})
+
+app.controller('AuthController', function($scope, $http, $location, authService, userService) {
+  $scope.user = {};
+
+  $scope.signup = function() {
+    userService.signup($scope.user)
+  }
+
+  $scope.login = function() {
+    userService.login($scope.user)
+  }
+
+})
+
+app.controller('resultsController', function($scope, searchService){
+  $scope.obj = searchService.resultsObjGetter();
+  $scope.arr = $scope.obj.dataArr
+  $scope.dupeShow = false
+  $scope.imageHide = false
 })
 
 app.controller('dashController', function($scope, userService) {
