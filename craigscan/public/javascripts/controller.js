@@ -72,7 +72,7 @@ app.controller('AuthController', function($scope, $http, $location, authService,
 
 })
 
-app.controller('resultsController', function($scope, $mdDialog, searchService){
+app.controller('resultsController', function($scope, $mdDialog, searchService, randomString){
   $scope.obj = searchService.resultsObjGetter();
   $scope.arr = $scope.obj.dataArr
   $scope.dupeShow = false
@@ -88,6 +88,8 @@ app.controller('resultsController', function($scope, $mdDialog, searchService){
       let search = {}
       search.title = results
       search.results = $scope.arr
+      search.id = randomString.getString()
+      console.log(search);
       searchService.saveSearch(search)
     })
   }
@@ -100,8 +102,9 @@ app.controller('dashController', function($scope, userService, searchService) {
     $scope.userObj = results
   })
 
-  $scope.deleteSearch = function(index){
-    searchService.deleteSearch(index).then(function(results){
+  $scope.deleteSearch = function(id){
+    console.log('deleting: ', id);
+    searchService.deleteSearch(id).then(function(results){
       console.log('results in controller:', results);
       $scope.userObj = results
     })

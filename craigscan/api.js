@@ -114,15 +114,20 @@ router.post('/savesearch', function(req, res, next) {
 })
 
 router.post('/deletesearch', function(req, res, next) {
-  let indexToDelete = req.body.index
+  let idToDelete = req.body.id
   let token = req.headers.token
   jwt.verify(token, 'SECRET', function(err, decoded) {
     if (err) {
       return next(err)
     } else {
       User.findById(decoded._id, function(err, user) {
-        user.searches.splice(indexToDelete, 1)
-        user.save(function(err, updatedUser) {
+        for (var i = 0; i < user.searches.length; i++) {
+          if (user.searches[i].id === idToDelete) {
+            user.searches.splice(i, 1)
+            i--
+          }
+        }
+        user.save(function(err, updatedUser){
           res.json(updatedUser)
         })
       })

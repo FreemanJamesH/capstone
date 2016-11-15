@@ -10,9 +10,9 @@
         <div class="md-list-item-text">
           <h3>Name: {{search.title}}</h3>
           <h4>Results: {{search.results.length}}</h4>
-          <p>{{item.notes}}</p>
         </div>
-        <md-button class="md-secondary md-raised md-warn" ng-click="deleteSearch($index)">Delete</md-button>
+        <md-button class="md-secondary md-raised md-warn" ng-click="deleteSearch(search.id)">Delete</md-button>
+        <md-button class="md-secondary md-raised md-primary" ng-click="viewSearch(search.id)">View</md-button>
         <md-divider ng-if="!$last"></md-divider>
       </md-list-item>
     </md-list>

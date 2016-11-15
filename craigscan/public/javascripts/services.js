@@ -18,6 +18,19 @@ app.factory('authInterceptor', ['authService', function(auth) {
   }
 }])
 
+app.service('randomString', function() {
+  return {
+    getString: function() {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      for (var i = 0; i < 16; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      }
+      return text;
+    }
+  }
+})
+
 app.service('authService', ['$window', function($window) {
   return {
     giveToken: function(token) {
@@ -88,14 +101,16 @@ app.service('searchService', ['$resource', function($resource, $location) {
         console.log(results);
       })
     },
-    deleteSearch: function(index){
+    deleteSearch: function(id) {
       return $resource('//localhost:3000/api/deletesearch')
-      .save({index:index})
-      .$promise
-      .then(function(results){
-        console.log('deleteSearch results:', results);
-        return results
-      })
+        .save({
+          id: id
+        })
+        .$promise
+        .then(function(results) {
+          console.log('deleteSearch results:', results);
+          return results
+        })
     }
   }
 }])
