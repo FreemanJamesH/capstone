@@ -91,8 +91,10 @@ router.post('/api', function(req, res, next) {
   function requestFunction(urlArg) {
     let url = urlArg + '&s=' + count
     request(url, function(err, resp, body) {
+      console.log('body:', body);
       var $ = cheerio.load(body)
-      $('.row').each(function() {
+      $('.result-row').each(function() {
+        console.log('li found!');
         let dataObj = {};
         dataObj.href = '//' + req.body.regionChoice + $(this).children('a').attr('href').slice(1)
         dataObj.title = $(this).find('.hdrlnk').text()
@@ -122,10 +124,11 @@ router.post('/api', function(req, res, next) {
           parseInt(time.slice(11, 13)) * 60 +
           parseInt(time.slice(14, 16))
         dataObj.timeConverted = timeConverted
-        dataObj.price = $(this).find('.price').text().slice(1)
+        dataObj.price = $(this).find('.result-price').text().slice(1)
         dataObj.price = parseInt(dataObj.price, 10)
         dataObj.time = $(this).find('time').attr('datetime')
         dataObj.location = $(this).find('.pnr').children('small').text()
+        console.log('dataObj:', dataObj);
         data.push(dataObj)
       })
       if (data.length === 100 + count && count != 2400) {
