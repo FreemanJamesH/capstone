@@ -8,7 +8,8 @@ app.factory('authInterceptor', ['authService', function(auth) {
       return config
     },
     response: function(res) {
-      if (res.config.url.indexOf('//localhost:3000/signup') === 0 && res.data.jwt) {
+      // if (res.config.url.indexOf('//localhost:3000/signup') === 0 && res.data.jwt) {
+      if (res.data.jwt) {
         auth.giveToken(res.data)
       }
       return res

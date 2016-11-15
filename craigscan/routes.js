@@ -60,27 +60,29 @@ router.post('/signup', function(req, res, next) {
 })
 
 router.post('/login', function(req, res, next) {
+  console.log('post to login received. req.body:', req.body);
   if (!req.body.username || !req.body.password) {
     return res.status(400)({
       message: 'Please fill out all fields'
     })
+  } else {
+    User.findOne({'username': req.body.username}, function(err, results){
+      if (!results){
+        console.log('user not found');
+      }
+      let passwordMatch = bcrypt.compareSync(req.body.password, results.password)
+      if (!passwordMatch){
+        console.log('wrong password');
+      } else {
+        console.log('sendign jwt...');
+        return res.json({jwt: results.generateJWT()})
+      }
+    })
   }
-
-  passport.authenticate('local', function(err, user, info) {
-    if (err) {
-      return next(err)
-    }
-    if (user) {
-      return res.json({
-        jwt: user.generateJWT()
-      })
-    } else {
-      return res.status(401).json(info)
-    }
-  })(req, res, next)
 })
 
 router.post('/api', function(req, res, next) {
+  console.log('api fired');
   let count = 0
   let data = [];
   let duplicate = 0;
