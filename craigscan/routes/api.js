@@ -31,48 +31,6 @@ router.get('/dashboard', function(req, res, next) {
   }
 })
 
-router.post('/signup', function(req, res, next) {
-  let hashed_pw = bcrypt.hashSync(req.body.password, 12)
-  let user = new User({
-    username: req.body.username,
-    email: req.body.email,
-    password: hashed_pw
-  });
-  user.save(function(err, returnedUser) {
-    if (err) {
-      res.send({
-        message: err
-      })
-    } else {
-      return res.json({
-        jwt: user.generateJWT()
-      })
-    }
-  })
-})
-
-router.post('/login', function(req, res, next) {
-  if (!req.body.username || !req.body.password) {
-    return res.status(400)({
-      message: 'Please fill out all fields'
-    })
-  } else {
-    User.findOne({
-      'username': req.body.username
-    }, function(err, results) {
-      if (!results) {
-      }
-      let passwordMatch = bcrypt.compareSync(req.body.password, results.password)
-      if (!passwordMatch) {
-      } else {
-        return res.json({
-          jwt: results.generateJWT()
-        })
-      }
-    })
-  }
-})
-
 router.post('/savesearch', function(req, res, next) {
   if (!req.headers.token) {
     let err = new Error()
