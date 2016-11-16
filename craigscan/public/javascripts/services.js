@@ -8,7 +8,6 @@ app.factory('authInterceptor', ['authService', function(auth) {
       return config
     },
     response: function(res) {
-      console.log('response interceptor res.data: ', res.data);
       // if (res.config.url.indexOf('//localhost:3000/signup') === 0 && res.data.jwt) {
       if (res.data.jwt) {
         auth.giveToken(res.data)
@@ -84,16 +83,26 @@ app.service('userService', ['$resource', '$location', function($resource, $locat
   }
 }])
 
-app.service('searchService', ['$resource', function($resource, $location) {
+app.service('searchService', ['$resource', '$location', function($resource, $location) {
   var resultsObj = {};
   return {
     search: function(obj) {
       // return $resource('https://jhfcapstone.herokuapp.com/api').save(obj).$promise.then(function(results) {
       return $resource('//localhost:3000/api/scrape').save(obj).$promise.then(function(results) {
+        console.log('setting results obj to results:', results);
         resultsObj = results;
       })
     },
     resultsObjGetter: function() {
+      console.log('resultsobj: ', resultsObj);
+      let dupeCount = 0;
+      for (var i=0; i<resultsObj.dataArr.length; i++){
+        if (resultsObj.dataArr[i].dupe){
+          dupeCount++
+        }
+      }
+      resultsObj.dupeCount = dupeCount
+      resultsObj.resultCount = resultsObj.dataArr.length
       return resultsObj;
     },
     saveSearch: function(obj) {
@@ -108,8 +117,16 @@ app.service('searchService', ['$resource', function($resource, $location) {
         })
         .$promise
         .then(function(results) {
-          console.log('deleteSearch results:', results);
           return results
+        })
+    },
+    viewSearch: function(id){
+      return $resource(`//localhost:3000/api/getsearch/${id}`)
+        .get()
+        .$promise
+        .then(function(results){
+          resultsObj = results
+          $location.path('/results')
         })
     }
   }

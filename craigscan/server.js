@@ -28,7 +28,6 @@ app.use(cors());
 app.use('/api', api);
 
 app.all('*', (req,res,next) => {
-  console.log('all fired');
   res.sendFile('index.html', { root: __dirname + '/public/'})
 })
 

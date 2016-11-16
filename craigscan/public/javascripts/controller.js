@@ -4,7 +4,6 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
   })
 
   $scope.logout = function() {
-    console.log('logout in controller called');
     $q(function(resolve, reject) {
       authService.logout()
       resolve('done!')
@@ -22,7 +21,6 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
     },
     function(newValue) {
       if (newValue) {
-        console.log('new value:', newValue);
         let decodedPayload = JSON.parse(atob(newValue.split('.')[1]))
         $scope.username = decodedPayload.username
       }
@@ -59,8 +57,7 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
   }
 })
 
-app.controller('AuthController', function($scope, $http, $location, authService, userService) {
-  $scope.user = {};
+app.controller('AuthController', function($scope, $http, $location, authService, userService) {  $scope.user = {};
 
   $scope.signup = function() {
     userService.signup($scope.user)
@@ -89,7 +86,6 @@ app.controller('resultsController', function($scope, $mdDialog, searchService, r
       search.title = results
       search.results = $scope.arr
       search.id = randomString.getString()
-      console.log(search);
       searchService.saveSearch(search)
     })
   }
@@ -98,14 +94,17 @@ app.controller('resultsController', function($scope, $mdDialog, searchService, r
 
 app.controller('dashController', function($scope, userService, searchService) {
   userService.getUser().then(function(results) {
-    console.log('results in dash: ', results);
     $scope.userObj = results
   })
 
   $scope.deleteSearch = function(id){
-    console.log('deleting: ', id);
     searchService.deleteSearch(id).then(function(results){
-      console.log('results in controller:', results);
+      $scope.userObj = results
+    })
+  }
+
+  $scope.viewSearch = function(id){
+    searchService.viewSearch(id).then(function(results){
       $scope.userObj = results
     })
   }

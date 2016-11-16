@@ -13,30 +13,23 @@ const authorize = function() {
 
 router.get('/dashboard', function(req, res, next) {
   if (!req.headers.token) {
-    console.log(1);
     let err = new Error()
     err.message = 'You are not logged in.'
     err.status = 403
     return next(err)
   } else {
-    console.log(2);
     let token = req.headers.token
     jwt.verify(token, 'SECRET', function(err, decoded) {
       if (err) {
-        console.log(3);
         return next(err)
       } else {
-        console.log(4);
         User.findById(decoded._id, function(err, user) {
-          console.log(5);
           res.send(user)
         })
       }
     })
   }
 })
-
-
 
 router.post('/signup', function(req, res, next) {
   let hashed_pw = bcrypt.hashSync(req.body.password, 12)
@@ -47,7 +40,6 @@ router.post('/signup', function(req, res, next) {
   });
   user.save(function(err, returnedUser) {
     if (err) {
-      console.log('An error occurred.')
       res.send({
         message: err
       })
@@ -60,7 +52,6 @@ router.post('/signup', function(req, res, next) {
 })
 
 router.post('/login', function(req, res, next) {
-  console.log('post to login received. req.body:', req.body);
   if (!req.body.username || !req.body.password) {
     return res.status(400)({
       message: 'Please fill out all fields'
@@ -70,13 +61,10 @@ router.post('/login', function(req, res, next) {
       'username': req.body.username
     }, function(err, results) {
       if (!results) {
-        console.log('user not found');
       }
       let passwordMatch = bcrypt.compareSync(req.body.password, results.password)
       if (!passwordMatch) {
-        console.log('wrong password');
       } else {
-        console.log('sendign jwt...');
         return res.json({
           jwt: results.generateJWT()
         })
@@ -86,22 +74,17 @@ router.post('/login', function(req, res, next) {
 })
 
 router.post('/savesearch', function(req, res, next) {
-  console.log('savesearch route hit. req: ', req);
   if (!req.headers.token) {
-    console.log(1);
     let err = new Error()
     err.message = 'You are not logged in.'
     err.status = 403
     return next(err)
   } else {
-    console.log(2);
     let token = req.headers.token
     jwt.verify(token, 'SECRET', function(err, decoded) {
       if (err) {
-        console.log(3);
         return next(err)
       } else {
-        console.log(4);
         User.findById(decoded._id, function(err, user) {
           user.searches.push(req.body)
           user.save(function(err, updatedUser) {
@@ -127,7 +110,7 @@ router.post('/deletesearch', function(req, res, next) {
             i--
           }
         }
-        user.save(function(err, updatedUser){
+        user.save(function(err, updatedUser) {
           res.json(updatedUser)
         })
       })
@@ -136,7 +119,6 @@ router.post('/deletesearch', function(req, res, next) {
 })
 
 router.post('/scrape', function(req, res, next) {
-  console.log('api fired');
   let count = 0
   let data = [];
   let duplicate = 0;
@@ -145,10 +127,8 @@ router.post('/scrape', function(req, res, next) {
   function requestFunction(urlArg) {
     let url = urlArg + '&s=' + count
     request(url, function(err, resp, body) {
-      console.log('body:', body);
       var $ = cheerio.load(body)
       $('.result-row').each(function() {
-        console.log('li found!');
         let dataObj = {};
         dataObj.href = '//' + req.body.regionChoice + $(this).children('a').attr('href').slice(1)
         dataObj.title = $(this).find('.hdrlnk').text()
@@ -163,9 +143,9 @@ router.post('/scrape', function(req, res, next) {
               foundDupe = true
             }
           })
-          if (foundDupe) {
-            duplicate++
-          }
+          // if (foundDupe) {
+          //   duplicate++
+          // }
         } else {
           dataObj.hasimg = false
           dataObj.img = 'https://www.shearwater.com/wp-content/plugins/lightbox/images/No-image-found.jpg';
@@ -182,7 +162,6 @@ router.post('/scrape', function(req, res, next) {
         dataObj.price = parseInt(dataObj.price, 10)
         dataObj.time = $(this).find('time').attr('datetime')
         dataObj.location = $(this).find('.pnr').children('small').text()
-        console.log('dataObj:', dataObj);
         data.push(dataObj)
       })
       if (data.length === 100 + count && count != 2400) {
@@ -190,12 +169,28 @@ router.post('/scrape', function(req, res, next) {
         return requestFunction(urlArg)
       }
       res.json({
-        dataArr: data,
-        dupeCount: duplicate,
-        resultCount: data.length
+        dataArr: data
       })
     })
   }
+})
+
+router.get('/getsearch/:id', function(req, res, next) {
+  let idToGet = req.params.id
+  let token = req.headers.token
+  jwt.verify(token, 'SECRET', function(err, decoded) {
+    if (err) {
+      return next(err)
+    } else {
+      User.findById(decoded._id, function(err, user) {
+        for (var i = 0; i < user.searches.length; i++) {
+          if (user.searches[i].id === idToGet) {
+            return res.json({dataArr: user.searches[i]})
+          }
+        }
+      })
+    }
+  })
 })
 
 router.get('/sls', function(req, res, next) {
