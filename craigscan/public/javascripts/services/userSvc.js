@@ -11,7 +11,7 @@ app.service('userService', ['$resource', '$location', function($resource, $locat
       return 3
     },
     getUser: function() {
-      return $resource('//localhost:3000/api/dashboard').get().$promise.then(function(response) {
+      return $resource('//localhost:3000/user/dashboard').get().$promise.then(function(response) {
           $location.path('/dashboard')
           return response
         },

@@ -3,7 +3,7 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
   return {
     search: function(obj) {
       // return $resource('https://jhfcapstone.herokuapp.com/api').save(obj).$promise.then(function(results) {
-      return $resource('//localhost:3000/api/scrape').save(obj).$promise.then(function(results) {
+      return $resource('//localhost:3000/scrape/scrape').save(obj).$promise.then(function(results) {
         console.log('setting results obj to results:', results);
         resultsObj = results;
       })
@@ -21,12 +21,12 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
       return resultsObj;
     },
     saveSearch: function(obj) {
-      return $resource('//localhost:3000/api/savesearch').save(obj).$promise.then(function(results) {
+      return $resource('//localhost:3000/user/savesearch').save(obj).$promise.then(function(results) {
         console.log(results);
       })
     },
     deleteSearch: function(id) {
-      return $resource('//localhost:3000/api/deletesearch')
+      return $resource('//localhost:3000/user/deletesearch')
         .save({
           id: id
         })
@@ -36,7 +36,7 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
         })
     },
     viewSearch: function(id){
-      return $resource(`//localhost:3000/api/getsearch/${id}`)
+      return $resource(`//localhost:3000/user/getsearch/${id}`)
         .get()
         .$promise
         .then(function(results){

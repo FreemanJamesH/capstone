@@ -13,8 +13,9 @@ mongoose.connect('mongodb://localhost/craigscan')
 require('./models/Users')
 
 const cors = require('cors')
-const api = require('./routes/api');
-const auth = require('./routes/auth')
+const user = require('./routes/user');
+const auth = require('./routes/auth');
+const scrape = require('./routes/scrape')
 
 
 // uncomment after placing your favicon in /public
@@ -26,8 +27,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize())
 app.use(cors());
-app.use('/api', api);
+app.use('/user', user);
 app.use('/auth', auth)
+app.use('/scrape', scrape)
 
 app.all('*', (req,res,next) => {
   res.sendFile('index.html', { root: __dirname + '/public/'})
