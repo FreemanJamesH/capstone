@@ -185,7 +185,7 @@ router.get('/getsearch/:id', function(req, res, next) {
       User.findById(decoded._id, function(err, user) {
         for (var i = 0; i < user.searches.length; i++) {
           if (user.searches[i].id === idToGet) {
-            return res.json({dataArr: user.searches[i]})
+            return res.json({search: user.searches[i]})
           }
         }
       })

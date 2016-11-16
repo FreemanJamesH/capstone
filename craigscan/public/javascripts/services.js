@@ -94,7 +94,6 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
       })
     },
     resultsObjGetter: function() {
-      console.log('resultsobj: ', resultsObj);
       let dupeCount = 0;
       for (var i=0; i<resultsObj.dataArr.length; i++){
         if (resultsObj.dataArr[i].dupe){
@@ -103,6 +102,7 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
       }
       resultsObj.dupeCount = dupeCount
       resultsObj.resultCount = resultsObj.dataArr.length
+      console.log('resultsObj in resultObjGetter: ', resultsObj);
       return resultsObj;
     },
     saveSearch: function(obj) {
@@ -125,7 +125,7 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
         .get()
         .$promise
         .then(function(results){
-          resultsObj = results
+          resultsObj.dataArr = results.search.results
           $location.path('/results')
         })
     }
