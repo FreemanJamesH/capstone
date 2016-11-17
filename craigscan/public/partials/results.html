@@ -2,9 +2,9 @@
     <div class="result_big_container" layout="row">
         <div class="form-style-5 resultsform" flex>
             <legend>Found
-                {{obj.resultCount - obj.dupeCount}}
+                {{resultsObj.resultCount - resultsObj.dupeCount}}
                 Unique Results</legend>
-            <label for="duplicates">{{obj.dupeCount}}
+            <label for="duplicates">{{resultsObj.dupeCount}}
                 Duplicates Detected</label>
 
             <div class="optionsTitle">
@@ -30,7 +30,7 @@
         <!-- </div> -->
         <div class="result_container" flex="80">
             <md-list>
-                <md-list-item class="md-3-line resultCard" ng-repeat="post in arr | orderBy:sortBy" ng-hide="(!dupeShow && post.dupe) || (!post.hasimg && imageHide)">
+                <md-list-item class="md-3-line resultCard" ng-repeat="post in resultsObj.results | orderBy:sortBy" ng-hide="(!dupeShow && post.dupe) || (!post.hasimg && imageHide)">
                     <!-- <a href="{{post.href}}"> -->
                         <div class="imgholder">
                             <img class="imgresult" src="{{post.img}}" alt="">

@@ -51,7 +51,7 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
       searchParams.url += ('&max_price=' + $scope.max_price)
     }
     searchParams.title = $scope.scantitle
-    searchService.search(searchParams).then(function(results) {
+    searchService.newSearch(searchParams).then(function(results) {
       $location.path('/results')
     })
   }

@@ -1,28 +1,26 @@
 app.service('searchService', ['$resource', '$location', function($resource, $location) {
   var resultsObj = {};
   return {
-    search: function(obj) {
+    newSearch: function(obj) {
       // return $resource('https://jhfcapstone.herokuapp.com/api').save(obj).$promise.then(function(results) {
       return $resource('//localhost:3000/scrape/scrape').save(obj).$promise.then(function(results) {
-        console.log('setting results obj to results:', results);
         resultsObj = results;
       })
     },
     resultsObjGetter: function() {
+      console.log('resultsObjGetter firing, resultsObj: ', resultsObj);
       let dupeCount = 0;
-      for (var i=0; i<resultsObj.dataArr.length; i++){
-        if (resultsObj.dataArr[i].dupe){
+      for (var i=0; i<resultsObj.results.length; i++){
+        if (resultsObj.results[i].dupe){
           dupeCount++
         }
       }
       resultsObj.dupeCount = dupeCount
-      resultsObj.resultCount = resultsObj.dataArr.length
-      console.log('resultsObj in resultObjGetter: ', resultsObj);
+      resultsObj.resultCount = resultsObj.results.length
       return resultsObj;
     },
     saveSearch: function(obj) {
       return $resource('//localhost:3000/user/savesearch').save(obj).$promise.then(function(results) {
-        console.log(results);
       })
     },
     deleteSearch: function(id) {
@@ -40,7 +38,8 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
         .get()
         .$promise
         .then(function(results){
-          resultsObj.dataArr = results.search.results
+          console.log('results in viewSearchMethod: ', results );
+          resultsObj = results
           $location.path('/results')
         })
     }

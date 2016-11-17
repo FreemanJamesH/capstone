@@ -1,8 +1,8 @@
 app.controller('resultsController', function($scope, $mdDialog, searchService, randomString){
-  $scope.obj = searchService.resultsObjGetter();
-  $scope.arr = $scope.obj.dataArr
+  $scope.resultsObj = searchService.resultsObjGetter();
   $scope.dupeShow = false
   $scope.imageHide = false
+
   $scope.saveDialog = function(){
     $mdDialog.show(
       $mdDialog.prompt()
@@ -11,9 +11,8 @@ app.controller('resultsController', function($scope, $mdDialog, searchService, r
         .openFrom('.resultsform')
         .ok('Save')
     ).then(function(results){
-      let search = {}
+      let search = $scope.resultsObj
       search.title = results
-      search.results = $scope.arr
       search.id = randomString.getString()
       searchService.saveSearch(search)
     })
