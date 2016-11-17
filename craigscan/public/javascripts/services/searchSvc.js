@@ -20,11 +20,11 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
       return resultsObj;
     },
     saveSearch: function(obj) {
-      return $resource('//localhost:3000/user/savesearch').save(obj).$promise.then(function(results) {
+      return $resource('//localhost:3000/search/savesearch').save(obj).$promise.then(function(results) {
       })
     },
     deleteSearch: function(id) {
-      return $resource('//localhost:3000/user/deletesearch')
+      return $resource('//localhost:3000/search/deletesearch')
         .save({
           id: id
         })
@@ -34,7 +34,7 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
         })
     },
     viewSearch: function(id){
-      return $resource(`//localhost:3000/user/getsearch/${id}`)
+      return $resource(`//localhost:3000/search/getsearch/${id}`)
         .get()
         .$promise
         .then(function(results){
