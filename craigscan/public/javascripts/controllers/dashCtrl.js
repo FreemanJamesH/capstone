@@ -4,6 +4,7 @@ app.controller('dashController', function($scope, userService, searchService) {
   })
 
   $scope.deleteSearch = function(id){
+    console.log('id in deleteSearch: ', id);
     searchService.deleteSearch(id).then(function(results){
       $scope.userObj = results
     })

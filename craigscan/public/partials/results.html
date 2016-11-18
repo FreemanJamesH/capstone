@@ -42,7 +42,7 @@
                             <h3>Rent: ${{ post.price }}</h3>
                             <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
             <md-button class="md-raised md-primary">Favorite</md-button>
-            <md-button ng-click="delete($index)" class="md-raised md-warn">Delete</md-button>
+            <md-button ng-click="delete(post._id)" class="md-raised md-warn">Delete</md-button>
             <md-button href="{{post.href}}" class="md-raised md-accent">Visit listing</md-button>
           </section>
                         </div>

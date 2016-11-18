@@ -5,7 +5,7 @@ app.controller('resultsController', function($scope, $mdDialog, searchService, p
   $scope.imageHide = false
 
   $scope.delete = function(index){
-    postService.delete($scope.resultsObj.id, index)
+    postService.delete($scope.resultsObj._id, index)
   }
 
   $scope.saveDialog = function(){
@@ -18,7 +18,6 @@ app.controller('resultsController', function($scope, $mdDialog, searchService, p
     ).then(function(results){
       let search = $scope.resultsObj
       search.title = results
-      search.id = randomString.getString()
       searchService.saveSearch(search)
     })
   }

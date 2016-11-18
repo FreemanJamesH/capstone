@@ -15,7 +15,6 @@ const jwt = require('jsonwebtoken');
 // })
 
 router.delete('/:searchid/:index', function(req, res, next) {
-
   let searchId = req.params.searchid
   console.log('searchid: ', searchId);
   let resultIndex = req.params.index
@@ -26,14 +25,15 @@ router.delete('/:searchid/:index', function(req, res, next) {
     } else {
       User.findById(decoded._id, function(err, user) {
         console.log('user found:', user);
-        for (var i = 0; i < user.searches.length; i++) {
-          if (user.searches[i].id === searchId) {
-            let deleted = user.searches[i].results.splice(resultIndex,1)
-            user.searches[i].results
-            console.log('spliced this:', deleted);
-            console.log('after splicing:', user.searches[i].results);
-          }
-        }
+        // for (var i = 0; i < user.searches.length; i++) {
+        //   if (user.searches[i].id === searchId) {
+        //     let deleted = user.searches[i].results.splice(resultIndex,1)
+        //     user.searches[i].results
+        //     console.log('spliced this:', deleted);
+        //     console.log('after splicing:', user.searches[i].results);
+        //   }
+        // }
+        user.searches.id(searchId).results.id(resultIndex).remove()
         console.log('this is what Im saving: ', user.searches);
         user.save(function(err, updatedUser) {
           // console.log('updated user:', updatedUser);

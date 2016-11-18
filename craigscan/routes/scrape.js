@@ -58,7 +58,7 @@ router.post('/scrape', function(req, res, next) {
         count += 100
         return requestFunction(urlArg)
       }
-      let searchObj = {title: null, id: null, results: data, favorites: [], deleted: [] }
+      let searchObj = {title: null, results: data, favorites: [], deleted: [] }
       res.json(searchObj)
     })
   }
