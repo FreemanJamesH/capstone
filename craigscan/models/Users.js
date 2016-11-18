@@ -2,6 +2,28 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
+const result = mongoose.Schema({
+  href: String,
+  title: String,
+  hasImg: Boolean,
+  isDupe: Boolean,
+  img: String,
+  timeConverted: Number,
+  price: Number,
+  time: Date,
+  location: String
+})
+
+const search = mongoose.Schema({
+  title: String,
+  id: String,
+  results: [result],
+  favorites: [result],
+  deleted: [result],
+  dupeCount: Number,
+  resultCount: Number
+})
+
 const userSchema = mongoose.Schema({
   username: String,
   email: {
@@ -9,7 +31,7 @@ const userSchema = mongoose.Schema({
     unique: true
   },
   password: String,
-  searches: Array
+  searches: [search]
 })
 
 userSchema.methods.validPassword = function(password){
