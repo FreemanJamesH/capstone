@@ -25,17 +25,6 @@ router.post('/scrape', function(req, res, next) {
         if ($(this).children('a').attr('data-ids')) {
           dataObj.hasimg = true
           dataObj.img = 'http://images.craigslist.org/' + $(this).children('a').attr('data-ids').slice(2, 19) + '_300x300.jpg';
-          // 'https://www.shearwater.com/wp-content/plugins/lightbox/images/No-image-found.jpg'
-          let foundDupe = false
-          data.forEach(function(element, index) {
-            if (dataObj.img === element.img || dataObj.title === element.title) {
-              dataObj.dupe = true
-              foundDupe = true
-            }
-          })
-          // if (foundDupe) {
-          //   duplicate++
-          // }
         } else {
           dataObj.hasimg = false
           dataObj.img = 'https://www.shearwater.com/wp-content/plugins/lightbox/images/No-image-found.jpg';
