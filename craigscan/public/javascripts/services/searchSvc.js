@@ -9,11 +9,24 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
     },
     resultsObjGetter: function() {
       console.log('resultsObjGetter firing, resultsObj: ', resultsObj);
+      let i = 0;
       let dupeCount = 0;
-      for (var i=0; i<resultsObj.results.length; i++){
-        if (resultsObj.results[i].dupe){
+      while (i<resultsObj.results.length){
+        let checkAgainst = resultsObj.results[i]
+        if (checkAgainst.dupe) {
           dupeCount++
         }
+        for (var k = i+1; k < resultsObj.results.length; k++){
+          let currentK = resultsObj.results[k]
+          if (checkAgainst.title === currentK.title && checkAgainst.price === currentK.price){
+            currentK.dupe = true
+          } else {
+            if (!currentK.dupe){
+              currentK.dupe = false
+            }
+          }
+        }
+        i++
       }
       resultsObj.dupeCount = dupeCount
       resultsObj.resultCount = resultsObj.results.length
