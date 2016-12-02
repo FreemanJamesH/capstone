@@ -1,4 +1,5 @@
 app.controller('MainController', function($scope, $http, searchService, stateListService, $location, authService, userService, $window, $q) {
+
   stateListService.retrieve().then(function() {
     $scope.stateListProto = stateListService.resultsArrGetter();
   })

@@ -7,8 +7,10 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
         resultsObj = results;
       })
     },
+    resultsObjSetter: function(obj){
+      resultsObj = obj
+    },
     resultsObjGetter: function() {
-      console.log('resultsObjGetter firing, resultsObj: ', resultsObj);
       let i = 0;
       let dupeCount = 0;
       while (i<resultsObj.results.length){

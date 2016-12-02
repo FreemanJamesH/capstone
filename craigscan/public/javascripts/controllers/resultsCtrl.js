@@ -1,11 +1,13 @@
 app.controller('resultsController', function($scope, $mdDialog, searchService, postService, randomString){
   $scope.resultsObj = searchService.resultsObjGetter();
-  console.log($scope.resultsObj);
   $scope.dupeShow = false
   $scope.imageHide = false
 
   $scope.delete = function(index){
-    postService.delete($scope.resultsObj._id, index)
+    postService.delete($scope.resultsObj._id, index).then(function(results){
+      searchService.resultsObjSetter(results)
+      $scope.resultsObj = searchService.resultsObjGetter()
+    })
   }
 
   $scope.saveDialog = function(){

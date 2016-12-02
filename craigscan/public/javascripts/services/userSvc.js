@@ -4,6 +4,7 @@ app.service('userService', ['$resource', '$location', function($resource, $locat
       return $resource('//localhost:3000/auth/signup').save(obj)
     },
     login: function(obj) {
+      console.log(obj);
       return $resource('//localhost:3000/auth/login').save(obj)
     },
     logout: function() {
