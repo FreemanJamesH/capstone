@@ -19,6 +19,8 @@ app.controller('resultsController', function($scope, $mdDialog, searchService, p
         .ok('Save')
     ).then(function(results){
       let search = $scope.resultsObj
+      delete search.dupeCount
+      delete search.resultCount
       search.title = results
       searchService.saveSearch(search)
     })
