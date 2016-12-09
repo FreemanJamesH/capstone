@@ -9,7 +9,6 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
 router.post('/:searchid', function(req, res, next) {
-  console.log('req.body:',  req.body);
   let searchId = req.params.searchid
   let resultIndex = req.params.index
   let token = req.headers.token
@@ -25,11 +24,15 @@ router.post('/:searchid', function(req, res, next) {
         {
           "$set": {
             "searches.$.results" : req.body
-          }
+          },
+        },
+        {
+          new: true
         },
         function (err, updatedUser){
           // if (err) {return err}
           console.log(err);
+          console.log('updated length:', updatedUser.searches.id(searchId).results.length)
           res.json(updatedUser.searches.id(searchId))
         }
       )

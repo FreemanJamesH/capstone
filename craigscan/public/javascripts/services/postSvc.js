@@ -14,6 +14,7 @@ app.service('postService', function($resource, searchService){
       console.log('currentResults:', currentResults);
       return $resource(`//localhost:3000/posts/${currentResults._id}`).save(dupesRemoved).$promise.then(function(results){
         searchService.resultsObjSetter(results)
+        return;
       })
     }
   }

@@ -1,5 +1,6 @@
-app.controller('resultsController', function($scope, $mdDialog, searchService, postService, randomString) {
+app.controller('resultsController', function($scope, $mdDialog, searchService, postService, randomString) {;
   $scope.resultsObj = searchService.resultsObjGetter();
+  console.log('results obj, initial load:', $scope.resultsObj);
   $scope.dupeShow = false
   $scope.imageHide = false
 
@@ -11,9 +12,9 @@ app.controller('resultsController', function($scope, $mdDialog, searchService, p
   }
 
   $scope.deleteDupes = function() {
-    console.log('deleting dupes');
     postService.deleteDupes().then(function(results) {
       $scope.resultsObj = searchService.resultsObjGetter()
+      console.log('dupes deleted, new results obj:', $scope.resultsObj);
     })
   }
 
