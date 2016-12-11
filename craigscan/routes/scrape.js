@@ -12,6 +12,7 @@ router.post('/scrape', function(req, res, next) {
   let count = 0
   let data = [];
   let duplicate = 0;
+  console.log(req.body);
   requestFunction(req.body.url)
 
   function requestFunction(urlArg) {

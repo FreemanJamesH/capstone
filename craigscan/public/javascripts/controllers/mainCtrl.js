@@ -52,8 +52,8 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
       searchParams.url += ('&max_price=' + $scope.max_price)
     }
     searchParams.title = $scope.scantitle
-    searchService.newSearch(searchParams).then(function(results) {
-      $location.path('/results')
-    })
+    $window.localStorage['url'] = searchParams.url
+    $window.localStorage['regionChoice'] = searchParams.regionChoice
+    $location.path('/results')
   }
 })

@@ -7,36 +7,38 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
         resultsObj = results;
       })
     },
-    resultsObjSetter: function(obj){
+    resultsObjSetter: function(obj) {
       resultsObj = obj
     },
     resultsObjGetter: function() {
-      let i = 0;
-      let dupeCount = 0;
-      while (i<resultsObj.results.length){
-        let checkAgainst = resultsObj.results[i]
-        if (checkAgainst.dupe) {
-          dupeCount++
-        }
-        for (var k = i+1; k < resultsObj.results.length; k++){
-          let currentK = resultsObj.results[k]
-          if (checkAgainst.title === currentK.title && checkAgainst.price === currentK.price){
-            currentK.dupe = true
-          } else {
-            if (!currentK.dupe){
-              currentK.dupe = false
+      if (resultsObj.results) {
+        let i = 0;
+        let dupeCount = 0;
+        while (i < resultsObj.results.length) {
+          let checkAgainst = resultsObj.results[i]
+          if (checkAgainst.dupe) {
+            dupeCount++
+          }
+          for (var k = i + 1; k < resultsObj.results.length; k++) {
+            let currentK = resultsObj.results[k]
+            if (checkAgainst.title === currentK.title && checkAgainst.price === currentK.price) {
+              currentK.dupe = true
+            } else {
+              if (!currentK.dupe) {
+                currentK.dupe = false
+              }
             }
           }
+          i++
         }
-        i++
+        resultsObj.dupeCount = dupeCount
+        resultsObj.resultCount = resultsObj.results.length
+        return resultsObj;
       }
-      resultsObj.dupeCount = dupeCount
-      resultsObj.resultCount = resultsObj.results.length
-      return resultsObj;
+      return {}
     },
     saveSearch: function(obj) {
-      return $resource('//localhost:3000/search/savesearch').save(obj).$promise.then(function(results) {
-      })
+      return $resource('//localhost:3000/search/savesearch').save(obj).$promise.then(function(results) {})
     },
     deleteSearch: function(id) {
       return $resource('//localhost:3000/search/deletesearch')
@@ -48,11 +50,11 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
           return results
         })
     },
-    viewSearch: function(id){
+    viewSearch: function(id) {
       return $resource(`//localhost:3000/search/getsearch/${id}`)
         .get()
         .$promise
-        .then(function(results){
+        .then(function(results) {
           resultsObj = results
           $location.path('/results')
         })

@@ -1,5 +1,17 @@
-app.controller('resultsController', function($scope, $mdDialog, searchService, postService) {;
-  $scope.resultsObj = searchService.resultsObjGetter();
+app.controller('resultsController', function($scope, $mdDialog, searchService, postService, $window) {
+
+  if (!(searchService.resultsObjGetter()._id)){
+    console.log('unsaved search detected');
+    let searchParams = {}
+    searchParams.regionChoice = $window.localStorage.regionChoice
+    searchParams.url = $window.localStorage.url
+    console.log(searchParams);
+    searchService.newSearch(searchParams).then(function(results) {
+      console.log('promised results:', results);
+      $scope.resultsObj = searchService.resultsObjGetter();
+    })
+  }
+
   $scope.dupeShow = false
   $scope.imageHide = false
   $scope.dupeCount = $scope.resultsObj.dupeCount
