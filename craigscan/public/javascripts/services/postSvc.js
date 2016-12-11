@@ -6,7 +6,6 @@ app.service('postService', function($resource, searchService) {
       })
     },
     deleteDupes: function(id, dupesRemoved) {
-      console.log('dupesremoved:', dupesRemoved);
       return $resource(`//localhost:3000/posts/${id}`).save(dupesRemoved).$promise.then(function(results) {
         searchService.resultsObjSetter(results)
         return;

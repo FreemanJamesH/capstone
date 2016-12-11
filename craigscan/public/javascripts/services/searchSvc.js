@@ -53,7 +53,6 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
         .get()
         .$promise
         .then(function(results){
-          console.log('results in viewSearchMethod: ', results );
           resultsObj = results
           $location.path('/results')
         })

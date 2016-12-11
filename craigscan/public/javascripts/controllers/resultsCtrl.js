@@ -1,12 +1,8 @@
-app.controller('resultsController', function($scope, $mdDialog, searchService, postService, randomString) {;
+app.controller('resultsController', function($scope, $mdDialog, searchService, postService) {;
   $scope.resultsObj = searchService.resultsObjGetter();
   $scope.dupeShow = false
   $scope.imageHide = false
   $scope.dupeCount = $scope.resultsObj.dupeCount
-
-  // $scope.$watch('resultsObj', function() {
-  //   $scope.dupeCount = $scope.resultsObj.results.length
-  // }, true)
 
   $scope.delete = function(index) {
     postService.delete($scope.resultsObj._id, index).then(function(results) {
@@ -16,10 +12,10 @@ app.controller('resultsController', function($scope, $mdDialog, searchService, p
   }
 
   $scope.deleteDupes = function() {
-    function dupeCheck(result) {
+    let dupesRemoved = $scope.resultsObj.results.filter(function(result) {
       return !result.dupe
-    }
-    let dupesRemoved = $scope.resultsObj.results.filter(dupeCheck)
+    })
+
     if ($scope.resultsObj._id) {
       postService.deleteDupes($scope.resultsObj._id, dupesRemoved).then(function(results) {
         $scope.resultsObj = searchService.resultsObjGetter()
@@ -45,5 +41,4 @@ app.controller('resultsController', function($scope, $mdDialog, searchService, p
       searchService.saveSearch(search)
     })
   }
-
 })

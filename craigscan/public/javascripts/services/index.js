@@ -1,6 +1,5 @@
 require('./authSvc.js')
 require('./interceptorSvc.js')
-require('./randomStringSvc.js')
 require('./searchSvc.js')
 require('./stateListSvc.js')
 require('./userSvc.js')
