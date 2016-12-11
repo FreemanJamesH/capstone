@@ -4,11 +4,22 @@ app.controller('resultsController', function($scope, $mdDialog, searchService, p
   $scope.imageHide = false
   $scope.dupeCount = $scope.resultsObj.dupeCount
 
-  $scope.delete = function(index) {
-    postService.delete($scope.resultsObj._id, index).then(function(results) {
+  $scope.delete = function(resultId) {
+    console.log(resultId);
+    postService.delete($scope.resultsObj._id, resultId).then(function(results) {
       searchService.resultsObjSetter(results)
       $scope.resultsObj = searchService.resultsObjGetter()
     })
+  }
+
+  $scope.deleteAnon = function(index){
+    let deleted = $scope.resultsObj.results.splice(index,1)
+    console.log(deleted[0]);
+    if (deleted[0].dupe){
+      $scope.dupeCount--
+    } else {
+      $scope.resultsObj.resultCount--
+    }
   }
 
   $scope.deleteDupes = function() {
