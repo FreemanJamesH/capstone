@@ -29,11 +29,9 @@
                 </div>
             </div>
         </div>
-        <!-- </div> -->
         <div class="result_container" flex="80">
             <md-list>
                 <md-list-item class="md-3-line resultCard" ng-repeat="post in resultsObj.results | orderBy:sortBy" ng-hide="(!dupeShow && post.dupe) || (!post.hasimg && imageHide)">
-                    <!-- <a href="{{post.href}}"> -->
                     <div class="imgholder">
                         <img class="imgresult" src="{{post.img}}" alt="">
                     </div>
@@ -49,7 +47,6 @@
                         </section>
                     </div>
                 </md-list-item>
-                <!-- </a> -->
             </div>
         </div>
     </div>
