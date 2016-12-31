@@ -42,11 +42,9 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
     })
 
     if ($scope.resultsObj._id) {
-      console.log('obj before removal:', $scope.resultsObj);
       postService.deleteDupes($scope.resultsObj._id, dupesRemoved).then(function(results) {
         $scope.resultsObj = searchService.resultsObjGetter()
         $scope.dupeCount = $scope.resultsObj.dupeCount;
-        console.log('obj after:', $scope.resultsObj);
       })
     } else {
       $scope.resultsObj.results = dupesRemoved
