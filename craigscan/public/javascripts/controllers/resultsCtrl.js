@@ -2,7 +2,7 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
 
   console.log('routeParams: ', $routeParams);
 
-  if (!(searchService.resultsObjGetter()._id)){
+  if (!(searchService.resultsObjGetter()._id) && !$routeParams.searchId) {
     let searchParams = {}
     searchParams.regionChoice = $window.localStorage.regionChoice
     searchParams.url = $window.localStorage.url
@@ -11,8 +11,11 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
       $scope.dupeCount = $scope.resultsObj.dupeCount
     })
   } else {
-    $scope.resultsObj = searchService.resultsObjGetter()
-    $scope.dupeCount = $scope.resultsObj.dupeCount
+    searchService.viewSearch($routeParams.searchId).then(function(){
+      $scope.resultsObj = searchService.resultsObjGetter()
+      $scope.dupeCount = $scope.resultsObj.dupeCount
+    })
+    console.log('oy');
   }
 
   $scope.dupeShow = false
@@ -26,10 +29,10 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
     })
   }
 
-  $scope.deleteAnon = function(index){
-    let deleted = $scope.resultsObj.results.splice(index,1)
+  $scope.deleteAnon = function(index) {
+    let deleted = $scope.resultsObj.results.splice(index, 1)
     console.log(deleted[0]);
-    if (deleted[0].dupe){
+    if (deleted[0].dupe) {
       $scope.dupeCount--
     } else {
       $scope.resultsObj.resultCount--

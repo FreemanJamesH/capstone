@@ -1,4 +1,4 @@
-app.controller('dashController', function($scope, userService, searchService) {
+app.controller('dashController', function($scope, $location, userService, searchService) {
 
   userService.getUser().then(function(results) {
     $scope.userObj = results
@@ -11,8 +11,6 @@ app.controller('dashController', function($scope, userService, searchService) {
   }
 
   $scope.viewSearch = function(id) {
-    searchService.viewSearch(id).then(function(results) {
-      $scope.userObj = results
-    })
+    $location.path(`/results/${id}`)
   }
 })
