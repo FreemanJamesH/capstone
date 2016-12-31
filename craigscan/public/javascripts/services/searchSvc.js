@@ -56,7 +56,7 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
         .$promise
         .then(function(results) {
           resultsObj = results
-          $location.path('/results')
+          $location.path('/results/1')
         })
     }
   }

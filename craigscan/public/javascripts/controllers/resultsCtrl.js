@@ -1,4 +1,6 @@
-app.controller('resultsController', function($scope, $mdDialog, searchService, postService, $window) {
+app.controller('resultsController', function($scope, $routeParams, $mdDialog, searchService, postService, $window) {
+
+  console.log('routeParams: ', $routeParams);
 
   if (!(searchService.resultsObjGetter()._id)){
     let searchParams = {}
