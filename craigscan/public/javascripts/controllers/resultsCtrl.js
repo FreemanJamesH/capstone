@@ -1,7 +1,5 @@
 app.controller('resultsController', function($scope, $routeParams, $mdDialog, searchService, postService, $window) {
 
-  console.log('routeParams: ', $routeParams);
-
   if (!(searchService.resultsObjGetter()._id) && !$routeParams.searchId) {
     let searchParams = {}
     searchParams.regionChoice = $window.localStorage.regionChoice
@@ -15,7 +13,6 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
       $scope.resultsObj = searchService.resultsObjGetter()
       $scope.dupeCount = $scope.resultsObj.dupeCount
     })
-    console.log('oy');
   }
 
   $scope.dupeShow = false
