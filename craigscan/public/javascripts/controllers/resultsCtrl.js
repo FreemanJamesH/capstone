@@ -1,5 +1,18 @@
 app.controller('resultsController', function($scope, $routeParams, $mdDialog, searchService, postService, $window) {
 
+  $scope.loading = true;
+  $scope.loadingMessage = `Loading your results...`
+
+  setTimeout(function(){
+    $scope.loadingMessage = `Thank you for your patience...`
+    $scope.$apply()
+    setTimeout(function(){
+      $scope.loadingMessage = `Searches returning many results can take time to process...`
+      $scope.$apply()
+    }, 4000)
+  }, 4000)
+
+
   if (!(searchService.resultsObjGetter()._id) && !$routeParams.searchId) {
     let searchParams = {}
     searchParams.regionChoice = $window.localStorage.regionChoice
@@ -7,11 +20,13 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
     searchService.newSearch(searchParams).then(function(results) {
       $scope.resultsObj = searchService.resultsObjGetter();
       $scope.dupeCount = $scope.resultsObj.dupeCount
+      $scope.loading = false;
     })
   } else {
     searchService.viewSearch($routeParams.searchId).then(function(){
       $scope.resultsObj = searchService.resultsObjGetter()
       $scope.dupeCount = $scope.resultsObj.dupeCount
+      $scope.loading = false;
     })
   }
 

@@ -18,7 +18,6 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
     },
     function(newValue) {
       if (newValue) {
-        alert('new token!')
         let decodedPayload = JSON.parse(atob(newValue.split('.')[1]))
         $scope.username = decodedPayload.username
       }

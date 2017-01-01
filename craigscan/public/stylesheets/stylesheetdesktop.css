@@ -249,3 +249,14 @@ form>*:not(.hr) {
     width: 16%;
     display: none;
 }
+
+.loading {
+    width:100%;
+    margin-top: 100px;
+    text-align: center;
+}
+
+md-progress-linear {
+  width: 50%;
+  margin-left: 25%;
+}

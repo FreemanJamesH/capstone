@@ -29,6 +29,13 @@
             </div>
         </div>
         <div class="result_container" flex="80">
+            <div class="loading" ng-show="loading">
+                <md-progress-linear class="md-warn" md-mode="indeterminate" value="50"></md-progress-linear>
+                <div>
+                    <br>
+                    {{loadingMessage}}
+                </div>
+            </div>
             <md-list>
                 <md-list-item class="md-3-line resultCard" ng-repeat="post in resultsObj.results | orderBy:sortBy" ng-hide="(!dupeShow && post.dupe) || (!post.hasimg && imageHide)">
                     <div class="imgholder">
