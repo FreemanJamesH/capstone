@@ -4,13 +4,9 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
     $scope.stateListProto = stateListService.resultsArrGetter();
   })
 
-  $scope.logout = function() {
-    $q(function(resolve, reject) {
-      authService.logout()
-      resolve('done!')
-    }).then(function(results) {
-      // $scope.$apply()
-    })
+  $scope.logout = function(){
+    authService.logout()
+    $scope.username = null
   }
 
   $scope.home = function() {
@@ -22,10 +18,12 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
     },
     function(newValue) {
       if (newValue) {
+        alert('new token!')
         let decodedPayload = JSON.parse(atob(newValue.split('.')[1]))
         $scope.username = decodedPayload.username
       }
-    }
+    },
+    true
   )
 
   $scope.dashboard = function() {

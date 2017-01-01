@@ -7,7 +7,7 @@ app.service('authService', ['$window', function($window) {
       return $window.localStorage['craigsbliss-token']
     },
     logout: function() {
-      $window.localStorage.removeItem('craigsbliss-token')
+      return $window.localStorage.removeItem('craigsbliss-token')
     },
     parseJwt: function(token) {
       if (token) {
