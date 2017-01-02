@@ -13,7 +13,7 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
   }, 4000)
 
 
-  if (!(searchService.resultsObjGetter()._id) && !$routeParams.searchId) {
+  if (!$routeParams.searchId) {
     let searchParams = {}
     searchParams.regionChoice = $window.localStorage.regionChoice
     searchParams.url = $window.localStorage.url
