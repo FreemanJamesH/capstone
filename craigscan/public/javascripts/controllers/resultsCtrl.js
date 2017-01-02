@@ -75,7 +75,7 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
       .openFrom('.resultsform')
       .ok('Save')
     ).then(function(results) {
-      let search = $scope.resultsObj
+      let search = Object.assign({}, $scope.resultsObj)
       delete search.dupeCount
       delete search.resultCount
       search.title = results
