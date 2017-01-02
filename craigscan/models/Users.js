@@ -7,6 +7,7 @@ const result = mongoose.Schema({
   title: String,
   hasImg: Boolean,
   isDupe: Boolean,
+  isFav: Boolean,
   img: String,
   timeConverted: Number,
   price: Number,
@@ -18,7 +19,6 @@ const search = mongoose.Schema({
   title: String,
   id: String,
   results: [result],
-  favorites: [result],
   deleted: [result],
   dupeCount: Number,
   resultCount: Number

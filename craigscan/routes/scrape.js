@@ -21,6 +21,7 @@ router.post('/scrape', function(req, res, next) {
       var $ = cheerio.load(body)
       $('.result-row').each(function() {
         let dataObj = {};
+        dataObj.isFav = false;
         dataObj.href = '//' + req.body.regionChoice + $(this).children('a').attr('href').slice(1)
         dataObj.title = $(this).find('.hdrlnk').text()
         let dataIds = $(this).children('a').attr('data-ids')
