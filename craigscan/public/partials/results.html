@@ -42,7 +42,7 @@
                         <md-icon class="favoriteIcon">favorite</md-icon>
                         <md-icon class="trashIcon" ng-show="resultsObj._id" ng-click="delete(post._id)">delete</md-icon>
                         <md-icon class="trashIcon" ng-show="!resultsObj._id" ng-click="deleteAnon($index)">delete</md-icon>
-                        <a href="{{post.href}}" target="_blank"><md-icon >open_in_new</md-icon></a>
+                        <a href="{{post.href}}" target="_blank"><md-icon class="openExternalIcon" >open_in_new</md-icon></a>
                     </div>
                     <div class="imgholder">
                         <img class="imgresult" src="{{post.img}}" alt="">
