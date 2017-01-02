@@ -251,12 +251,34 @@ form>*:not(.hr) {
 }
 
 .loading {
-    width:100%;
+    width: 100%;
     margin-top: 100px;
     text-align: center;
 }
 
 md-progress-linear {
-  width: 50%;
-  margin-left: 25%;
+    width: 50%;
+    margin-left: 25%;
+}
+
+.resultIcon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.resultIcon * {
+    cursor: pointer;
+}
+
+.resultIcon a {
+    all: unset;
+}
+
+.trashIcon:hover{
+    color: red;
+}
+
+.favoriteIcon:hover{
+    color: purple;
 }

@@ -38,6 +38,12 @@
             </div>
             <md-list>
                 <md-list-item class="md-3-line resultCard" ng-repeat="post in resultsObj.results | orderBy:sortBy" ng-hide="(!dupeShow && post.dupe) || (!post.hasimg && imageHide)">
+                    <div class='resultIcon'>
+                        <md-icon class="favoriteIcon">favorite</md-icon>
+                        <md-icon class="trashIcon" ng-show="resultsObj._id" ng-click="delete(post._id)">delete</md-icon>
+                        <md-icon class="trashIcon" ng-show="!resultsObj._id" ng-click="deleteAnon($index)">delete</md-icon>
+                        <a href="{{post.href}}" target="_blank"><md-icon >open_in_new</md-icon></a>
+                    </div>
                     <div class="imgholder">
                         <img class="imgresult" src="{{post.img}}" alt="">
                     </div>
@@ -47,10 +53,7 @@
                             {{ post.time | date: 'medium' }}</h3><br>
                         <h3>Rent: ${{ post.price }}</h3>
                         <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                            <md-button class="md-raised md-primary">Favorite</md-button>
-                            <md-button ng-show="resultsObj._id" ng-click="delete(post._id)" class="md-raised md-warn">Delete</md-button>
-                            <md-button ng-show="!resultsObj._id" ng-click="deleteAnon($index)" class="md-raised md-warn">Delete</md-button>
-                            <md-button href="{{post.href}}" target="_blank" class="md-raised md-accent">Visit listing</md-button>
+                            <!-- <md-button class="md-raised md-primary">Favorite</md-button> -->
                         </section>
                     </div>
                 </md-list-item>
