@@ -26,6 +26,24 @@ router.post('/favorite/:searchid/:index', function(req, res, next) {
   })
 })
 
+router.post('/unfavorite/:searchid/:index', function(req, res, next) {
+  let searchId = req.params.searchid
+  let resultIndex = req.params.index
+  let token = req.headers.token
+  jwt.verify(token, 'SECRET', function(err, decoded) {
+    if (err) {
+      return next(err)
+    } else {
+      User.findById(decoded._id, function(err, user) {
+        user.searches.id(searchId).results.id(resultIndex).isFav = false
+        user.save(function(err, updatedUser) {
+          res.json(updatedUser.searches.id(searchId))
+        })
+      })
+    }
+  })
+})
+
 router.post('/:searchid', function(req, res, next) {
   let searchId = req.params.searchid
   let resultIndex = req.params.index

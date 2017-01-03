@@ -18,6 +18,12 @@ app.service('postService', function($resource, searchService) {
         searchService.resultsObjSetter(results)
         return;
       })
+    },
+    unfavorite: function(id, index){
+      return $resource(`//localhost:3000/posts/unfavorite/${id}/${index}`).save().$promise.then(function(results){
+        searchService.resultsObjSetter(results)
+        return;
+      })
     }
   }
 })

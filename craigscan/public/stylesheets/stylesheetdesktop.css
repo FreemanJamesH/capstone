@@ -283,6 +283,10 @@ md-progress-linear {
     color: purple;
 }
 
+.favoritedIcon {
+    color: purple;
+}
+
 .openExternalIcon:hover{
     color: lime;
 }

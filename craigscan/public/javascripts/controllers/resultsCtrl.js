@@ -43,8 +43,13 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
   }
 
   $scope.favorite = function(resultId){
-    console.log(resultId);
     postService.favorite($scope.resultsObj._id, resultId).then(function(results){
+      $scope.resultsObj = searchService.resultsObjGetter()
+    })
+  }
+
+  $scope.unfavorite = function(resultId){
+    postService.unfavorite($scope.resultsObj._id, resultId).then(function(results){
       $scope.resultsObj = searchService.resultsObjGetter()
     })
   }

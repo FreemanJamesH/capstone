@@ -29,6 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize())
 app.use(cors());
+
 app.use('/search', search);
 app.use('/auth', auth)
 app.use('/scrape', scrape)
@@ -53,7 +54,6 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    console.log(err.message);
     res.json({
       message: err.message,
       error: err
