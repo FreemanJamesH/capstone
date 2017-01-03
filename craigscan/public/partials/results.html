@@ -13,7 +13,10 @@
                         <md-option ng-value="'-timeConverted'">Post Date</md-option>
                         <md-option ng-value="'price'">Price</md-option>
                     </md-select>
-                    <md-checkbox ng-model="dupeShow" ng-change="loggit()">
+                    <md-checkbox ng-model="favOnly">
+                      Show only favorites
+                    </md-checkbox>
+                    <md-checkbox ng-model="dupeShow">
                         Show Duplicates
                     </md-checkbox>
                     <md-checkbox ng-model="imageHide">
@@ -37,12 +40,14 @@
                 </div>
             </div>
             <md-list>
-                <md-list-item class="md-3-line resultCard" ng-repeat="post in resultsObj.results | orderBy:sortBy" ng-hide="(!dupeShow && post.dupe) || (!post.hasimg && imageHide)">
+                <md-list-item class="md-3-line resultCard" ng-repeat="post in resultsObj.results | orderBy:sortBy" ng-hide="(favOnly && !post.isFav)||(!dupeShow && post.dupe) || (!post.hasimg && imageHide)">
                     <div class='resultIcon'>
                         <md-icon class="favoriteIcon" ng-click="favorite(post._id)">favorite</md-icon>
                         <md-icon class="trashIcon" ng-show="resultsObj._id" ng-click="delete(post._id)">delete</md-icon>
                         <md-icon class="trashIcon" ng-show="!resultsObj._id" ng-click="deleteAnon($index)">delete</md-icon>
-                        <a href="{{post.href}}" target="_blank"><md-icon class="openExternalIcon" >open_in_new</md-icon></a>
+                        <a href="{{post.href}}" target="_blank">
+                            <md-icon class="openExternalIcon">open_in_new</md-icon>
+                        </a>
                     </div>
                     <div class="imgholder">
                         <img class="imgresult" src="{{post.img}}" alt="">

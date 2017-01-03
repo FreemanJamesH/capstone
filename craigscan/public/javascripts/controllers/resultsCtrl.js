@@ -32,6 +32,7 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
 
   $scope.dupeShow = false
   $scope.imageHide = false
+  $scope.favOnly = false
 
   $scope.delete = function(resultId) {
     console.log(resultId);
