@@ -13,16 +13,15 @@ app.service('postService', function($resource, searchService) {
       })
     },
     favorite: function(id, index){
-      console.log(`id and index: ${id}, ${index}`);
       return $resource(`//localhost:3000/posts/favorite/${id}/${index}`).save().$promise.then(function(results){
         searchService.resultsObjSetter(results)
-        return;
+        return results;
       })
     },
     unfavorite: function(id, index){
       return $resource(`//localhost:3000/posts/unfavorite/${id}/${index}`).save().$promise.then(function(results){
         searchService.resultsObjSetter(results)
-        return;
+        return results;
       })
     }
   }

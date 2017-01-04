@@ -14,10 +14,14 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
       if (resultsObj.results) {
         let i = 0;
         let dupeCount = 0;
+        let favCount = 0;
         while (i < resultsObj.results.length) {
           let checkAgainst = resultsObj.results[i]
           if (checkAgainst.dupe) {
             dupeCount++
+          }
+          if (checkAgainst.isFav){
+            favCount++
           }
           for (var k = i + 1; k < resultsObj.results.length; k++) {
             let currentK = resultsObj.results[k]
@@ -31,6 +35,7 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
           }
           i++
         }
+        resultsObj.favCount = favCount
         resultsObj.dupeCount = dupeCount
         resultsObj.resultCount = resultsObj.results.length
         return resultsObj;

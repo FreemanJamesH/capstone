@@ -20,12 +20,14 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
     searchService.newSearch(searchParams).then(function(results) {
       $scope.resultsObj = searchService.resultsObjGetter();
       $scope.dupeCount = $scope.resultsObj.dupeCount
+      $scope.favCount = $scope.resultsObj.favCount
       $scope.loading = false;
     })
   } else {
     searchService.viewSearch($routeParams.searchId).then(function(){
       $scope.resultsObj = searchService.resultsObjGetter()
       $scope.dupeCount = $scope.resultsObj.dupeCount
+      $scope.favCount = $scope.resultsObj.favCount
       $scope.loading = false;
     })
   }
@@ -35,7 +37,6 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
   $scope.favOnly = false
 
   $scope.delete = function(resultId) {
-    console.log(resultId);
     postService.delete($scope.resultsObj._id, resultId).then(function(results) {
       searchService.resultsObjSetter(results)
       $scope.resultsObj = searchService.resultsObjGetter()

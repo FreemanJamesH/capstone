@@ -1,9 +1,10 @@
 <div class="solidbg">
     <div class="result_big_container" layout="row">
         <div class="form-style-5 resultsform" flex>
-            <legend>Found
-                {{resultsObj.resultCount - resultsObj.dupeCount}}
-                Unique Results</legend>
+            <legend>{{resultsObj.resultCount - resultsObj.dupeCount}}
+                Unique Results Found</legend>
+            <label for="duplicates">{{favCount}}
+                Marked as Favorite</label>
             <label for="duplicates">{{dupeCount}}
                 Duplicates Detected</label>
             <div class="optionsTitle">
