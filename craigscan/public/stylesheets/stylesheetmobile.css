@@ -1,3 +1,7 @@
+/** {
+  box-sizing: border-box;
+}
+
 ng-view {
   width: 100%;
 }
@@ -11,20 +15,13 @@ ng-view {
 .form-style-5 {
   width: 90%;
   margin-left: 5%;
-  /*margin-top: 150px;*/
   position: absolute;
 }
 
 .neighborhood {
   width: 100%;
   height: auto;
-  /*background-image : url();*/
-  /*background-color: red;*/
   padding: 0px;
-  /*border: 8px solid yellow;*/
-  /*text-align: center;*/
-
-
 }
 
 .craigs {
@@ -34,3 +31,54 @@ ng-view {
 .bliss {
   font-size: 32px;
 }
+
+
+
+md-list {
+  display: inline-block;
+}
+
+.resultCard {
+  /*display: none;*/
+}
+
+.solidbg {
+  height: auto;
+}
+
+.container {
+  width:100%;
+  padding: 0px;
+  height: auto;
+  max-height: none;
+}
+
+.control_panel_container {
+  min-width: 100% !important;
+  max-width: none;
+  margin: 0px;
+  left: 0px;
+  flex: none;
+  display: inline-block;
+  /*z-index: 1000;*/
+  /*position: absolute;*/
+  height:auto;
+}
+
+.results_control_panel {
+  border: 3px solid yellow;
+  margin-top: 10px;
+}
+
+.results_container {
+  display: inline-block;
+  border: 3px dashed pink;
+  width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  max-width: none !important;
+  /*overflow: visible;*/
+  /*margin-top: 500px;*/
+  position: relative;
+  margin-left: 0px;
+}*/

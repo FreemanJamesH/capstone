@@ -1,21 +1,20 @@
-<div class="solidbg">
-    <div class="result_big_container" layout="row">
-        <div class="form-style-5 resultsform" flex>
-            <legend>{{resultsObj.resultCount - resultsObj.dupeCount}}
-                Unique Results Found</legend>
-            <label for="duplicates">{{favCount}}
-                Marked as Favorite</label>
-            <label for="duplicates">{{dupeCount}}
-                Duplicates Detected</label>
-            <div class="optionsTitle">
-                <legend>Options:</legend>
+<!-- <div class="solidbg"> -->
+    <div class="container">
+        <div class="control_panel_container form-style-6">
+            <div class="results_control_panel">
                 <div class="options_container">
+                    <legend>{{resultsObj.resultCount - resultsObj.dupeCount}}
+                        Unique Results Found</legend>
+                    <label for="duplicates">{{favCount}}
+                        Marked as Favorite</label>
+                    <label for="duplicates">{{dupeCount}}
+                        Duplicates Detected</label>
                     <md-select id="sort" ng-model="sortBy" ng-change=(sortLog()) placeholder="Sort by">
                         <md-option ng-value="'-timeConverted'">Post Date</md-option>
                         <md-option ng-value="'price'">Price</md-option>
                     </md-select>
                     <md-checkbox ng-model="favOnly">
-                      Show only favorites
+                        Show only favorites
                     </md-checkbox>
                     <md-checkbox ng-model="dupeShow">
                         Show Duplicates
@@ -32,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="result_container" flex="80">
+        <div class="results_container">
             <div class="loading" ng-show="loading">
                 <md-progress-linear class="md-warn" md-mode="indeterminate" value="50"></md-progress-linear>
                 <div>
@@ -59,11 +58,9 @@
                         <h3>Posted on:
                             {{ post.time | date: 'medium' }}</h3><br>
                         <h3>Rent: ${{ post.price }}</h3>
-                        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-                            <!-- <md-button class="md-raised md-primary">Favorite</md-button> -->
-                        </section>
                     </div>
                 </md-list-item>
-            </div>
+            </md-list>
         </div>
     </div>
+<!-- </div> -->

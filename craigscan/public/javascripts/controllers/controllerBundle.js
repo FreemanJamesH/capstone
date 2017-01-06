@@ -182,7 +182,7 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
       $mdDialog.prompt()
       .clickOutsideToClose(true)
       .title('Please choose a name for your search.')
-      .openFrom('.resultsform')
+      .openFrom('.control_panel_container')
       .ok('Save')
     ).then(function(results) {
       let search = Object.assign({}, $scope.resultsObj)
