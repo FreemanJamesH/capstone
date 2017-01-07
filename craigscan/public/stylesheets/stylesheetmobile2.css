@@ -1,0 +1,21 @@
+.container {}
+
+.control_panel_container {
+    height: auto;
+    width: 100%;
+    display: block;
+}
+
+.results_control_panel {
+    margin-top: 5px;
+}
+
+.results_container {
+    height: auto;
+    width: 100%;
+    display: block;
+}
+
+.options_container {
+
+}
