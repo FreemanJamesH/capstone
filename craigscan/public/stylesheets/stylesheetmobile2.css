@@ -19,3 +19,56 @@
 .options_container {
 
 }
+
+{
+  box-sizing: border-box;
+}
+
+ng-view {
+  width: 100%;
+}
+
+.md-toolbar-tools{
+  height: auto;
+  min-height: 60px;
+  max-height: 500px;
+}
+
+.form-style-5 {
+  box-sizing: border-box;
+  width: 70%;
+  margin-left: 15%;
+  position: absolute;
+}
+
+.form-style-5 legend {
+    font-size: 1.0em;
+    margin-top: 5.5px;
+    margin-bottom: 5.5px;
+}
+
+.form-style-5 .number {
+  width: 20px;
+  height: 20px;
+  padding-bottom: 8px;
+  align-content: flex-start;
+}
+
+span p {
+  color: red;
+}
+
+
+.neighborhood {
+  width: 100%;
+  height: auto;
+  padding: 0px;
+}
+
+.craigs {
+  font-size: 24px;
+}
+
+.bliss {
+  font-size: 32px;
+}

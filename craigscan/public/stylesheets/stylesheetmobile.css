@@ -1,4 +1,4 @@
-/** {
+{
   box-sizing: border-box;
 }
 
@@ -39,7 +39,7 @@ md-list {
 }
 
 .resultCard {
-  /*display: none;*/
+  display: none;
 }
 
 .solidbg {
