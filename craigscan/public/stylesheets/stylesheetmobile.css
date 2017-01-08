@@ -1,3 +1,25 @@
+.container {}
+
+.control_panel_container {
+    height: auto;
+    width: 100%;
+    display: block;
+}
+
+.results_control_panel {
+    margin-top: 5px;
+}
+
+.results_container {
+    height: auto;
+    width: 100%;
+    display: block;
+}
+
+.options_container {
+
+}
+
 {
   box-sizing: border-box;
 }
@@ -13,10 +35,29 @@ ng-view {
 }
 
 .form-style-5 {
-  width: 90%;
-  margin-left: 5%;
+  box-sizing: border-box;
+  width: 70%;
+  margin-left: 15%;
   position: absolute;
 }
+
+.form-style-5 legend {
+    font-size: 1.0em;
+    margin-top: 5.5px;
+    margin-bottom: 5.5px;
+}
+
+.form-style-5 .number {
+  width: 20px;
+  height: 20px;
+  padding-bottom: 8px;
+  align-content: flex-start;
+}
+
+span p {
+  color: red;
+}
+
 
 .neighborhood {
   width: 100%;
@@ -31,54 +72,3 @@ ng-view {
 .bliss {
   font-size: 32px;
 }
-
-
-
-md-list {
-  display: inline-block;
-}
-
-.resultCard {
-  display: none;
-}
-
-.solidbg {
-  height: auto;
-}
-
-.container {
-  width:100%;
-  padding: 0px;
-  height: auto;
-  max-height: none;
-}
-
-.control_panel_container {
-  min-width: 100% !important;
-  max-width: none;
-  margin: 0px;
-  left: 0px;
-  flex: none;
-  display: inline-block;
-  /*z-index: 1000;*/
-  /*position: absolute;*/
-  height:auto;
-}
-
-.results_control_panel {
-  border: 3px solid yellow;
-  margin-top: 10px;
-}
-
-.results_container {
-  display: inline-block;
-  border: 3px dashed pink;
-  width: 100%;
-  height: auto !important;
-  max-height: none !important;
-  max-width: none !important;
-  /*overflow: visible;*/
-  /*margin-top: 500px;*/
-  position: relative;
-  margin-left: 0px;
-}*/
