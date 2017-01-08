@@ -1,0 +1,26 @@
+
+.resultCard {
+  display: block;
+  text-align: center;
+  align-content: center;
+}
+
+.resultCard * {
+  all: unset;
+  display: block;
+}
+
+.imgholder {
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+
+.imgholder * {
+  margin: 2px auto;
+}
+
+.resultIcon * {
+  color: #6f6d63;
+  display: inline-block;
+}
