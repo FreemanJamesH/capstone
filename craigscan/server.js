@@ -8,6 +8,15 @@ const request = require('request')
 const cheerio = require('cheerio')
 const mongoose = require('mongoose')
 const passport = require('passport')
+const schedule = require('node-schedule')
+
+// var rule = new schedule.RecurrenceRule()
+// rule.second = [1,5,10]
+// console.log(rule);
+
+// schedule.scheduleJob(rule, function(){
+//   console.log('Hello!');
+// })
 
 mongoose.connect('mongodb://localhost/craigscan')
 require('./models/Users')
