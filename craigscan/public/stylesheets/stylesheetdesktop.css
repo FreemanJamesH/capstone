@@ -261,7 +261,7 @@ md-progress-linear {
 
 .control_panel_container {
     box-sizing: padding-box;
-    width: 30%;
+    width: 24%;
     display: inline-block;
     background-color: #e45641;
     height: 97%;
@@ -270,7 +270,7 @@ md-progress-linear {
 .results_container {
     position: absolute;
     display: inline-block;
-    width: 69%;
+    width: 75%;
     overflow: scroll;
     height: 100%;
     right: 0px;
