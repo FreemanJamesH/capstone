@@ -17,22 +17,44 @@
     </md-list>
 </md-content> -->
 
+<md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
 
-  <md-grid-list
-        md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6"
-        md-row-height-gt-md="1:1" md-row-height="2:2"
-        md-gutter="12px" md-gutter-gt-sm="8px" >
+    <md-grid-tile ng-repeat="search in userObj.searches track by $index">
+        <md-grid-tile-header ng-class="'color' + $index % 6">
+            <h3>{{search.title}}</h3>
+            <div class="searchIcons">
+                <md-icon ng-click="viewSearch(search._id)">open_in_new</md-icon>
+                <md-icon ng-click="deleteSearch(search._id)">delete</md-icon>
+            </div>
+        </md-grid-tile-header>
+        <md-list>
+            <md-list-item>
+                <md-icon>picture_in_picture</md-icon>
+                <p>
+                    {{search.results.length}}
+                    Results
+                </p>
+            </md-list-item>
+            <md-list-item>
+                <md-icon>favorite</md-icon>
+                <p>
+                    6 favorites
+                </p>
+            </md-list-item>
+            <md-list-item>
+                <md-icon>date_range</md-icon>
+                <p>
+                    Last Update: Today, 12:00AM
+                </p>
+            </md-list-item>
+            <md-list-item>
+                <p></p>
+                <md-button class="md-fab md-primary">
+                    <md-icon>edit</md-icon>
+                </md-button>
+            </md-list-item>
 
-    <md-grid-tile ng-class="'color' + $index % 6" ng-repeat="search in userObj.searches track by $index">
-      <md-grid-tile-header>
-        <h3>{{search.title}}</h3>
-        <div class="searchIcons">
-          <md-icon>open_in_new</md-icon>
-          <md-icon>delete</md-icon>
-        </div>
-      </md-grid-tile-header>
-      <md-button class="md-secondary md-raised md-primary" ng-click="viewSearch(search._id)">View</md-button>
+        </md-list>
     </md-grid-tile>
 
-
-  </md-grid-list>
+</md-grid-list>
