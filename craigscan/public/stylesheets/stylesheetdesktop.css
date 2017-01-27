@@ -6,6 +6,10 @@ body, html {
     background-color: #e45641;
 }
 
+md-icon {
+  cursor: pointer;
+}
+
 .craigs {
     cursor: pointer;
 }
@@ -65,7 +69,7 @@ a {
     display: flex;
 }
 
-md-list-item:hover {
+.resultCard:hover {
     background-color: #f1a94e;
 }
 
@@ -290,3 +294,49 @@ md-progress-linear {
 .options_container  * {
     display: block;
 }
+
+HTMLJSSTYLES.CSS
+md-grid-list {
+  margin: 8px; }
+
+.color0 {
+    background: #ff8a80; }
+
+.color1 {
+  background: #b0b0b0;
+  color: black;
+ }
+
+.color2 {
+  background: #b9f6ca;
+  color: black;
+ }
+
+.color3 {
+  background: #ffff8d;
+  color: black;
+ }
+
+.color4 {
+  background: #84ffff;
+  color:black;
+ }
+
+.color5 {
+  background: #b388ff; }
+
+
+md-grid-tile {
+    background-color: white;
+}
+
+
+.searchIcons {
+     margin: auto;
+     position: absolute;
+     top: 25%; left: 50%; bottom: 25%; right: 0;
+     text-align: right;
+}
+
+md-grid-tile {
+  transition: all 400ms ease-out 50ms; }
