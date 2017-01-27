@@ -30,27 +30,25 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
   }
 
   $scope.submit = function() {
-    var searchParams = {};
-    searchParams.regionChoice = $scope.regionChoice
-    searchParams.url = 'ht' + $scope.regionChoice + 'search/apa?'
+    var url;
+    url = $scope.regionChoice + 'search/apa?'
     if ($scope.query) {
-      searchParams.url += ('&query=' + $scope.query)
+      url += ('&query=' + $scope.query)
     }
     if ($scope.distance) {
-      searchParams.url += ('&search_distance=' + $scope.distance)
+      url += ('&search_distance=' + $scope.distance)
     }
     if ($scope.postal) {
-      searchParams.url += ('&postal=' + $scope.postal)
+      url += ('&postal=' + $scope.postal)
     }
     if ($scope.min_price) {
-      searchParams.url += ('&min_price=' + $scope.min_price)
+      url += ('&min_price=' + $scope.min_price)
     }
     if ($scope.max_price) {
-      searchParams.url += ('&max_price=' + $scope.max_price)
+      url += ('&max_price=' + $scope.max_price)
     }
-    searchParams.title = $scope.scantitle
-    $window.localStorage['url'] = searchParams.url
-    $window.localStorage['regionChoice'] = searchParams.regionChoice
+    $window.localStorage['url'] = url
+    $window.localStorage['regionChoice'] = $scope.regionChoice
     $location.path('/results')
   }
 })
