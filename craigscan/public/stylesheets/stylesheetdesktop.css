@@ -6,6 +6,10 @@ body, html {
     background-color: #e45641;
 }
 
+md-icon {
+  cursor: pointer;
+}
+
 .craigs {
     cursor: pointer;
 }
