@@ -22,7 +22,7 @@ router.post('/scrape', function(req, res, next) {
       $('.result-row').each(function() {
         let dataObj = {};
         dataObj.isFav = false;
-        dataObj.href = '//' + req.body.regionChoice + $(this).children('a').attr('href').slice(1)
+        dataObj.href = req.body.regionChoice + $(this).children('a').attr('href').slice(1)
         dataObj.title = $(this).find('.hdrlnk').text()
         let dataIds = $(this).children('a').attr('data-ids')
         if (dataIds) {
@@ -72,7 +72,7 @@ router.get('/sls', function(req, res, next) {
       stateObj.regionList = []
       $(this).next().find('a').each(function(i, elem) {
         let regionObj = {};
-        regionObj.link = ($(this).attr('href')).slice(2)
+        regionObj.link = ($(this).attr('href')).slice(0)
         regionObj.name = ($(this).html())
         stateObj.regionList.push(regionObj)
       })
