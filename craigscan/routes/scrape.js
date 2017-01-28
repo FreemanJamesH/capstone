@@ -12,10 +12,22 @@ router.post('/scrape', function(req, res, next) {
   let count = 0
   let data = [];
   let duplicate = 0;
-  requestFunction(req.body.url)
+  let searchParams = req.body.searchParams;
+  searchParams.updated = Date.now()
+  console.log('searchParams:', searchParams);
+  let url = searchParams.url
+
+  for (var param in searchParams) {
+    if (searchParams[param] && param != 'url' ) {
+      url += `&${param}=${searchParams[param]}`
+    }
+  }
+
+  requestFunction(url)
 
   function requestFunction(urlArg) {
     let url = urlArg + '&s=' + count
+    console.log('requestFunction fired, url:', url);
     request(url, function(err, resp, body) {
       var $ = cheerio.load(body)
       $('.result-row').each(function() {
@@ -26,7 +38,7 @@ router.post('/scrape', function(req, res, next) {
         let dataIds = $(this).children('a').attr('data-ids')
         if (dataIds) {
           let commaDex = dataIds.indexOf(',')
-          if (commaDex !== -1){
+          if (commaDex !== -1) {
             dataObj.img = 'http://images.craigslist.org/' + dataIds.slice(2, commaDex) + '_300x300.jpg';
           } else {
             dataObj.img = 'http://images.craigslist.org/' + dataIds.slice(2) + '_300x300.jpg';
@@ -49,7 +61,13 @@ router.post('/scrape', function(req, res, next) {
         count += 100
         return requestFunction(urlArg)
       }
-      let searchObj = {title: null, params:req.body.searchParams, results: data, favorites: [], deleted: []}
+      let searchObj = {
+        title: null,
+        params: searchParams,
+        results: data,
+        favorites: [],
+        deleted: []
+      }
       res.json(searchObj)
     })
   }

@@ -43,7 +43,7 @@ router.post('/savesearch', function(req, res, next) {
         User.findById(decoded._id, function(err, user) {
           user.searches.push(req.body)
           user.save(function(err, updatedUser) {
-            console.log(updatedUser);
+            console.log('updatedUser:', updatedUser);
           })
         })
       }

@@ -32,19 +32,14 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
   $scope.submit = function() {
     let url = $scope.regionChoice + 'search/apa?'
     let searchParams = {
+      url: $scope.regionChoice + 'search/apa?',
       query: $scope.query,
       distance: $scope.distance,
       postal: $scope.distance,
       min_price: $scope.min_price,
       max_price: $scope.max_price
     }
-    for (var param in searchParams) {
-      if (searchParams[param]) {
-        url += `&${param}=${searchParams[param]}`
-      }
-    }
     $window.localStorage['searchParams'] = JSON.stringify(searchParams)
-    $window.localStorage['url'] = url
     $window.localStorage['regionChoice'] = $scope.regionChoice
     $location.path('/results')
   }

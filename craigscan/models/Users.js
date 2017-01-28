@@ -16,10 +16,7 @@ const result = mongoose.Schema({
 })
 
 const params = mongoose.Schema({
-    updated: {
-      type: Date,
-      default: Date.now
-    },
+    updated: Number,
     query: String,
     distance: String,
     postal: String,
