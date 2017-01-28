@@ -30,8 +30,7 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
   }
 
   $scope.submit = function() {
-    var url;
-    url = $scope.regionChoice + 'search/apa?'
+    let url = $scope.regionChoice + 'search/apa?'
     if ($scope.query) {
       url += ('&query=' + $scope.query)
     }
