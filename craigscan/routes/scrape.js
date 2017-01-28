@@ -36,13 +36,8 @@ router.post('/scrape', function(req, res, next) {
           dataObj.hasimg = false
           dataObj.img = 'https://www.shearwater.com/wp-content/plugins/lightbox/images/No-image-found.jpg';
         }
-        let time = $(this).find('time').attr('datetime')
-        let timeConverted =
-          (parseInt(time.slice(0, 4)) - 1970) * 365 * 24 * 60 * 60 +
-          parseInt(time.slice(5, 7)) * 30 * 24 * 60 * 60 +
-          parseInt(time.slice(8, 10)) * 24 * 60 * 60 +
-          parseInt(time.slice(11, 13)) * 60 +
-          parseInt(time.slice(14, 16))
+        let time = new Date($(this).find('time').attr('datetime'))
+        let timeConverted = time.getTime()
         dataObj.timeConverted = timeConverted
         dataObj.price = $(this).find('.result-price').text().slice(1)
         dataObj.price = parseInt(dataObj.price, 10)
