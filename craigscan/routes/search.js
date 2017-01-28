@@ -60,13 +60,6 @@ router.post('/deletesearch', function(req, res, next) {
       return next(err)
     } else {
       User.findById(decoded._id, function(err, user) {
-        // for (var i = 0; i < user.searches.length; i++) {
-        //   if (user.searches[i]._id === idToDelete) {
-        //     console.log('search to delete found: ', user.searches[i]);
-        //     user.searches.splice(i, 1)
-        //     i--
-        //   }
-        // }
         user.searches.id(idToDelete).remove()
         user.save(function(err, updatedUser) {
           res.json(updatedUser)
@@ -78,26 +71,16 @@ router.post('/deletesearch', function(req, res, next) {
 
 router.get('/getsearch/:id', function(req, res, next) {
   let idToGet = req.params.id
-  console.log('getting this search:', idToGet);
   let token = req.headers.token
   jwt.verify(token, 'SECRET', function(err, decoded) {
     if (err) {
       return next(err)
     } else {
       User.findById(decoded._id, function(err, user) {
-        // for (var i = 0; i < user.searches.length; i++) {
-        //   if (user.searches[i]._id === idToGet) {
-        //     console.log('retrieved search info: ', {search: user.searches[i]});
-        //     return res.json(user.searches[i])
-        //   }
-        // }
         res.json(user.searches.id(idToGet))
       })
     }
   })
 })
-
-
-
 
 module.exports = router;

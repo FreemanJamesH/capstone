@@ -43,7 +43,7 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
         url += `&${param}=${searchParams[param]}`
       }
     }
-    $window.localStorage['searchParams'] = searchParams
+    $window.localStorage['searchParams'] = JSON.stringify(searchParams)
     $window.localStorage['url'] = url
     $window.localStorage['regionChoice'] = $scope.regionChoice
     $location.path('/results')

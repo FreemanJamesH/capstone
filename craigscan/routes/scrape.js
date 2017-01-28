@@ -12,7 +12,6 @@ router.post('/scrape', function(req, res, next) {
   let count = 0
   let data = [];
   let duplicate = 0;
-  console.log(req.body);
   requestFunction(req.body.url)
 
   function requestFunction(urlArg) {
@@ -55,7 +54,7 @@ router.post('/scrape', function(req, res, next) {
         count += 100
         return requestFunction(urlArg)
       }
-      let searchObj = {title: null, results: data, favorites: [], deleted: [] }
+      let searchObj = {title: null, params:req.body.searchParams, results: data, favorites: [], deleted: []}
       res.json(searchObj)
     })
   }

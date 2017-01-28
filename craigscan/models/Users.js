@@ -15,9 +15,18 @@ const result = mongoose.Schema({
   location: String
 })
 
+const params = mongoose.Schema({
+    query: String,
+    distance: String,
+    postal: String,
+    min_price: String,
+    max_price: String
+})
+
 const search = mongoose.Schema({
   title: String,
   id: String,
+  params: params,
   results: [result],
   deleted: [result],
   dupeCount: Number,
