@@ -4,7 +4,7 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
     $scope.stateListProto = stateListService.resultsArrGetter();
   })
 
-  $scope.logout = function(){
+  $scope.logout = function() {
     authService.logout()
     $scope.username = null
   }
@@ -31,21 +31,19 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
 
   $scope.submit = function() {
     let url = $scope.regionChoice + 'search/apa?'
-    if ($scope.query) {
-      url += ('&query=' + $scope.query)
+    let searchParams = {
+      query: $scope.query,
+      distance: $scope.distance,
+      postal: $scope.distance,
+      min_price: $scope.min_price,
+      max_price: $scope.max_price
     }
-    if ($scope.distance) {
-      url += ('&search_distance=' + $scope.distance)
+    for (var param in searchParams) {
+      if (searchParams[param]) {
+        url += `&${param}=${searchParams[param]}`
+      }
     }
-    if ($scope.postal) {
-      url += ('&postal=' + $scope.postal)
-    }
-    if ($scope.min_price) {
-      url += ('&min_price=' + $scope.min_price)
-    }
-    if ($scope.max_price) {
-      url += ('&max_price=' + $scope.max_price)
-    }
+    $window.localStorage['searchParams'] = searchParams
     $window.localStorage['url'] = url
     $window.localStorage['regionChoice'] = $scope.regionChoice
     $location.path('/results')
