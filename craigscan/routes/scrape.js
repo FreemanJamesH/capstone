@@ -20,12 +20,12 @@ router.post('/scrape', function(req, res, next) {
   let url = searchParams.url
 
   for (var param in searchParams) {
-    if (searchParams[param] && param != 'url' ) {
+    if (searchParams[param] && param != 'url') {
       url += `&${param}=${searchParams[param]}`
     }
   }
 
-  scrapeRequest(url, searchParams, count, []).then(function(results){
+  scrapeRequest(url, searchParams, count, []).then(function(results) {
     console.log('here are the results:', results);
     res.json(results)
   })

@@ -1,12 +1,5 @@
-const express = require('express');
-const router = express.Router();
-const mongoose = require('mongoose')
 const request = require('request');
 const cheerio = require('cheerio');
-const User = mongoose.model('User')
-const bcrypt = require('bcrypt');
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
 
 function recursiveScrape(urlArg, searchParams, count, data) {
 
