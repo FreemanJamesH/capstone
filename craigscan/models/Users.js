@@ -16,6 +16,7 @@ const result = mongoose.Schema({
 })
 
 const params = mongoose.Schema({
+    regionChoice: String,
     updated: Number,
     query: String,
     distance: String,

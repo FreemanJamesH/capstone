@@ -3,18 +3,11 @@ const cheerio = require('cheerio');
 
 function recursiveScrape(urlArg, searchParams, count, data) {
 
-  function decide(data) {
-    if (data.length == (count + 100)) {
+  function decide(data, dateStop) {
+    if (data.length === (count + 100) && dateStop === false) {
       return recursiveScrape(urlArg, searchParams, count + 100, data)
     }
-    let searchObj = {
-      title: null,
-      params: searchParams,
-      results: data,
-      favorites: [],
-      deleted: []
-    }
-    return searchObj
+    return data
   }
   return scrape(urlArg, searchParams, count, data).then(decide)
 }
@@ -23,6 +16,7 @@ function recursiveScrape(urlArg, searchParams, count, data) {
 function scrape(urlArg, searchParams, count, data) {
   return new Promise(function(resolve) {
     console.log('scraping');
+    let dateStop = false;
     let url = urlArg + '&s=' + count
     request(url, function(err, resp, body) {
       var $ = cheerio.load(body)
@@ -44,6 +38,13 @@ function scrape(urlArg, searchParams, count, data) {
         }
         let time = new Date($(this).find('time').attr('datetime'))
         let timeConverted = time.getTime()
+        console.log(searchParams.updated);
+        console.log(timeConverted);
+        console.log('timecheck:', searchParams.update > timeConverted);
+        if (timeConverted < searchParams.update){
+          dateStop = true
+          return
+        }
         dataObj.timeConverted = timeConverted
         dataObj.price = $(this).find('.result-price').text().slice(1)
         dataObj.price = parseInt(dataObj.price, 10)
@@ -51,7 +52,7 @@ function scrape(urlArg, searchParams, count, data) {
         dataObj.location = $(this).find('.pnr').children('small').text()
         data.push(dataObj)
       })
-      resolve(data)
+      resolve(data, dateStop)
     })
   })
 }

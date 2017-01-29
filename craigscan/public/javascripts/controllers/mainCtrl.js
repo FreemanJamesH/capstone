@@ -30,9 +30,9 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
   }
 
   $scope.submit = function() {
-    let url = $scope.regionChoice + 'search/apa?'
     let searchParams = {
-      url: $scope.regionChoice + 'search/apa?',
+      regionChoice: $scope.regionChoice,
+      updated: Date.now(),
       query: $scope.query,
       distance: $scope.distance,
       postal: $scope.distance,

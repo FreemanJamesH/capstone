@@ -16,7 +16,6 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
   if (!$routeParams.searchId) {
     let searchObj = {}
     searchObj.regionChoice = $window.localStorage.regionChoice
-    searchObj.url = $window.localStorage.url
     searchObj.searchParams = JSON.parse($window.localStorage.searchParams)
     searchService.newSearch(searchObj).then(function(results) {
       $scope.resultsObj = searchService.resultsObjGetter();

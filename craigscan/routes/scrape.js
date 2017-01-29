@@ -12,10 +12,9 @@ const scrapeRequest = require('./scrape-engine/scraper.js')
 router.post('/scrape', function(req, res, next) {
   let count = 0
   let data = [];
-  let duplicate = 0;
   let searchParams = req.body.searchParams;
-  searchParams.updated = Date.now()
-  let url = searchParams.url
+  console.log(searchParams);
+  let url = searchParams.regionChoice + 'search/apa?'
 
   for (var param in searchParams) {
     if (searchParams[param] && param != 'url') {
@@ -24,8 +23,14 @@ router.post('/scrape', function(req, res, next) {
   }
 
   scrapeRequest(url, searchParams, count, []).then(function(results) {
-    console.log('here are the results:', results);
-    res.json(results)
+    let searchObj = {
+      title: null,
+      params: searchParams,
+      results: results,
+      favorites: [],
+      deleted: []
+    }
+    res.json(searchObj)
   })
 
 })

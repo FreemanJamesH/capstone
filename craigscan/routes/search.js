@@ -7,6 +7,7 @@ const User = mongoose.model('User')
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const scrapeRequest = require('./scrape-engine/scraper.js')
 
 router.get('/dashboard', function(req, res, next) {
   if (!req.headers.token) {
@@ -83,8 +84,42 @@ router.get('/getsearch/:id', function(req, res, next) {
   })
 })
 
-router.get('/updatesearch/:id', function(req, res, next){
-  console.log('req.params.id:', req.params.id);
+router.get('/updatesearch/:id', function(req, res, next) {
+  let idToGet = req.params.id
+  let token = req.headers.token
+  jwt.verify(token, 'SECRET', function(err, decoded) {
+    if (err) {
+      return next(err)
+    } else {
+      User.findById(decoded._id, function(err, user) {
+        let search = user.searches.id(idToGet)
+
+        let count = 0
+        let data = [];
+        let duplicate = 0;
+        let searchParams = search.params;
+        let url = searchParams.url
+
+        for (var param in searchParams) {
+          if (searchParams[param] && param != 'url') {
+            url += `&${param}=${searchParams[param]}`
+          }
+        }
+
+        scrapeRequest(url, searchParams, count, []).then(function(results) {
+          let searchObj = {
+            title: null,
+            params: searchParams,
+            results: results,
+            favorites: [],
+            deleted: []
+          }
+          res.json(searchObj)
+        })
+
+      })
+    }
+  })
 })
 
 module.exports = router;
