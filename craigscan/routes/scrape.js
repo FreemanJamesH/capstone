@@ -8,12 +8,10 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const scrapeRequest = require('./scrape-engine/scraper.js')
-const testExport = require('./scrape-engine/sayhello.js')
 
 
 
 router.post('/scrape', function(req, res, next) {
-  testExport()
   let count = 0
   let data = [];
   let duplicate = 0;
