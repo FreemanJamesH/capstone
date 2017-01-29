@@ -7,7 +7,6 @@ function recursiveScrape(urlArg, searchParams, count, data) {
     if (data.length == (count + 100)) {
       return recursiveScrape(urlArg, searchParams, count + 100, data)
     }
-
     let searchObj = {
       title: null,
       params: searchParams,
@@ -17,9 +16,7 @@ function recursiveScrape(urlArg, searchParams, count, data) {
     }
     return searchObj
   }
-
   return scrape(urlArg, searchParams, count, data).then(decide)
-
 }
 
 
