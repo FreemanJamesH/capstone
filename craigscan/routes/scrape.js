@@ -9,8 +9,6 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const scrapeRequest = require('./scrape-engine/scraper.js')
 
-
-
 router.post('/scrape', function(req, res, next) {
   let count = 0
   let data = [];
@@ -29,6 +27,7 @@ router.post('/scrape', function(req, res, next) {
     console.log('here are the results:', results);
     res.json(results)
   })
+
 })
 
 router.get('/sls', function(req, res, next) {

@@ -33,7 +33,11 @@ function scrape(urlArg, searchParams, count, data) {
         let dataIds = $(this).children('a').attr('data-ids')
         if (dataIds) {
           let commaDex = dataIds.indexOf(',')
-          if (commaDex !== -1) {} else {}
+          if (commaDex !== -1) {
+            dataObj.img = 'http://images.craigslist.org/' + dataIds.slice(2, commaDex) + '_300x300.jpg';
+          } else {
+            dataObj.img = 'http://images.craigslist.org/' + dataIds.slice(2) + '_300x300.jpg';
+          }
           dataObj.hasimg = true
         } else {
           dataObj.hasimg = false
