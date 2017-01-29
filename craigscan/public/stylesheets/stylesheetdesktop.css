@@ -340,3 +340,14 @@ md-grid-tile {
 
 md-grid-tile {
   transition: all 400ms ease-out 50ms; }
+
+.dashCardList {
+  
+}
+
+.refresh {
+  position: absolute;
+  display: inline-block !important;
+  bottom: 0px;
+  margin: 10px auto;
+}

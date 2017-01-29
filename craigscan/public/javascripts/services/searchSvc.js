@@ -20,7 +20,7 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
           if (checkAgainst.dupe) {
             dupeCount++
           }
-          if (checkAgainst.isFav){
+          if (checkAgainst.isFav) {
             favCount++
           }
           for (var k = i + 1; k < resultsObj.results.length; k++) {
@@ -57,6 +57,14 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
     },
     viewSearch: function(id) {
       return $resource(`//localhost:3000/search/getsearch/${id}`)
+        .get()
+        .$promise
+        .then(function(results) {
+          resultsObj = results
+        })
+    },
+    updateSearch: function(id) {
+      return $resource(`//localhost:3000/search/updatesearch/${id}`)
         .get()
         .$promise
         .then(function(results) {

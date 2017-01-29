@@ -13,4 +13,10 @@ app.controller('dashController', function($scope, $location, userService, search
   $scope.viewSearch = function(id) {
     $location.path(`/results/${id}`)
   }
+
+  $scope.updateSearch = function(id){
+    searchService.updateSearch(id).then(function(results){
+      $scope.userObj = results
+    })
+  }
 })

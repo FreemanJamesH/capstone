@@ -83,4 +83,8 @@ router.get('/getsearch/:id', function(req, res, next) {
   })
 })
 
+router.get('/updatesearch/:id', function(req, res, next){
+  console.log('req.params.id:', req.params.id);
+})
+
 module.exports = router;

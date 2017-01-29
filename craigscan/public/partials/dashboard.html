@@ -12,7 +12,7 @@
                 <md-icon>edit</md-icon>
             </div>
         </md-grid-tile-header>
-        <md-list>
+        <md-list class="dashCardList">
             <md-list-item>
                 <md-icon>picture_in_picture</md-icon>
                 <p>
@@ -32,11 +32,10 @@
                     Last Update: {{search.params.updated | date:'medium'}}
                 </p>
             </md-list-item>
-            <md-list-item>
-                <p></p>
-            </md-list-item>
-
         </md-list>
+        <md-button class="refresh" ng-click="updateSearch(search._id)">
+            <p>Update</p>
+        </md-button>
     </md-grid-tile>
 
 </md-grid-list>

@@ -7,14 +7,18 @@ const User = mongoose.model('User')
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const scrapeRequest = require('./scrape-engine/scraper.js')
+const testExport = require('./scrape-engine/sayhello.js')
+
+
 
 router.post('/scrape', function(req, res, next) {
+  testExport()
   let count = 0
   let data = [];
   let duplicate = 0;
   let searchParams = req.body.searchParams;
   searchParams.updated = Date.now()
-  console.log('searchParams:', searchParams);
   let url = searchParams.url
 
   for (var param in searchParams) {
@@ -23,54 +27,10 @@ router.post('/scrape', function(req, res, next) {
     }
   }
 
-  requestFunction(url)
-
-  function requestFunction(urlArg) {
-    let url = urlArg + '&s=' + count
-    console.log('requestFunction fired, url:', url);
-    request(url, function(err, resp, body) {
-      var $ = cheerio.load(body)
-      $('.result-row').each(function() {
-        let dataObj = {};
-        dataObj.isFav = false;
-        dataObj.href = req.body.regionChoice + $(this).children('a').attr('href').slice(1)
-        dataObj.title = $(this).find('.hdrlnk').text()
-        let dataIds = $(this).children('a').attr('data-ids')
-        if (dataIds) {
-          let commaDex = dataIds.indexOf(',')
-          if (commaDex !== -1) {
-            dataObj.img = 'http://images.craigslist.org/' + dataIds.slice(2, commaDex) + '_300x300.jpg';
-          } else {
-            dataObj.img = 'http://images.craigslist.org/' + dataIds.slice(2) + '_300x300.jpg';
-          }
-          dataObj.hasimg = true
-        } else {
-          dataObj.hasimg = false
-          dataObj.img = 'https://www.shearwater.com/wp-content/plugins/lightbox/images/No-image-found.jpg';
-        }
-        let time = new Date($(this).find('time').attr('datetime'))
-        let timeConverted = time.getTime()
-        dataObj.timeConverted = timeConverted
-        dataObj.price = $(this).find('.result-price').text().slice(1)
-        dataObj.price = parseInt(dataObj.price, 10)
-        dataObj.time = $(this).find('time').attr('datetime')
-        dataObj.location = $(this).find('.pnr').children('small').text()
-        data.push(dataObj)
-      })
-      if (data.length === 100 + count && count != 2400) {
-        count += 100
-        return requestFunction(urlArg)
-      }
-      let searchObj = {
-        title: null,
-        params: searchParams,
-        results: data,
-        favorites: [],
-        deleted: []
-      }
-      res.json(searchObj)
-    })
-  }
+  scrapeRequest(url, searchParams, count, []).then(function(results){
+    console.log('here are the results:', results);
+    res.json(results)
+  })
 })
 
 router.get('/sls', function(req, res, next) {
