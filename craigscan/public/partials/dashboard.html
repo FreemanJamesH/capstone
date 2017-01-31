@@ -29,11 +29,20 @@
             <md-list-item>
                 <md-icon>date_range</md-icon>
                 <p>
-                    Last Update: {{search.searchParameters.updated | date:'medium'}}
+                    Last Update:
+                    {{search.searchParameters.updated | date:'medium'}}
                 </p>
             </md-list-item>
+            <!-- <md-list-item ng-show="updating"> -->
+            <!-- </md-list-item> -->
         </md-list>
-        <md-button class="refresh" ng-click="updateSearch(search._id)">
+        <div class="loading updating" ng-show="updating">
+            <md-progress-linear class="md-warn" md-mode="indeterminate" value="50"></md-progress-linear>
+            <!-- <div>
+                Updating your search...
+            </div> -->
+        </div>
+        <md-button class="refresh" ng-hide="updating" ng-click="updateSearch(search._id)">
             <p>Update</p>
         </md-button>
     </md-grid-tile>

@@ -1,5 +1,7 @@
 app.controller('dashController', function($scope, $location, userService, searchService) {
 
+  $scope.updating = false;
+
   userService.getUser().then(function(results) {
     $scope.userObj = results
   })
@@ -15,7 +17,9 @@ app.controller('dashController', function($scope, $location, userService, search
   }
 
   $scope.updateSearch = function(id){
+    $scope.updating = true;
     searchService.updateSearch(id).then(function(results){
+      $scope.updating = false;
       $scope.userObj = results
     })
   }
