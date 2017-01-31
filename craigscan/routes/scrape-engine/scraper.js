@@ -34,6 +34,7 @@ function scrape(urlArg, searchParams, count, data, newSearch) {
           dataObj.hasimg = true
         } else {
           dataObj.hasimg = false
+          dataObj.img = 'https://www.shearwater.com/wp-content/plugins/lightbox/images/No-image-found.jpg';
         }
         let time = new Date($(this).find('time').attr('datetime'))
         let timeConverted = time.getTime()
