@@ -14,14 +14,11 @@ function recursiveScrape(urlArg, searchParams, count, data, newSearch) {
 
 
 function scrape(urlArg, searchParams, count, data, newSearch) {
-  console.log(`urlArg: ${urlArg} DONE`);
   return new Promise(function(resolve) {
     let dateStop = false;
     let url = urlArg + '&s=' + count
     request(url, function(err, resp, body) {
-      console.log('making request');
       var $ = cheerio.load(body)
-      console.log('result row:', $('.result-row'));
       $('.result-row').each(function() {
         let dataObj = {};
         dataObj.isFav = false;
@@ -40,9 +37,6 @@ function scrape(urlArg, searchParams, count, data, newSearch) {
         }
         let time = new Date($(this).find('time').attr('datetime'))
         let timeConverted = time.getTime()
-        console.log(timeConverted)
-        console.log(dataObj.title)
-        console.log('timecheck:', searchParams.updated > timeConverted);
         if ((timeConverted < searchParams.updated && newSearch === false) || dateStop == true){
           dateStop = true
           return

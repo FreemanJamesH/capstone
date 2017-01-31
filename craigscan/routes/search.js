@@ -93,13 +93,8 @@ router.get('/updatesearch/:id', function(req, res, next) {
     } else {
       User.findById(decoded._id, function(err, user) {
         let search = user.searches.id(idToGet)
-        console.log('update request received for this search:', search);
-        console.log('and the title: ', search.title);
-        console.log('and the search parameters updated:', search.searchParameters.updated);
         let data = [];
         let url = search.searchParameters.regionChoice + 'search/apa?'
-        console.log(`Here's the url immediately after it was created:`, url);
-
         let parameters = ['query', 'distance', 'postal', 'min_price', 'max_price']
 
         for (var i = 0; i < parameters.length; i++) {
@@ -107,8 +102,6 @@ router.get('/updatesearch/:id', function(req, res, next) {
             url+= `&${parameters[i]}=${search.searchParameters[parameters[i]]}`
           }
         }
-
-        console.log(`And here's the url after the for has run, immediately before being used as an argument: ${url}`);
 
         scrapeRequest(url, search.searchParameters, 0, [], false).then(function(results) {
           let newResults = results
