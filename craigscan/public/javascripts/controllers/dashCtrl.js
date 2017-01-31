@@ -1,7 +1,5 @@
 app.controller('dashController', function($scope, $location, userService, searchService) {
 
-  console.log('dash controller initialized');
-
   $scope.updating = false;
 
   userService.getUser().then(function(results) {

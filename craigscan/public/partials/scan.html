@@ -1,22 +1,12 @@
 <div class="neighborhood">
   <div class="form-style-5">
     <form id="form1" ng-submit="submit()">
-      <!-- <legend><span class="number">1</span>What's your scan's name?</legend>
-    <input type="text" ng-model="scantitle" placeholder="Name your scan here"> -->
 
-      <!-- <label>How far back should your scan search?</label> -->
-      <!-- <md-content>
-        <md-datepicker ng-model="scandate" md-placeholder="Enter date"></md-datepicker>
-      </md-content> -->
-
-      <legend><span class="number">1</span>What Are You Trying to Find?</legend>
-      <input type="text" ng-model="query" placeholder="Type query here">
-      <hr class="hr">
-      <legend><span class="number">2</span>Where?</legend>
+      <legend><span class="number">1</span>Where are you looking?</legend>
       <md-select required ng-model="stateChoice" placeholder="Select a state">
         <md-option ng-value="stateListProto.indexOf(stateObj)" ng-repeat="stateObj in stateListProto">{{stateObj.state}}</md-option>
       </md-select>
-      <!-- <hr class="hr"> -->
+      <hr class="hr">
 
       <md-radio-group required ng-model="regionChoice">
         <md-radio-button ng-repeat="region in stateListProto[stateChoice].regionList" ng-value="region.link" aria-label="{{ d.label }}">
@@ -25,21 +15,21 @@
       </md-radio-group>
       <hr class="hr">
 
-      <legend><span class="number">3</span>Distance Within Zipcode?</legend>
-      <input id="postal" type="text" ng-model="postal" placeholder="Zip code">
-      <input id="distance" type="number" ng-model="distance" placeholder="Distance (miles)">
-      <hr class="hr">
-
-      <legend><span class="number">4</span>Price</legend>
-      <!-- <label for="min_price">Min Price</label> -->
+      <legend><span class="number">2</span>Price</legend>
       <input id="min_price" type="text" ng-model="min_price" placeholder="Min Price">
-      <!-- <label for="max_price">Max Price</label> -->
       <input id="max_price" type="text" ng-model="max_price" placeholder="Max Price">
       <hr class="hr">
 
-      <legend><span class="number">5</span>All Done?</legend>
+      <legend><span class="number">3</span>Distance Within Zipcode? (Optional)</legend>
+      <input id="distance" type="number" ng-model="distance" placeholder="Distance (miles)">
+      <input id="postal" type="text" ng-model="postal" placeholder="Zip code">
+      <hr class="hr">
+
+
+      <legend><span class="number">4</span>All Done?</legend>
       <input type="submit" value="Submit search" />
       <hr class="hr">
+
     </form>
   </div>
 </div>
