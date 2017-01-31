@@ -34,8 +34,8 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
       regionChoice: $scope.regionChoice,
       updated: Date.now(),
       query: $scope.query,
-      distance: $scope.distance,
-      postal: $scope.distance,
+      search_distance: $scope.distance,
+      postal: $scope.postal,
       min_price: $scope.min_price,
       max_price: $scope.max_price
     }

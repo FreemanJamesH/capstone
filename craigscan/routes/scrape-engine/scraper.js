@@ -3,6 +3,8 @@ const cheerio = require('cheerio');
 
 function recursiveScrape(urlArg, searchParams, count, data, newSearch) {
 
+  console.log(`here's the url arg: ${urlArg}`);
+
   function decide(data, dateStop) {
     if (data.length === (count + 100) && dateStop === false) {
       return recursiveScrape(urlArg, searchParams, count + 100, data, newSearch)

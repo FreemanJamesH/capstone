@@ -94,7 +94,7 @@ router.get('/updatesearch/:id', function(req, res, next) {
       User.findById(decoded._id, function(err, user) {
         let search = user.searches.id(idToGet)
         let url = search.searchParameters.regionChoice + 'search/apa?'
-        let parameters = ['query', 'distance', 'postal', 'min_price', 'max_price']
+        let parameters = ['query', 'search_distance', 'postal', 'min_price', 'max_price']
 
         for (var i = 0; i < parameters.length; i++) {
           if (search.searchParameters[parameters[i]]) {

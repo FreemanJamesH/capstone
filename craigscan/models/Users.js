@@ -19,7 +19,7 @@ const searchParametersSchema = mongoose.Schema({
     regionChoice: String,
     updated: Number,
     query: String,
-    distance: String,
+    search_distance: String,
     postal: String,
     min_price: String,
     max_price: String

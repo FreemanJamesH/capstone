@@ -16,9 +16,11 @@ router.post('/scrape', function(req, res, next) {
   console.log(searchParams);
   let url = searchParams.regionChoice + 'search/apa?'
 
-  for (var param in searchParams) {
-    if (searchParams[param] && param != 'url') {
-      url += `&${param}=${searchParams[param]}`
+  let parameters = ['query', 'search_distance', 'postal', 'min_price', 'max_price']
+
+  for (var i = 0; i < parameters.length; i++) {
+    if (searchParams[parameters[i]]) {
+      url += `&${parameters[i]}=${searchParams[parameters[i]]}`
     }
   }
 

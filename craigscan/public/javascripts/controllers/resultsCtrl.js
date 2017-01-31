@@ -17,6 +17,7 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
     let searchObj = {}
     searchObj.regionChoice = $window.localStorage.regionChoice
     searchObj.searchParams = JSON.parse($window.localStorage.searchParams)
+    console.log('search params:', $window.localStorage.searchParams);
     searchService.newSearch(searchObj).then(function(results) {
       $scope.resultsObj = searchService.resultsObjGetter();
       $scope.dupeCount = $scope.resultsObj.dupeCount
