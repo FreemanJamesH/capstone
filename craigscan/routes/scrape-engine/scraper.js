@@ -22,6 +22,12 @@ function scrape(urlArg, searchParams, count, data, newSearch) {
       $('.result-row').each(function() {
         let dataObj = {};
         dataObj.isFav = false;
+        let resultHref = $(this).children('a').attr('href').slice(1)
+        if (resultHref[0] === '/'){
+          dataObj.href = '//' + resultHref.slice(1)
+        } else {
+          dataObj.href = searchParams.regionChoice + $(this).children('a').attr('href').slice(1)
+        }
         dataObj.title = $(this).find('.hdrlnk').text()
         let dataIds = $(this).children('a').attr('data-ids')
         if (dataIds) {
