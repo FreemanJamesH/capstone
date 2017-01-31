@@ -15,7 +15,7 @@ const result = mongoose.Schema({
   location: String
 })
 
-const params = mongoose.Schema({
+const searchParametersSchema = mongoose.Schema({
     regionChoice: String,
     updated: Number,
     query: String,
@@ -28,7 +28,7 @@ const params = mongoose.Schema({
 const search = mongoose.Schema({
   title: String,
   id: String,
-  params: params,
+  searchParameters: searchParametersSchema,
   results: [result],
   deleted: [result],
   dupeCount: Number,

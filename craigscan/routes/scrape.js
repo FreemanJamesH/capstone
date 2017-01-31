@@ -22,10 +22,10 @@ router.post('/scrape', function(req, res, next) {
     }
   }
 
-  scrapeRequest(url, searchParams, count, []).then(function(results) {
+  scrapeRequest(url, searchParams, count, [], true).then(function(results) {
     let searchObj = {
       title: null,
-      params: searchParams,
+      searchParameters: searchParams,
       results: results,
       favorites: [],
       deleted: []

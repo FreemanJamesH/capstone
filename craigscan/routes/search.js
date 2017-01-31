@@ -93,28 +93,29 @@ router.get('/updatesearch/:id', function(req, res, next) {
     } else {
       User.findById(decoded._id, function(err, user) {
         let search = user.searches.id(idToGet)
-
-        let count = 0
+        console.log('update request received for this search:', search);
+        console.log('and the title: ', search.title);
+        console.log('and the search parameters updated:', search.searchParameters.updated);
         let data = [];
-        let duplicate = 0;
-        let searchParams = search.params;
-        let url = searchParams.url
+        let url = search.searchParameters.regionChoice + 'search/apa?'
+        console.log(`Here's the url immediately after it was created:`, url);
 
-        for (var param in searchParams) {
-          if (searchParams[param] && param != 'url') {
-            url += `&${param}=${searchParams[param]}`
+        let parameters = ['query', 'distance', 'postal', 'min_price', 'max_price']
+
+        for (var i = 0; i < parameters.length; i++) {
+          if (search.searchParameters[parameters[i]]) {
+            url+= `&${parameters[i]}=${search.searchParameters[parameters[i]]}`
           }
         }
 
-        scrapeRequest(url, searchParams, count, []).then(function(results) {
-          let searchObj = {
-            title: null,
-            params: searchParams,
-            results: results,
-            favorites: [],
-            deleted: []
-          }
-          res.json(searchObj)
+        console.log(`And here's the url after the for has run, immediately before being used as an argument: ${url}`);
+
+        scrapeRequest(url, search.searchParameters, 0, [], false).then(function(results) {
+          let newResults = results
+          console.log('and the new results:', newResults);
+          newResults.concat(search.results)
+          search.results = newResults
+          res.json(search)
         })
 
       })
