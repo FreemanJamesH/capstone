@@ -108,6 +108,7 @@ router.get('/updatesearch/:id', function(req, res, next) {
           let concatenated = newResults.concat(search.results)
           console.log('and the concatenated results:', concatenated);
           search.results = concatenated
+          search.searchParameters.updated = Date.now()
           user.save(function(err, updatedUser) {
             console.log('err', err);
             console.log('search updated!: ', updatedUser);
