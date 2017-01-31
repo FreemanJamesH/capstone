@@ -93,24 +93,27 @@ router.get('/updatesearch/:id', function(req, res, next) {
     } else {
       User.findById(decoded._id, function(err, user) {
         let search = user.searches.id(idToGet)
-        let data = [];
         let url = search.searchParameters.regionChoice + 'search/apa?'
         let parameters = ['query', 'distance', 'postal', 'min_price', 'max_price']
 
         for (var i = 0; i < parameters.length; i++) {
           if (search.searchParameters[parameters[i]]) {
-            url+= `&${parameters[i]}=${search.searchParameters[parameters[i]]}`
+            url += `&${parameters[i]}=${search.searchParameters[parameters[i]]}`
           }
         }
 
         scrapeRequest(url, search.searchParameters, 0, [], false).then(function(results) {
           let newResults = results
           console.log('and the new results:', newResults);
-          newResults.concat(search.results)
-          search.results = newResults
-          res.json(search)
+          let concatenated = newResults.concat(search.results)
+          console.log('and the concatenated results:', concatenated);
+          search.results = concatenated
+          user.save(function(err, updatedUser) {
+            console.log('err', err);
+            console.log('search updated!: ', updatedUser);
+            res.json(updatedUser)
+          })
         })
-
       })
     }
   })
