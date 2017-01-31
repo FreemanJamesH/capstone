@@ -68,7 +68,7 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
         .get()
         .$promise
         .then(function(results) {
-          resultsObj = results
+          return results
         })
     }
   }
