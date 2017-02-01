@@ -14,6 +14,10 @@ md-icon {
     cursor: pointer;
 }
 
+md-input-container {
+  all: unset;
+}
+
 md-option, md-select {
     color: black;
 }
