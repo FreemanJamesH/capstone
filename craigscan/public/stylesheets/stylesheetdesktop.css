@@ -369,7 +369,6 @@ md-grid-tile {
 
 .validationError {
   color: red;
-  border: 1px solid red;
   margin-left: 8px;
   font-family: courier;
 }
