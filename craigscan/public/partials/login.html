@@ -1,9 +1,14 @@
 <div class="neighborhood" layout="column">
-  <div class="form-style-5 small" >
-    <form ng-click="login()">
-      <legend><span class="number">⇉</span>Welcome back!</legend>
-      <input type="text" ng-model="user.username" placeholder="Username">
-      <input type="text" ng-model="user.password" placeholder="Password">
-      <input type="submit" value="Log in" />
-    </form>
-</div>
+    <div class="form-style-5 small">
+        <form name="loginForm" novalidate ng-click="login()">
+            <legend>
+                <span class="number">⇉</span>Welcome back!</legend>
+            <input name="username" type="text" required ng-model="user.username" placeholder="Username">
+            <span class="validationError" ng-show="submitted && loginForm.username.$error.required">
+                This is a required field</span>
+            <input name="password" type="password" required ng-model="user.password" placeholder="Password">
+            <span class="validationError" ng-show="submitted && loginForm.password.$error.required">
+                This is a required field</span>
+            <input type="submit" value="Log in"/>
+        </form>
+    </div>

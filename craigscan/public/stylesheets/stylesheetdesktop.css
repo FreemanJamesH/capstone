@@ -119,8 +119,12 @@ md-content {
     width: 100%;
 }
 
+input[type="password"] {
+  all:unset;
+}
+
 .form-style-5 {
-    max-width: 500px;
+    width: 500px;
     background: #f4f7f8;
     margin: 20px auto;
     padding: 20px;
@@ -152,7 +156,7 @@ form>*:not(.hr) {
     margin-top: 4px;
 }
 
-.form-style-5 input[type="text"], .form-style-5 input[type="date"], .form-style-5 input[type="datetime"], .form-style-5 input[type="email"], .form-style-5 input[type="number"], .form-style-5 input[type="search"], .form-style-5 input[type="time"], .form-style-5 input[type="url"], .form-style-5 textarea, .form-style-5 select {
+.form-style-5 input[type="text"], .form-style-5 input[type="date"], .form-style-5 input[type="password"], .form-style-5 input[type="datetime"], .form-style-5 input[type="email"], .form-style-5 input[type="number"], .form-style-5 input[type="search"], .form-style-5 input[type="time"], .form-style-5 input[type="url"], .form-style-5 textarea, .form-style-5 select {
     font-family: Georgia, "Times New Roman", Times, serif;
     background: rgba(255, 255, 255, .1);
     border: none;
@@ -361,4 +365,11 @@ md-grid-tile {
   display: inline-block !important;
   bottom: 40px;
   margin: 10px auto;
+}
+
+.validationError {
+  color: red;
+  border: 1px solid red;
+  margin-left: 8px;
+  font-family: courier;
 }

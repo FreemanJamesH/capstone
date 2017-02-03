@@ -3,12 +3,12 @@
         <form name="form1" id="form1" novalidate ng-submit="submit()">
             <md-input-container>
                 <legend>
-    <span class="number">1</span>Where are you looking? (Required)</legend>
+                    <span class="number">1</span>Where are you looking? (Required)</legend>
                 <md-select required name="stateChoice" ng-model="stateChoice" placeholder="Select a state">
                     <md-option ng-click="reset()" ng-value="stateListProto.indexOf(stateObj)" ng-repeat="stateObj in stateListProto">{{stateObj.state}}</md-option>
                 </md-select>
                 <div ng-show="!stateChoice && submitted">
-                    <div>Please choose a state</div>
+                    <div class="validationError">Please choose a state</div>
                 </div>
             </md-input-container>
             <hr class="hr">
@@ -20,24 +20,24 @@
                     </md-radio-button>
                 </md-radio-group>
                 <div ng-show="!regionChoice && stateChoice && submitted">
-                    <div>Please choose a region</div>
+                    <div class="validationError">Please choose a region</div>
                 </div>
             </md-input-container>
             <hr class="hr">
-<legend>
-<span class="number">2</span>Price</legend>
+            <legend>
+                <span class="number">2</span>Price</legend>
             <input id="min_price" type="text" ng-model="min_price" placeholder="Min Price">
             <input id="max_price" type="text" ng-model="max_price" placeholder="Max Price">
             <hr class="hr">
 
-<legend>
-<span class="number">3</span>Distance Within Zipcode? (Optional)</legend>
+            <legend>
+                <span class="number">3</span>Distance Within Zipcode?</legend>
             <input id="distance" type="number" ng-model="distance" placeholder="Distance (miles)">
             <input id="postal" type="text" ng-model="postal" placeholder="Zip code">
             <hr class="hr">
 
-  <legend>
-<span class="number">4</span>All Done?</legend>
+            <legend>
+                <span class="number">4</span>All Done?</legend>
             <md-input-container>
                 <input type="submit" value="Submit search" ng-click="attemptedSubmit()"/>
                 <hr class="hr">
