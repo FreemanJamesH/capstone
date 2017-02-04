@@ -1,15 +1,35 @@
-app.controller('AuthController', function($scope, $http, $location, authService, userService) {  $scope.user = {};
+app.controller('AuthController', function($scope, $http, $location, authService, userService) {
+  $scope.user = {};
+  $scope.credentialsExistError = false;
+  $scope.submitted = false;
+
 
   $scope.signup = function() {
-    console.log('errors?:', $scope.signupForm.$error);
-    console.log('valid?:', $scope.signupForm.$valid);
     $scope.submitted = true;
-    // userService.signup($scope.user)
+    if ($scope.signupForm.$valid) {
+      userService.signup($scope.user).then(function(response){
+        if (response.message){
+          if (response.message.code === 11000){
+            $scope.credentialsExistError = true;
+          }
+        } else {
+          $location.path('/')
+        }
+      })
+    }
   }
 
   $scope.login = function() {
+    console.log('Login fired');
+    console.log('login valid form valid?:', $scope.loginForm.$valid);
     $scope.submitted = true;
-    // userService.login($scope.user)
+    userService.login($scope.user).then(function(response){
+      if (response.credentialsInvalid){
+        $scope.credentialsInvalid = true
+      } else {
+        $location.path('/')
+      }
+    })
   }
 
 })

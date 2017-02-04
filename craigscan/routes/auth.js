@@ -37,14 +37,23 @@ router.post('/login', function(req, res, next) {
     User.findOne({
       'username': req.body.username
     }, function(err, results) {
-      if (!results) {
+      if (err) {
+        res.send(err)
       }
-      let passwordMatch = bcrypt.compareSync(req.body.password, results.password)
-      if (!passwordMatch) {
+      let error = {
+        credentialsInvalid: true
+      }
+      if (!results) {
+        res.send(error)
       } else {
-        return res.json({
-          jwt: results.generateJWT()
-        })
+        let passwordMatch = bcrypt.compareSync(req.body.password, results.password)
+        if (!passwordMatch) {
+          res.send(error)
+        } else {
+          return res.json({
+            jwt: results.generateJWT()
+          })
+        }
       }
     })
   }

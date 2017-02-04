@@ -1,6 +1,6 @@
 <div class="neighborhood" layout="column">
     <div class="form-style-5 small">
-        <form name="loginForm" novalidate ng-click="login()">
+        <form name="loginForm" novalidate>
             <legend>
                 <span class="number">⇉</span>Welcome back!</legend>
             <input name="username" type="text" required ng-model="user.username" placeholder="Username">
@@ -9,6 +9,8 @@
             <input name="password" type="password" required ng-model="user.password" placeholder="Password">
             <span class="validationError" ng-show="submitted && loginForm.password.$error.required">
                 This is a required field</span>
-            <input type="submit" value="Log in"/>
+            <span class="validationError" ng-show="credentialsInvalid">
+                Sorry, invalid login information. Please try again.</span>
+            <input type="submit" value="Log in" ng-click="login()"/>
         </form>
     </div>

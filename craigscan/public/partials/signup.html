@@ -21,6 +21,8 @@
                 This is a required field</span>
             <span class="validationError" ng-show="submitted && signupForm.password.$error.pattern">
                 Password must be at least 8 characters, contain at least one digit and one alphabetic character, and must not contain special characters</span>
+            <span class="validationError" ng-show="credentialsExistError">
+                A user with that username or email already exists. Please try another.</span>
             <input type="submit" value="Sign up!"/>
         </form>
     </div>
