@@ -28,7 +28,7 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
     true
   )
 
-  $scope.reset = function(){
+  $scope.reset = function() {
     $scope.submitted = false;
   }
 
@@ -38,19 +38,23 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
 
   $scope.submit = function() {
     $scope.submitted = true;
-    if ($scope.stateChoice && $scope.regionChoice) {
-      let searchParams = {
-        regionChoice: $scope.regionChoice,
-        updated: Date.now(),
-        query: $scope.query,
-        search_distance: $scope.distance,
-        postal: $scope.postal,
-        min_price: $scope.min_price,
-        max_price: $scope.max_price
+    if ($scope.max_price < $scope.min_price) {
+      $scope.maxSmaller = true;
+    } else {
+      if ($scope.stateChoice && $scope.regionChoice) {
+        let searchParams = {
+          regionChoice: $scope.regionChoice,
+          updated: Date.now(),
+          query: $scope.query,
+          search_distance: $scope.distance,
+          postal: $scope.postal,
+          min_price: $scope.min_price,
+          max_price: $scope.max_price
+        }
+        $window.localStorage['searchParams'] = JSON.stringify(searchParams)
+        $window.localStorage['regionChoice'] = $scope.regionChoice
+        $location.path('/results')
       }
-      $window.localStorage['searchParams'] = JSON.stringify(searchParams)
-      $window.localStorage['regionChoice'] = $scope.regionChoice
-      $location.path('/results')
     }
   }
 })

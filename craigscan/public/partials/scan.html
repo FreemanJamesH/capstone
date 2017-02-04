@@ -1,6 +1,6 @@
 <div class="neighborhood">
     <div class="form-style-5">
-        <form name="form1" id="form1" novalidate ng-submit="submit()">
+        <form name="searchForm" id="searchForm" novalidate ng-submit="submit()">
             <md-input-container>
                 <legend>
                     <span class="number">1</span>Where are you looking? (Required)</legend>
@@ -26,14 +26,20 @@
             <hr class="hr">
             <legend>
                 <span class="number">2</span>Price</legend>
-            <input id="min_price" type="text" ng-model="min_price" placeholder="Min Price">
-            <input id="max_price" type="text" ng-model="max_price" placeholder="Max Price">
+            <input name="min_price" ng-pattern="/^\d*$/" id="min_price" type="number" ng-model="min_price" placeholder="Min Price">
+            <input name="max_price" ng-pattern="/^\d*$/" id="max_price" type="number" ng-model="max_price" placeholder="Max Price">
+            <span class="validationError" ng-show="maxSmaller">
+                Minimum price may not exceed minimum price</span>
             <hr class="hr">
 
             <legend>
                 <span class="number">3</span>Distance Within Zipcode?</legend>
-            <input id="distance" type="number" ng-model="distance" placeholder="Distance (miles)">
-            <input id="postal" type="text" ng-model="postal" placeholder="Zip code">
+            <input name="distance" ng-pattern="/^[0-9]{0,2}$/" id="distance" type="number" ng-model="distance" placeholder="Distance (miles)">
+            <span class="validationError" ng-show="searchForm.distance.$error.pattern">
+                Please enter a distance from 0 to 99</span>
+            <input name="postal" ng-pattern="/^[0-9]{5}$/" id="postal" type="number" ng-model="postal" placeholder="Zip code">
+            <span class="validationError" ng-show="searchForm.postal.$error.pattern">
+                Please enter a valid 5-digit zipcode</span>
             <hr class="hr">
 
             <legend>
