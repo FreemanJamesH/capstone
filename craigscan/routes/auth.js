@@ -4,12 +4,15 @@ const mongoose = require('mongoose')
 const request = require('request');
 const cheerio = require('cheerio');
 const User = mongoose.model('User')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const validate = require('express-validation')
+const user_validation = require('../models/validations/user.js')
 
-router.post('/signup', function(req, res, next) {
-  let hashed_pw = bcrypt.hashSync(req.body.password, 12)
+router.post('/signup', validate(user_validation.signup), function(req, res, next) {
+  console.log('signup request received, body:', req.body);
+  let hashed_pw = bcrypt.hashSync(req.body.password)
   let user = new User({
     username: req.body.username,
     email: req.body.email,
@@ -28,7 +31,7 @@ router.post('/signup', function(req, res, next) {
   })
 })
 
-router.post('/login', function(req, res, next) {
+router.post('/login', validate(user_validation.login), function(req, res, next) {
   if (!req.body.username || !req.body.password) {
     return res.status(400)({
       message: 'Please fill out all fields'

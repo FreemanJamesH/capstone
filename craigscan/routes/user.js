@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const request = require('request');
 const cheerio = require('cheerio');
 const User = mongoose.model('User')
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 

@@ -10,12 +10,13 @@
                 Usernames may contain alphanumeric characters only</span>
             <span class="validationError" ng-show="submitted && (signupForm.username.$error.minlength || signupForm.username.$error.maxlength)">
                 Username must be 3 to 16 characters in length</span>
-            <input name="email" type="email" required ng-model="user.email" placeholder="Email">
 
+            <input name="email" type="email" required ng-model="user.email" placeholder="Email">
             <span class="validationError" ng-show="submitted && signupForm.email.$error.required">
                 This is a required field</span>
             <span class="validationError" ng-show="submitted && signupForm.email.$error.email">
                 Please enter a valid email</span>
+
             <input name="password" type="password" required ng-pattern="/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,})$/" ng-model="user.password" placeholder="Password">
             <span class="validationError" ng-show="submitted && signupForm.password.$error.required">
                 This is a required field</span>

@@ -9,7 +9,6 @@
     "node": "6.2.1"
   },
   "dependencies": {
-    "bcrypt": "^0.8.7",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "cheerio": "^0.20.0",
@@ -20,6 +19,8 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "express-jwt": "^5.0.0",
+    "express-validation": "^1.0.1",
+    "joi": "^10.2.1",
     "jsonwebtoken": "^7.1.9",
     "method-override": "^2.3.6",
     "mongoose": "^4.5.3",
