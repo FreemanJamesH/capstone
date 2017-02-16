@@ -1,4 +1,4 @@
-app.controller('MainController', function($scope, $http, searchService, stateListService, $location, authService, userService, $window, $q) {
+app.controller('MainController', function($scope, $http, $rootScope, searchService, stateListService, $location, authService, userService, $window, $q) {
 
   $scope.stateChoice = undefined;
   $scope.regionChoice = undefined;
@@ -9,7 +9,7 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
 
   $scope.logout = function() {
     authService.logout()
-    $scope.username = null
+    $rootScope.username = null
   }
 
   $scope.home = function() {
@@ -22,7 +22,7 @@ app.controller('MainController', function($scope, $http, searchService, stateLis
     function(newValue) {
       if (newValue) {
         let decodedPayload = JSON.parse(atob(newValue.split('.')[1]))
-        $scope.username = decodedPayload.username
+        $rootScope.username = decodedPayload.username
       }
     },
     true

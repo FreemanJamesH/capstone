@@ -1,4 +1,4 @@
-app.controller('resultsController', function($scope, $routeParams, $mdDialog, searchService, postService, $window) {
+app.controller('resultsController', function($scope, $routeParams, $rootScope, $mdDialog, searchService, postService, $window) {
 
   $scope.loading = true;
   $scope.loadingMessage = `Loading your results...`
@@ -83,20 +83,27 @@ app.controller('resultsController', function($scope, $routeParams, $mdDialog, se
 
   $scope.saveDialog = function() {
 
-
-
-    $mdDialog.show(
-      $mdDialog.prompt()
-      .clickOutsideToClose(true)
-      .title('Please choose a name for your search.')
-      .openFrom('.control_panel_container')
-      .ok('Save')
-    ).then(function(results) {
-      let search = Object.assign({}, $scope.resultsObj)
-      delete search.dupeCount
-      delete search.resultCount
-      search.title = results
-      searchService.saveSearch(search)
-    })
+    if ($rootScope.username){
+      $mdDialog.show(
+        $mdDialog.prompt()
+        .clickOutsideToClose(true)
+        .title('Please choose a name for your search.')
+        .openFrom('.control_panel_container')
+        .ok('Save')
+      ).then(function(results) {
+        let search = Object.assign({}, $scope.resultsObj)
+        delete search.dupeCount
+        delete search.resultCount
+        search.title = results
+        searchService.saveSearch(search)
+      })
+    } else {
+      $mdDialog.show(
+        $mdDialog.alert()
+        .clickOutsideToClose(true)
+        .title('You must be logged in to save searches.')
+        .ok('Okay')
+      )
+    }
   }
 })
