@@ -36,13 +36,13 @@
             <!-- <md-list-item ng-show="updating"> -->
             <!-- </md-list-item> -->
         </md-list>
-        <div class="loading updating" ng-show="updating">
+        <div class="loading updating" ng-show="search.updating">
             <md-progress-linear class="md-warn" md-mode="indeterminate" value="50"></md-progress-linear>
             <!-- <div>
                 Updating your search...
             </div> -->
         </div>
-        <md-button class="refresh" ng-hide="updating" ng-click="updateSearch(search._id)">
+        <md-button class="refresh" ng-hide="search.updating" ng-click="updateSearch(search._id, $index)">
             <p>Update</p>
         </md-button>
     </md-grid-tile>

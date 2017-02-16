@@ -16,10 +16,11 @@ app.controller('dashController', function($scope, $location, userService, search
     $location.path(`/results/${id}`)
   }
 
-  $scope.updateSearch = function(id){
+  $scope.updateSearch = function(id, $index){
+    $scope.userObj.searches[$index].updating = true
     $scope.updating = true;
     searchService.updateSearch(id).then(function(results){
-      $scope.updating = false;
+      $scope.userObj.searches[$index].updating = false
       $scope.userObj = results
     })
   }
