@@ -44,7 +44,8 @@ router.post('/savesearch', function(req, res, next) {
         User.findById(decoded._id, function(err, user) {
           user.searches.push(req.body)
           user.save(function(err, updatedUser) {
-            console.log('updatedUser:', updatedUser);
+            let searchId = updatedUser.searches.slice(-1)[0]._id;
+            res.json({id: searchId})
           })
         })
       }

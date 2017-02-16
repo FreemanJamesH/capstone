@@ -20,8 +20,6 @@ app.controller('AuthController', function($scope, $http, $location, authService,
   }
 
   $scope.login = function() {
-    console.log('Login fired');
-    console.log('login valid form valid?:', $scope.loginForm.$valid);
     $scope.submitted = true;
     userService.login($scope.user).then(function(response){
       if (response.credentialsInvalid){

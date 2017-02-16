@@ -3,7 +3,7 @@
     <div class="control_panel_container form-style-6">
         <div class="results_control_panel">
             <div class="options_container">
-                <label for="duplicates"><h4>Showing your search: {{resultsObj.title}}</h4></label>
+                <label for="duplicates" ng-show="resultsObj.title"><h4>Showing your search: {{resultsObj.title}}</h4></label>
                 <legend>{{resultsObj.resultCount - resultsObj.dupeCount}}
                     Unique Results Found</legend>
                 <label for="duplicates">{{resultsObj.favCount}}

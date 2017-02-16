@@ -1,4 +1,4 @@
-app.controller('resultsController', function($scope, $routeParams, $rootScope, $mdDialog, searchService, postService, $window) {
+app.controller('resultsController', function($scope, $routeParams, $rootScope, $location, $mdDialog, searchService, postService, $window) {
 
   $scope.loading = true;
   $scope.loadingMessage = `Loading your results...`
@@ -99,7 +99,10 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
         delete search.dupeCount
         delete search.resultCount
         search.title = results
-        searchService.saveSearch(search)
+        searchService.saveSearch(search).then(function(results){
+          console.log('results from save in controller:', results);
+          $location.path(`/results/${results.id}`)
+        })
       })
     } else {
       $mdDialog.show(
