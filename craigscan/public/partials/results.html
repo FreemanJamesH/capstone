@@ -3,9 +3,10 @@
     <div class="control_panel_container form-style-6">
         <div class="results_control_panel">
             <div class="options_container">
+                <label for="duplicates"><h4>Showing your search: {{resultsObj.title}}</h4></label>
                 <legend>{{resultsObj.resultCount - resultsObj.dupeCount}}
                     Unique Results Found</legend>
-                <label for="duplicates">{{favCount}}
+                <label for="duplicates">{{resultsObj.favCount}}
                     Marked as Favorite</label>
                 <label for="duplicates">{{dupeCount}}
                     Duplicates Detected</label>
@@ -22,7 +23,7 @@
                 <md-checkbox ng-model="imageHide">
                     Show Only Results with Images
                 </md-checkbox>
-                <md-button ng-click="saveDialog()" class="md-raised md-primary">
+                <md-button ng-show="showSave" ng-click="saveDialog()" class="md-raised md-primary">
                     Save this search
                 </md-button>
                 <md-button ng-click="deleteDupes()" class="md-raised md-warn">

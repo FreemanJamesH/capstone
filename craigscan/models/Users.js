@@ -31,8 +31,7 @@ const search = mongoose.Schema({
   searchParameters: searchParametersSchema,
   results: [result],
   deleted: [result],
-  dupeCount: Number,
-  resultCount: Number
+  favCount: Number
 })
 
 const userSchema = mongoose.Schema({

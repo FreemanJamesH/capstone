@@ -11,6 +11,7 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
       resultsObj = obj
     },
     resultsObjGetter: function() {
+      console.log('running resultsObjGetter');
       if (resultsObj.results) {
         let i = 0;
         let dupeCount = 0;
@@ -43,6 +44,7 @@ app.service('searchService', ['$resource', '$location', function($resource, $loc
       return {}
     },
     saveSearch: function(obj) {
+      console.log('saving search:', obj);
       return $resource('//localhost:3000/search/savesearch').save(obj).$promise.then(function(results) {})
     },
     deleteSearch: function(id) {

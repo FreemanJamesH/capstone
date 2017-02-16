@@ -18,6 +18,7 @@ router.post('/favorite/:searchid/:index', function(req, res, next) {
     } else {
       User.findById(decoded._id, function(err, user) {
         user.searches.id(searchId).results.id(resultIndex).isFav = true
+        user.searches.id(searchId).favCount++
         user.save(function(err, updatedUser) {
           res.json(updatedUser.searches.id(searchId))
         })
@@ -36,6 +37,7 @@ router.post('/unfavorite/:searchid/:index', function(req, res, next) {
     } else {
       User.findById(decoded._id, function(err, user) {
         user.searches.id(searchId).results.id(resultIndex).isFav = false
+        user.searches.id(searchId).favCount--
         user.save(function(err, updatedUser) {
           res.json(updatedUser.searches.id(searchId))
         })

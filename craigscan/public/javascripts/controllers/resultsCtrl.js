@@ -2,6 +2,7 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
 
   $scope.loading = true;
   $scope.loadingMessage = `Loading your results...`
+  $scope.showSave = true;
 
   setTimeout(function(){
     $scope.loadingMessage = `Thank you for your patience...`
@@ -24,6 +25,7 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
       $scope.loading = false;
     })
   } else {
+    $scope.showSave = false;
     searchService.viewSearch($routeParams.searchId).then(function(){
       $scope.resultsObj = searchService.resultsObjGetter()
       $scope.dupeCount = $scope.resultsObj.dupeCount
@@ -46,12 +48,14 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
   $scope.favorite = function(resultId){
     postService.favorite($scope.resultsObj._id, resultId).then(function(results){
       $scope.resultsObj = searchService.resultsObjGetter()
+      console.log('favorited!:', $scope.resultsObj);
     })
   }
 
   $scope.unfavorite = function(resultId){
     postService.unfavorite($scope.resultsObj._id, resultId).then(function(results){
       $scope.resultsObj = searchService.resultsObjGetter()
+      console.log('unfavorited!:', $scope.resultsObj);
     })
   }
 
