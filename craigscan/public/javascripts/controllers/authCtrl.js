@@ -29,14 +29,12 @@ app.controller('AuthController', function($scope, $http, $location, $window, aut
           let localStorageTime = Math.round(JSON.parse($window.localStorage.searchParams).updated/1000)
           let timeNow = Math.round(Date.now()/1000)
           let timeSinceLastSearch = timeNow - localStorageTime
-          console.log(`Time since last search:`, timeSinceLastSearch);
           if (timeSinceLastSearch > 3600){
             $location.path('/')
           } else {
             $location.path('/results')
           }
         } else {
-          console.log('no local storage found');
           $location.path('/')
         }
       }
