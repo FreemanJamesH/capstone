@@ -43,23 +43,16 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
 
 
       let deleted = $scope.resultsObj.results.splice(index,1)
-      console.log('deleted:', deleted)
       if (deleted[0].isFav){
-        console.log('decrementing favCount from this:', $scope.favCount);
         $scope.favCount--
-        console.log('to this:', $scope.favCount);
       }
       if (deleted[0].dupe) {
         $scope.dupeCount--
       } else {
         $scope.resultsObj.resultCount--
       }
-
-
         // searchService.resultsObjSetter(results)
         // $scope.resultsObj = searchService.resultsObjGetter()
-
-
     })
   }
 
