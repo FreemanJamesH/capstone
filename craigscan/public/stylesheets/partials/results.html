@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="control_panel_container form-style-6">
+        <div class="results_control_panel">
+            <div class="options_container">
+                <label for="duplicates" ng-show="resultsObj.title"><h4>Showing your search: {{resultsObj.title}}</h4></label>
+                <legend>{{resultsObj.resultCount - resultsObj.dupeCount}}
+                    Unique Results Found</legend>
+                <label for="duplicates">{{resultsObj.favCount}}
+                    Marked as Favorite</label>
+                <label for="duplicates">{{dupeCount}}
+                    Duplicates Detected</label>
+                <md-select id="sort" ng-model="sortBy" ng-change=(sortLog()) placeholder="Sort by">
+                    <md-option ng-value="'-timeConverted'">Post Date</md-option>
+                    <md-option ng-value="'price'">Price</md-option>
+                </md-select>
+                <md-checkbox ng-model="favOnly">
+                    Show only favorites
+                </md-checkbox>
+                <md-checkbox ng-model="dupeShow">
+                    Show Duplicates
+                </md-checkbox>
+                <md-checkbox ng-model="imageHide">
+                    Show Only Results with Images
+                </md-checkbox>
+                <md-button ng-show="showSave" ng-click="saveDialog()" class="md-raised md-primary">
+                    Save this search
+                </md-button>
+                <md-button ng-click="deleteDupes()" class="md-raised md-warn">
+                    Delete duplicates
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <div class="results_container">
+        <div class="loading" ng-show="loading">
+            <md-progress-linear class="md-warn" md-mode="indeterminate" value="50"></md-progress-linear>
+            <div>
+                <br>
+                {{loadingMessage}}
+            </div>
+        </div>
+        <md-list>
+            <md-list-item class="md-2-line resultCard" ng-repeat="post in resultsObj.results | orderBy:sortBy" ng-hide="(favOnly && !post.isFav)||(!dupeShow && post.dupe) || (!post.hasimg && imageHide)">
+                <div class='resultIcon'>
+                    <md-icon class="favoriteIcon" ng-hide="post.isFav" ng-click="favorite(post._id)">favorite</md-icon>
+                    <md-icon class="favoritedIcon" ng-show="post.isFav" ng-click="unfavorite(post._id)">favorite</md-icon>
+                    <a href="{{post.href}}" target="_blank">
+                        <md-icon class="openExternalIcon">open_in_new</md-icon>
+                    </a>
+                    <md-icon class="trashIcon" ng-show="resultsObj._id" ng-click="delete(post._id)">delete</md-icon>
+                    <md-icon class="trashIcon" ng-show="!resultsObj._id" ng-click="deleteAnon($index)">delete</md-icon>
+                </div>
+                <div class="imgholder">
+                    <img class="imgresult" src="{{post.img}}" alt="">
+                </div>
+                <div class="md-list-item-text" layout="column" layout-align="start">
+                    <h2 class="postTitle">{{ post.title }}</h2><br>
+                    <h3 class="postPosted">Posted:
+                        {{ post.time | date: 'medium' }}</h3><br>
+                    <h3>Rent: ${{ post.price }}</h3>
+                </div>
+            </md-list-item>
+        </md-list>
+    </div>
+</div>

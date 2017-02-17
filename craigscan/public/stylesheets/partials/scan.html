@@ -1,0 +1,54 @@
+<div class="neighborhood">
+    <div class="form-style-5">
+        <form name="searchForm" id="searchForm" novalidate ng-submit="submit()">
+            <md-input-container>
+                <legend>
+                    <span class="number">1</span>Where are you looking? (Required)</legend>
+                <md-select required name="stateChoice" ng-model="stateChoice" placeholder="Select a state">
+                    <md-option ng-click="reset()" ng-value="stateListProto.indexOf(stateObj)" ng-repeat="stateObj in stateListProto">{{stateObj.state}}</md-option>
+                </md-select>
+                <div ng-show="!stateChoice && submitted">
+                    <div class="validationError">Please choose a state</div>
+                </div>
+            </md-input-container>
+            <hr class="hr">
+
+            <md-input-container>
+                <md-radio-group name="regionChoice" required ng-model="regionChoice">
+                    <md-radio-button ng-repeat="region in stateListProto[stateChoice].regionList" ng-value="region.link" aria-label="{{ d.label }}">
+                        {{region.name}}
+                    </md-radio-button>
+                </md-radio-group>
+                <div ng-show="!regionChoice && stateChoice && submitted">
+                    <div class="validationError">Please choose a region</div>
+                </div>
+            </md-input-container>
+            <hr class="hr">
+            <legend>
+                <span class="number">2</span>Price</legend>
+            <input name="min_price" ng-pattern="/^\d*$/" id="min_price" type="number" ng-model="min_price" placeholder="Min Price">
+            <input name="max_price" ng-pattern="/^\d*$/" id="max_price" type="number" ng-model="max_price" placeholder="Max Price">
+            <span class="validationError" ng-show="maxSmaller">
+                Minimum price may not exceed minimum price</span>
+            <hr class="hr">
+
+            <legend>
+                <span class="number">3</span>Distance Within Zipcode?</legend>
+            <input name="distance" ng-pattern="/^[0-9]{0,2}$/" id="distance" type="number" ng-model="distance" placeholder="Distance (miles)">
+            <span class="validationError" ng-show="searchForm.distance.$error.pattern">
+                Please enter a distance from 0 to 99</span>
+            <input name="postal" ng-pattern="/^[0-9]{5}$/" id="postal" type="number" ng-model="postal" placeholder="Zip code">
+            <span class="validationError" ng-show="searchForm.postal.$error.pattern">
+                Please enter a valid 5-digit zipcode</span>
+            <hr class="hr">
+
+            <legend>
+                <span class="number">4</span>All Done?</legend>
+            <md-input-container>
+                <input type="submit" value="Submit search" ng-click="attemptedSubmit()"/>
+                <hr class="hr">
+            </md-input-container>
+
+        </form>
+    </div>
+</div>

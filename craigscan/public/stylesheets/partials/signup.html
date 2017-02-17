@@ -1,0 +1,29 @@
+<div class="neighborhood" layout="column">
+    <div class="form-style-5 small">
+        <form name="signupForm" novalidate ng-submit="signup()">
+            <legend>
+                <span class="number">⇉</span>Signup in seconds!</legend>
+            <input name="username" type="text" required ng-pattern="/^[a-zA-Z0-9]*$/" ng-minlength="3" ng-maxlength="16" ng-model="user.username" placeholder="Username">
+            <span class="validationError" ng-show="submitted && signupForm.username.$error.required">
+                This is a required field</span>
+            <span class="validationError" ng-show="submitted && signupForm.username.$error.pattern">
+                Usernames may contain alphanumeric characters only</span>
+            <span class="validationError" ng-show="submitted && (signupForm.username.$error.minlength || signupForm.username.$error.maxlength)">
+                Username must be 3 to 16 characters in length</span>
+
+            <input name="email" type="email" required ng-model="user.email" placeholder="Email">
+            <span class="validationError" ng-show="submitted && signupForm.email.$error.required">
+                This is a required field</span>
+            <span class="validationError" ng-show="submitted && signupForm.email.$error.email">
+                Please enter a valid email</span>
+
+            <input name="password" type="password" required ng-pattern="/(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{8,})$/" ng-model="user.password" placeholder="Password">
+            <span class="validationError" ng-show="submitted && signupForm.password.$error.required">
+                This is a required field</span>
+            <span class="validationError" ng-show="submitted && signupForm.password.$error.pattern">
+                Password must be at least 8 characters, contain at least one digit and one alphabetic character, and must not contain special characters</span>
+            <span class="validationError" ng-show="credentialsExistError">
+                A user with that username or email already exists. Please try another.</span>
+            <input type="submit" value="Sign up!"/>
+        </form>
+    </div>

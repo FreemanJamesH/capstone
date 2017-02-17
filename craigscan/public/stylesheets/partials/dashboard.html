@@ -1,0 +1,50 @@
+<h1>welcome to your dashboard,
+    {{userObj.username}}</h1>
+
+<md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+
+    <md-grid-tile ng-repeat="search in userObj.searches track by $index">
+        <md-grid-tile-header ng-class="'color' + $index % 6">
+            <h3>{{search.title}}</h3>
+            <div class="searchIcons">
+                <md-icon ng-click="viewSearch(search._id)">open_in_new</md-icon>
+                <md-icon ng-click="deleteSearch(search._id)">delete</md-icon>
+                <md-icon>edit</md-icon>
+            </div>
+        </md-grid-tile-header>
+        <md-list class="dashCardList">
+            <md-list-item>
+                <md-icon>picture_in_picture</md-icon>
+                <p>
+                    {{search.results.length}}
+                    Results
+                </p>
+            </md-list-item>
+            <md-list-item>
+                <md-icon>favorite</md-icon>
+                <p>
+                    {{search.favCount}} favorites
+                </p>
+            </md-list-item>
+            <md-list-item>
+                <md-icon>date_range</md-icon>
+                <p>
+                    Last Update:
+                    {{search.searchParameters.updated | date:'medium'}}
+                </p>
+            </md-list-item>
+            <!-- <md-list-item ng-show="updating"> -->
+            <!-- </md-list-item> -->
+        </md-list>
+        <div class="loading updating" ng-show="search.updating">
+            <md-progress-linear class="md-warn" md-mode="indeterminate" value="50"></md-progress-linear>
+            <!-- <div>
+                Updating your search...
+            </div> -->
+        </div>
+        <md-button class="refresh" ng-hide="search.updating" ng-click="updateSearch(search._id, $index)">
+            <p>Update</p>
+        </md-button>
+    </md-grid-tile>
+
+</md-grid-list>
