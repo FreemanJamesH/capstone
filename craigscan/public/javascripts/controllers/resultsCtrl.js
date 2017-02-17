@@ -46,16 +46,24 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
   }
 
   $scope.favorite = function(resultId){
-    postService.favorite($scope.resultsObj._id, resultId).then(function(results){
-      $scope.resultsObj = searchService.resultsObjGetter()
-      console.log('favorited!:', $scope.resultsObj);
-    })
+
+    if (!$scope.resultsObj.title){
+      $mdDialog.show(
+        $mdDialog.alert()
+        .clickOutsideToClose(true)
+        .title('Please save your search to add favorites.')
+        .ok('Okay')
+      )
+    } else {
+      postService.favorite($scope.resultsObj._id, resultId).then(function(results){
+        $scope.resultsObj = searchService.resultsObjGetter()
+      })
+    }
   }
 
   $scope.unfavorite = function(resultId){
     postService.unfavorite($scope.resultsObj._id, resultId).then(function(results){
       $scope.resultsObj = searchService.resultsObjGetter()
-      console.log('unfavorited!:', $scope.resultsObj);
     })
   }
 
