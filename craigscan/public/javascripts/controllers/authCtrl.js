@@ -25,8 +25,20 @@ app.controller('AuthController', function($scope, $http, $location, $window, aut
       if (response.credentialsInvalid){
         $scope.credentialsInvalid = true
       } else {
-      console.log('the unix time in your localstorage is:', JSON.parse($window.localStorage.searchParams).updated)
-        $location.path('/')
+        if ($window.localStorage.searchParams){
+          let localStorageTime = Math.round(JSON.parse($window.localStorage.searchParams).updated/1000)
+          let timeNow = Math.round(Date.now()/1000)
+          let timeSinceLastSearch = timeNow - localStorageTime
+          console.log(`Time since last search:`, timeSinceLastSearch);
+          if (timeSinceLastSearch > 3600){
+            $location.path('/')
+          } else {
+            $location.path('/results')
+          }
+        } else {
+          console.log('no local storage found');
+          $location.path('/')
+        }
       }
     })
   }
