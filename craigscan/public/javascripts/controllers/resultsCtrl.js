@@ -45,7 +45,7 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
     })
   }
 
-  $scope.favorite = function(resultId){
+  $scope.favorite = function(resultId, index){
 
     if (!$scope.resultsObj.title){
       $mdDialog.show(
@@ -56,15 +56,15 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
       )
     } else {
       postService.favorite($scope.resultsObj._id, resultId).then(function(results){
-        $scope.resultsObj = searchService.resultsObjGetter()
-        console.log('results obj updated');
+        // $scope.resultsObj = searchService.resultsObjGetter()
+        $scope.resultsObj.results[index].isFav = true;
       })
     }
   }
 
-  $scope.unfavorite = function(resultId){
+  $scope.unfavorite = function(resultId, index){
     postService.unfavorite($scope.resultsObj._id, resultId).then(function(results){
-      $scope.resultsObj = searchService.resultsObjGetter()
+      $scope.resultsObj.results[index].isFav = false;
     })
   }
 

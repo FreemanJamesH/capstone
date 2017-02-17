@@ -42,8 +42,8 @@
         <md-list>
             <md-list-item class="md-2-line resultCard" ng-repeat="post in resultsObj.results | orderBy:sortBy" ng-hide="(favOnly && !post.isFav)||(!dupeShow && post.dupe) || (!post.hasimg && imageHide)">
                 <div class='resultIcon'>
-                    <md-icon class="favoriteIcon" ng-hide="post.isFav" ng-click="favorite(post._id)">favorite</md-icon>
-                    <md-icon class="favoritedIcon" ng-show="post.isFav" ng-click="unfavorite(post._id)">favorite</md-icon>
+                    <md-icon class="favoriteIcon" ng-hide="post.isFav" ng-click="favorite(post._id, $index)">favorite</md-icon>
+                    <md-icon class="favoritedIcon" ng-show="post.isFav" ng-click="unfavorite(post._id, $index)">favorite</md-icon>
                     <a href="{{post.href}}" target="_blank">
                         <md-icon class="openExternalIcon">open_in_new</md-icon>
                     </a>
