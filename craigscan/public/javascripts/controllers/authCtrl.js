@@ -25,7 +25,7 @@ app.controller('AuthController', function($scope, $http, $location, $window, aut
       if (response.credentialsInvalid){
         $scope.credentialsInvalid = true
       } else {
-      console.log('the unix time is:', JSON.parse($window.localStorage.searchParams).updated)
+      console.log('the unix time in your localstorage is:', JSON.parse($window.localStorage.searchParams).updated)
         $location.path('/')
       }
     })
