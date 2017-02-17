@@ -5,7 +5,7 @@
                 <label for="duplicates" ng-show="resultsObj.title"><h4>Showing your search: {{resultsObj.title}}</h4></label>
                 <legend>{{resultsObj.resultCount - resultsObj.dupeCount}}
                     Unique Results Found</legend>
-                <label for="duplicates">{{resultsObj.favCount}}
+                <label for="duplicates">{{favCount}}
                     Marked as Favorite</label>
                 <label for="duplicates">{{dupeCount}}
                     Duplicates Detected</label>
@@ -47,7 +47,7 @@
                     <a href="{{post.href}}" target="_blank">
                         <md-icon class="openExternalIcon">open_in_new</md-icon>
                     </a>
-                    <md-icon class="trashIcon" ng-show="resultsObj._id" ng-click="delete(post._id)">delete</md-icon>
+                    <md-icon class="trashIcon" ng-show="resultsObj._id" ng-click="delete(post._id, $index)">delete</md-icon>
                     <md-icon class="trashIcon" ng-show="!resultsObj._id" ng-click="deleteAnon($index)">delete</md-icon>
                 </div>
                 <div class="imgholder">

@@ -4,10 +4,10 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
   $scope.loadingMessage = `Loading your results...`
   $scope.showSave = true;
 
-  setTimeout(function(){
+  setTimeout(function() {
     $scope.loadingMessage = `Thank you for your patience...`
     $scope.$apply()
-    setTimeout(function(){
+    setTimeout(function() {
       $scope.loadingMessage = `Searches returning many results can take time to process...`
       $scope.$apply()
     }, 4000)
@@ -26,7 +26,7 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
     })
   } else {
     $scope.showSave = false;
-    searchService.viewSearch($routeParams.searchId).then(function(){
+    searchService.viewSearch($routeParams.searchId).then(function() {
       $scope.resultsObj = searchService.resultsObjGetter()
       $scope.dupeCount = $scope.resultsObj.dupeCount
       $scope.favCount = $scope.resultsObj.favCount
@@ -38,16 +38,34 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
   $scope.imageHide = false
   $scope.favOnly = false
 
-  $scope.delete = function(resultId) {
+  $scope.delete = function(resultId, index) {
     postService.delete($scope.resultsObj._id, resultId).then(function(results) {
-      searchService.resultsObjSetter(results)
-      $scope.resultsObj = searchService.resultsObjGetter()
+
+
+      let deleted = $scope.resultsObj.results.splice(index,1)
+      console.log('deleted:', deleted)
+      if (deleted[0].isFav){
+        console.log('decrementing favCount from this:', $scope.favCount);
+        $scope.favCount--
+        console.log('to this:', $scope.favCount);
+      }
+      if (deleted[0].dupe) {
+        $scope.dupeCount--
+      } else {
+        $scope.resultsObj.resultCount--
+      }
+
+
+        // searchService.resultsObjSetter(results)
+        // $scope.resultsObj = searchService.resultsObjGetter()
+
+
     })
   }
 
-  $scope.favorite = function(resultId, index){
+  $scope.favorite = function(resultId, index) {
 
-    if (!$scope.resultsObj.title){
+    if (!$scope.resultsObj.title) {
       $mdDialog.show(
         $mdDialog.alert()
         .clickOutsideToClose(true)
@@ -55,16 +73,18 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
         .ok('Okay')
       )
     } else {
-      postService.favorite($scope.resultsObj._id, resultId).then(function(results){
+      postService.favorite($scope.resultsObj._id, resultId).then(function(results) {
         // $scope.resultsObj = searchService.resultsObjGetter()
         $scope.resultsObj.results[index].isFav = true;
+        $scope.favCount++
       })
     }
   }
 
-  $scope.unfavorite = function(resultId, index){
-    postService.unfavorite($scope.resultsObj._id, resultId).then(function(results){
+  $scope.unfavorite = function(resultId, index) {
+    postService.unfavorite($scope.resultsObj._id, resultId).then(function(results) {
       $scope.resultsObj.results[index].isFav = false;
+      $scope.favCount--
     })
   }
 
@@ -96,7 +116,7 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
 
   $scope.saveDialog = function() {
 
-    if ($rootScope.username){
+    if ($rootScope.username) {
       $mdDialog.show(
         $mdDialog.prompt()
         .clickOutsideToClose(true)
@@ -108,7 +128,7 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
         delete search.dupeCount
         delete search.resultCount
         search.title = results
-        searchService.saveSearch(search).then(function(results){
+        searchService.saveSearch(search).then(function(results) {
           console.log('results from save in controller:', results);
           $location.path(`/results/${results.id}`)
         })
