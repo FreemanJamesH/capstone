@@ -10,6 +10,7 @@ app.controller('MainController', function($scope, $http, $rootScope, searchServi
   $scope.logout = function() {
     authService.logout()
     $rootScope.username = null
+    $location.path('/')
   }
 
   $scope.home = function() {
