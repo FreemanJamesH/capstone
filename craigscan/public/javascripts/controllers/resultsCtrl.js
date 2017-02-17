@@ -58,7 +58,6 @@ app.controller('resultsController', function($scope, $routeParams, $rootScope, $
       postService.favorite($scope.resultsObj._id, resultId).then(function(results){
         $scope.resultsObj = searchService.resultsObjGetter()
         console.log('results obj updated');
-        console.log(`your location: ${$location.hash()}`);
       })
     }
   }
