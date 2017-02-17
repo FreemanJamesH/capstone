@@ -84,6 +84,9 @@ router.delete('/:searchid/:index', function(req, res, next) {
       return next(err)
     } else {
       User.findById(decoded._id, function(err, user) {
+        if (user.searches.id(searchId).results.id(resultIndex).isFav === true){
+          user.searches.id(searchId).favCount--
+        }
         user.searches.id(searchId).results.id(resultIndex).remove()
         user.save(function(err, updatedUser) {
           res.json(updatedUser.searches.id(searchId))
