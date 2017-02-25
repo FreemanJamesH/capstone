@@ -7,9 +7,7 @@ app.controller('dashController', function($scope, $location, userService, search
     for (var i = 0; i < results.searches.length; i++) {
       $scope.colorTracker[i] = 0
     }
-    console.log($scope.colorTracker);
     $scope.userObj = results
-    console.log($scope.userObj);
   })
 
   $scope.deleteSearch = function(id, index) {
@@ -21,9 +19,6 @@ app.controller('dashController', function($scope, $location, userService, search
       }
       $scope.userObj = results
     })
-
-    console.log(`searches in user obj:`, $scope.userObj.searches);
-
   }
 
   $scope.viewSearch = function(id) {
