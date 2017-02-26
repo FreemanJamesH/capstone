@@ -24,3 +24,11 @@
   color: #6f6d63;
   display: inline-block;
 }
+
+.fullWelcome {
+  display: none;
+}
+
+#hamburger {
+  display: inline-block;
+}

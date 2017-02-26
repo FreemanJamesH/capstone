@@ -33,7 +33,6 @@
                         <span>Apartment Search</span>
                     </span>
                 </h1>
-                <span flex></span>
                 <md-button ng-hide="username" class="md-raised">
                     <a href="login">
                         | Log in</a>
@@ -43,17 +42,22 @@
                         | Sign up</a>
                 </md-button>
                 <md-menu>
-                    <md-button ng-show="username" ng-click="$mdOpenMenu($event)" class="md-button" aria-label="Open sample menu">
-                        Welcome,
-                        {{username}}!
-                        <md-icon>arrow_drop_down</md-icon>
+                    <md-button id="welcomeButton" ng-show="username" ng-click="$mdOpenMenu($event)" class="md-button" aria-label="Open sample menu">
+                        <md-icon id="hamburger">menu</md-icon>
+                        <div class="fullWelcome">
+                            Welcome,
+                            {{username}}!
+                            <md-icon>arrow_drop_down</md-icon>
+                        </div>
                     </md-button>
                     <md-menu-content>
                         <md-menu-item>
                             <md-button ng-click="logout()">Log Out</md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button><a href="/dashboard">Dashboard</a></md-button>
+                            <md-button>
+                                <a href="/dashboard">Dashboard</a>
+                            </md-button>
                         </md-menu-item>
                     </md-menu-content>
                 </md-menu>

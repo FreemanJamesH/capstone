@@ -10,6 +10,10 @@ md-icon {
   cursor: pointer;
 }
 
+#hamburger {
+  display: none;
+}
+
 .craigs {
     cursor: pointer;
 }
