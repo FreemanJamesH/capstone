@@ -398,3 +398,17 @@ md-grid-tile {
   position: absolute;
   right: 0px;
 }
+
+.buttonholder {
+  position: absolute;
+  right: 0px;
+}
+
+#menuGreeting{
+  display: none;
+  border-bottom: 1px solid black;
+}
+
+#dashboardLink {
+  all: unset;
+}

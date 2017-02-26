@@ -30,17 +30,19 @@
             <div class="md-toolbar-tools">
                 <h1>
                     <span ng-click="home()" class="craigs">Craigs<span class="bliss">Bliss</span>
-                        <span>Apartment Search</span>
+                        <span id="aptsearch">Apartment Search</span>
                     </span>
                 </h1>
-                <md-button ng-hide="username" class="md-raised">
-                    <a href="login">
-                        | Log in</a>
-                </md-button>
-                <md-button ng-hide="username" class="md-raised">
-                    <a href="signup">
-                        | Sign up</a>
-                </md-button>
+                <div class="buttonholder">
+                    <md-button ng-hide="username" class="md-raised">
+                        <a href="login">
+                            | Log in</a>
+                    </md-button>
+                    <md-button ng-hide="username" class="md-raised">
+                        <a href="signup">
+                            | Sign up</a>
+                    </md-button>
+                </div>
                 <md-menu>
                     <md-button id="welcomeButton" ng-show="username" ng-click="$mdOpenMenu($event)" class="md-button" aria-label="Open sample menu">
                         <md-icon id="hamburger">menu</md-icon>
@@ -51,12 +53,15 @@
                         </div>
                     </md-button>
                     <md-menu-content>
+                            <md-menu-item id="menuGreeting">
+                                <p>Hello, {{username}}</p>
+                            </md-menu-item>
                         <md-menu-item>
                             <md-button ng-click="logout()">Log Out</md-button>
                         </md-menu-item>
                         <md-menu-item>
                             <md-button>
-                                <a href="/dashboard">Dashboard</a>
+                                <a id="dashboardLink" href="/dashboard">Dashboard</a>
                             </md-button>
                         </md-menu-item>
                     </md-menu-content>

@@ -31,3 +31,11 @@
 #hamburger {
   display: inline-block;
 }
+
+#menuGreeting{
+  display: inherit;
+}
+
+#aptsearch {
+  display: none;
+}
