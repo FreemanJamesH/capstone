@@ -1,12 +1,12 @@
 app.service('userService', ['$resource', '$location', function($resource, $location, $window) {
   return {
     signup: function(obj) {
-      return $resource('//localhost:3000/auth/signup').save(obj).$promise.then(function(response){
+      return $resource('https://jhfcapstone.herokuapp.com/auth/signup').save(obj).$promise.then(function(response){
         return response
       })
     },
     login: function(obj) {
-      return $resource('//localhost:3000/auth/login').save(obj).$promise.then(function(response){
+      return $resource('https://jhfcapstone.herokuapp.com/auth/login').save(obj).$promise.then(function(response){
         return response
       })
     },
@@ -15,7 +15,7 @@ app.service('userService', ['$resource', '$location', function($resource, $locat
       return
     },
     getUser: function() {
-      return $resource('//localhost:3000/user/dashboard').get().$promise.then(function(response) {
+      return $resource('https://jhfcapstone.herokuapp.com/user/dashboard').get().$promise.then(function(response) {
           $location.path('/dashboard')
           return response
         },

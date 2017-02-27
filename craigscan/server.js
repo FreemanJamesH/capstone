@@ -9,6 +9,7 @@ const cheerio = require('cheerio')
 const mongoose = require('mongoose')
 const passport = require('passport')
 const schedule = require('node-schedule')
+require('dotenv').config()
 
 // var rule = new schedule.RecurrenceRule()
 // rule.second = [1,5,10]
