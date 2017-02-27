@@ -18,7 +18,7 @@ const schedule = require('node-schedule')
 //   console.log('Hello!');
 // })
 
-mongoose.connect(process.ENV.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI)
 require('./models/Users')
 
 const cors = require('cors')
