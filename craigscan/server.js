@@ -18,7 +18,7 @@ const schedule = require('node-schedule')
 //   console.log('Hello!');
 // })
 
-mongoose.connect('mongodb://freeman.james.h:test1234@ds163699.mlab.com:63699/heroku_6h4f2n1d')
+mongoose.connect(process.ENV.MONGODB_URI)
 require('./models/Users')
 
 const cors = require('cors')
