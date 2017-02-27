@@ -412,3 +412,7 @@ md-grid-tile {
 #dashboardLink {
   all: unset;
 }
+
+#searchForm > md-input-container:nth-child(1) > select {
+  width: auto;
+}
