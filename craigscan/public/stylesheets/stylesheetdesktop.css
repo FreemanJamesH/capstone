@@ -57,7 +57,7 @@ a {
     height: 100%;
     background-image: url('./tilt-shift-neighborhood-dark.jpg');
     background-repeat: no-repeat;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 .solidbg {
